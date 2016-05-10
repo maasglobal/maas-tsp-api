@@ -1,0 +1,21 @@
+{
+  "name": "maas-tsp-api",
+  "version": "0.0.1",
+  "description": "MaaS TSP (Transport Service Provider) API",
+  "private": true,
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha --require source-map-support/register test",
+    "build": "node_modules/gulp/bin/gulp.js release"
+  },
+  "keywords": [
+    "bpmn",
+    "maas"
+  ],
+  "author": "Lauri Svan <lauri.svan@sc5.io> (https://github.com/laurisvan)",
+  "license": "UNLICENSED",
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
