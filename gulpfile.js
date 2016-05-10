@@ -22,6 +22,10 @@ gulp.task('copy-specs', function() {
     .pipe(gulp.dest('docs/specs'));
 });
 
+gulp.task('watch-specs', function() {
+  gulp.watch(['specs/**/*.yml'], ['transform-yaml', 'copy-specs']);
+})
+
 gulp.task('transform-yaml', function() {
   return gulp.src('./specs/*.yml')
     .pipe(yaml({ safe: true, space: 2 }))
