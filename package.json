@@ -6,16 +6,21 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "node_modules/mocha/bin/mocha --require source-map-support/register test",
-    "build": "node_modules/gulp/bin/gulp.js release"
+    "build": "node_modules/gulp/bin/gulp.js release",
+    "build-docs": "node_modules/gulp/bin/gulp.js docs"
   },
   "keywords": [
-    "bpmn",
     "maas"
   ],
   "author": "Lauri Svan <lauri.svan@sc5.io> (https://github.com/laurisvan)",
   "license": "UNLICENSED",
   "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^4.0.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-yaml": "^1.0.1",
+    "swagger-ui": "^2.1.4"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }

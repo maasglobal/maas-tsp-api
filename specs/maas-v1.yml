@@ -22,7 +22,7 @@ info:
 
     The cases of how MaaS interacts with TSP are depicted below:
     
-    ![MaaS-TSP Business Process](https://github.com/maasglobal/maas-tsp-api/blob/master/specs/maas-v1-overall.svg "MaaS-TSP Business Process")
+    ![MaaS-TSP Business Process](specs/maas-v1-overall.svg "MaaS-TSP Business Process")
     
     ## Booking API
     
