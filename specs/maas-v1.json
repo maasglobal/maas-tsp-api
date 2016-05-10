@@ -1,0 +1,415 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "MaaS-TSP",
+    "description": "This is a API specification of REST endpoints that a Transport Service\nProvider (TSP) should implement to receive messages from MaaS. It is\nwritten in machine readable [Swagger](http://swagger.io/) format, so that\nAPI endpoints, validators and test clients can be generated from the\ndocumentation.\n\nIn addition to this documentation, MaaS maintains a [reference\nimplementation](https://github.com/maasglobal/maas-tsp-api) with test\ncases. It is also running as a [reference service](https://tsp.maas.global/).\n\nCurrently the TSP api consists of:\n   * Booking API (mandatory)\n   * Feedback API (to be defined)\n   * Admin API (to be defined)\n\nThe cases of how MaaS interacts with TSP are depicted below:\n\n![MaaS-TSP Business Process](https://github.com/maasglobal/maas-tsp-api/blob/master/specs/maas-v1-overall.svg \"MaaS-TSP Business Process\")\n\n## Booking API\n\nThe following scenario explains the life-cycle of an individual trip\nfrom a TSP viewpoint. Whenever a new concept (such as an actor or action)\nis represented, it is imprinted in **bold**.\n\nThis scenario, with a few extra details is detailed in the process diagram\nbelow. It should be noted from the picture that MaaS more often acts as a\ncaller than a callee for Transport Service Provider. \n\n\n### Planning a Route\n\n**User** **queries** for a **Route** with an address or latitude-logitude\npair from one place to another. MaaS queries the route from a third party\n**Routing Engine** that contains the data for **TSP** routes. At this point\nMaaS makes no queries to the TSP - it expects the Routing Engine contains \nvalid GTFS data for the TSP.\n\n**MaaS** shows several possible **Plans**, each containing a valid\n**Route** with several **Legs** with a part of a route using a specific\nTSP.\n\n### Creating a Booking\n\nUser browses through the Plans and chooses to book a trip. For each Leg\nin the Plan Route, MaaS creates a new **Booking** for a TSP.\nIt should be noted that the booking may be hours or days in\nadvance - a bit like in booking a hotel. The booking contains the\nindividual Leg as the detailed travel plan for the TSP, as well as\ncustomer contact information.\n\nTSP receives the booking and confirms the trip. TSP may modify the details\nof the Booking, such as moving the **start location** to closest known\nstreet address or delaying the Leg **start time**, as long as the\n**end time** can be guaranteed. The Booking is supplemented with\n**booked** state information and additional **terms** latest such as\nthe latest **cancellation time**.\n\nMaaS checks that the booking succeeded and stores the Booking for future\nreference.\n\n### Navigating a Route\n\nUser starts to navigate the Route. MaaS tracks for the user location to\nknow if there are any changes needed in the plan. MaaS triggers the changes\nfor bookings by monitoring the individual Legs.\n\nMaaS monitors the Booking terms and Leg **start time**.\nWhen the actual Leg starts, MaaS **starts** the Leg and notifies the TSP.\nUser or TSP may request changes to the Booking, e.g. in a case of a delay\nor cancellation.\n\nEach of these scenarios are described below.\n\n### Updating a Booking\n\nA Booking may be updated by a User, MaaS or TSP when any party receives\nnew information that the Leg needs to be changed. Since the update may need\nconfirmation from User or a 3rd party system, it is an asynchronous\noperation.\n\nEither party (MaaS or TSP) may send an updated Booking with\n**UPDATE_REQUESTED** state. The recipient processes the request\nasynchronously and either confirms the request with **UPDATED** state,\nsends its proposal with **UPDATE_REQUESTED**, or cancels the leg with\n**CANCELLED** state.\n\n### Cancelling a Booking\n\nA Booking may be cancelled by User or MaaS within **cancellation time** in\n**terms** of the Booking without a specific request. MaaS sends a modified\nBooking with state **CANCELLED** information. TSP confirms and updates its\nown systems.\n\nIt should be noted that cancellation is an exception case and is likely\nhappen only when the user chooses to cancel the whole route Plan.\nInstead, MaaS and/or TSP should update the booking with new information.\n\nTSP can assume Booking as paid if the cancellation time has passed and no\ncancellation has been received from MaaS.\n\n### Paying a Booking\n\nA Booking may be paid (e.g. confirmed) before the **cancellation time**\nin **terms** has expired. MaaS sends a modified Booking with **PAID**\nstate wich the TSP confirms.\n\nTSP can assume Booking as paid if the cancellation time has passed and no\ncancellation has been received from MaaS.\n\n### Error Cases\n\nIt may be possible that MaaS sends an invalid request or the TSP cannot\nfulfill a request. In any such case, TSP may respond with an error. If\nTSP responds with an error, MaaS assumes the state was not changed (e.g.\na transaction was rolled back). MaaS may repeat the request\nwith the same or different data later on.\n\nThe same principle applies when TSP is communicating with MaaS.\n\n## Feedback API\n\n**To be defined**\n\n## Admin API\n\n**To be defined**\n\n\n## Overall Information\n",
+    "termsOfService": "http://api.maas.global/terms/",
+    "contact": {
+      "name": "MaaS API Team",
+      "email": "developers@maas.fi",
+      "url": "http://maas.fi/"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "Booking",
+      "description": "Booking related APIs are the core of a TSP implementation.\nCorrespondingly, Booking is the main object exchanged between MaaS and\na TSP.\n\nA Booking contains the essentials of the information, such as the leg\nschedule,  terms of service and customer contact.\n\nThrouhgout the trip life-cycle, its **state** is changed from\nBOOKED to CANCELLED, PAID, UPDATE_REQUESTED, UPDATED, STARTED and\nFINISHED.\n"
+    },
+    {
+      "name": "Feedback",
+      "description": "MaaS collects feedback from the trips and mediates this back to TSP\nwhen wanted. In order to receive feedback through MaaS, TSP may implement\nthese APIs.\n"
+    },
+    {
+      "name": "Admin",
+      "description": "In the future MaaS will implement machine-readable APIs that a TSP may\nuse to update GTFS route information, API keys and other information\nthat is needed for communicating between MaaS and a TSP.\n"
+    }
+  ],
+  "securityDefinitions": {
+    "key": {
+      "description": "MaaS can authenticate using an access token as part of the\nHTTP(S) headers. The keys are sent as part of every request that MaaS\nmakes to the TSP API with a `x-api-key` custom header option.\n",
+      "type": "apiKey",
+      "name": "x-api-key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "key": []
+    }
+  ],
+  "paths": {
+    "/bookings": {
+      "get": {
+        "description": "Returns the `Bookings` that have been created through the system.",
+        "tags": [
+          "Booking"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The bookings matching the query parameters",
+            "schema": {
+              "type": "array",
+              "minItems": 0,
+              "items": {
+                "$ref": "#/definitions/booking"
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-serverless-endpoint": "echo~GET"
+      },
+      "post": {
+        "description": "Creates a new `Booking` for the TSP in **booked** state. The returned object will be a refrence that is passed back & forth throughout the booking life cycle. The Booking may be modified in the response, e.g. location being adjusted for a more suitable pick-up location.",
+        "tags": [
+          "Booking"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "newBooking",
+            "in": "body",
+            "description": "New `Booking`data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/newBooking"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A new booking was succesfully created",
+            "schema": {
+              "$ref": "#/definitions/booking"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/bookings/{id}": {
+      "put": {
+        "description": "Modifies the state of a `Booking`, e.g. **cancels**, **pays** or **reschedules** it.",
+        "tags": [
+          "Booking"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Booking id to modify",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "booking",
+            "in": "body",
+            "description": "New `Booking` data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/booking"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The booking modification was accepted.",
+            "schema": {
+              "$ref": "#/definitions/booking"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "error": {
+      "type": "object",
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "newBooking": {
+      "type": "object",
+      "required": [
+        "leg",
+        "customer"
+      ],
+      "properties": {
+        "leg": {
+          "$ref": "#/definitions/leg"
+        },
+        "customer": {
+          "$ref": "#/definitions/customer"
+        },
+        "meta": {
+          "type": "object"
+        }
+      }
+    },
+    "booking": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/newBooking"
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/definitions/bookingState"
+        },
+        "terms": {
+          "$ref": "#/definitions/bookingState"
+        },
+        "token": {
+          "$ref": "#/definitions/token"
+        }
+      },
+      "required": [
+        "id",
+        "state",
+        "leg",
+        "customer",
+        "token"
+      ]
+    },
+    "bookingState": {
+      "type": "string",
+      "enum": [
+        "BOOKED",
+        "CANCELLED",
+        "PAID",
+        "UPDATE_REQUESTED",
+        "UPDATED",
+        "STARTED",
+        "FINISHED"
+      ]
+    },
+    "token": {
+      "properties": {
+        "validityDuration": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "$ref": "#/definitions/time"
+            },
+            "to": {
+              "$ref": "#/definitions/time"
+            }
+          }
+        },
+        "meta": {
+          "type": "object"
+        }
+      }
+    },
+    "customer": {
+      "type": "object",
+      "required": [
+        "id",
+        "firstName",
+        "lastName"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "leg": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "from": {
+          "$ref": "#/definitions/place"
+        },
+        "to": {
+          "$ref": "#/definitions/place"
+        },
+        "startTime": {
+          "$ref": "#/definitions/time"
+        },
+        "endTime": {
+          "$ref": "#/definitions/time"
+        },
+        "mode": {
+          "$ref": "#/definitions/mode"
+        },
+        "departureDelay": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "arrivalDelay": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "distance": {
+          "type": "number",
+          "minimum": 0
+        },
+        "fare": {
+          "$ref": "#/definitions/fare"
+        },
+        "route": {
+          "type": "string"
+        },
+        "routeShortName": {
+          "type": "string"
+        },
+        "routeLongName": {
+          "type": "string"
+        },
+        "agencyId": {
+          "type": "string"
+        },
+        "legGeometry": {
+          "$ref": "#/definitions/legGeometry"
+        }
+      },
+      "required": [
+        "from",
+        "to",
+        "mode",
+        "startTime",
+        "endTime"
+      ]
+    },
+    "place": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "stopId": {
+          "type": "string"
+        },
+        "stopCode": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      },
+      "required": [
+        "lon",
+        "lat"
+      ]
+    },
+    "legGeometry": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "points": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "time": {
+      "type": "integer",
+      "maximum": 2147483647,
+      "minimum": 0
+    },
+    "fare": {
+      "type": "object"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "WALK",
+        "BICYCLE",
+        "CAR",
+        "TRAM",
+        "SUBWAY",
+        "RAIL",
+        "BUS",
+        "FERRY",
+        "CABLE_CAR",
+        "GONDOLA",
+        "FUNICULAR",
+        "TRANSIT",
+        "TRAINISH",
+        "BUSISH",
+        "LEG_SWITCH"
+      ]
+    }
+  }
+}
