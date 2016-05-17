@@ -11,6 +11,6 @@ Building the documentation:
     npm run-script build  # builds the documentation
     npm start	          # starts the development server
     
-Updating the documentation (MaaS staff only) [using git subtrees for gh-pages](https://gist.github.com/cobyism/4730490):
+Updating the documentation (MaaS contributors) [using git subtrees for gh-pages](https://gist.github.com/cobyism/4730490):
 
     git subtree push --prefix docs origin gh-pages
