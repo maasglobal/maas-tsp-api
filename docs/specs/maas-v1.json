@@ -52,7 +52,7 @@
   "paths": {
     "/bookings/": {
       "get": {
-        "description": "Returns the `Booking` that has been created earlier.",
+        "description": "Returns the `Booking` that has been created earlier",
         "tags": [
           "Booking"
         ],
@@ -252,7 +252,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The booking was modified.",
+            "description": "The booking was modified",
             "schema": {
               "$ref": "#/definitions/booking"
             }
@@ -288,7 +288,7 @@
     },
     "newBooking": {
       "type": "object",
-      "description": "A new booking, created by MaaS POST request in 'new' state.",
+      "description": "A new booking, created by MaaS POST request in 'new' state",
       "required": [
         "leg",
         "customer"
@@ -311,7 +311,7 @@
     },
     "booking": {
       "type": "object",
-      "description": "The booking information describing the state and details of the transaction.",
+      "description": "The booking information describing the state and details of the transaction",
       "allOf": [
         {
           "$ref": "#/definitions/newBooking"
@@ -332,7 +332,7 @@
           "$ref": "#/definitions/token"
         },
         "meta": {
-          "description": "Arbitrary metadata that a TSP can add.",
+          "description": "Arbitrary metadata that a TSP can add",
           "type": "object"
         }
       },
