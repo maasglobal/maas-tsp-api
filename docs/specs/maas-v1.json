@@ -3,11 +3,12 @@
   "info": {
     "version": "v1",
     "title": "MaaS-TSP",
-    "description": "This is a API specification of REST endpoints that a Transport Service Provider (TSP) should implement to receive messages from MaaS. It is written in machine readable [Swagger](http://swagger.io/) format, so thatAPI endpoints, validators and test clients can be generated from the documentation.\n\nIn addition to this documentation, MaaS maintains a [reference implementation (**TODO**)](https://github.com/maasglobal/maas-tsp-api) with test cases. It is also running as a [reference service (**TODO**)](https://tsp.maas.global/).\n\nRight now MaaS TSP API consists of the Booking API. In addition, a need for customer feedback API (for mediating customer feedback to a TSP) and administration API (for changing API keys etc.) may be defined.\n",
+    "description": "This is a API specification of REST endpoints that a Transport Service Provider (TSP) should implement to receive messages from MaaS. It is written in machine readable [Swagger](http://swagger.io/) format, so thatAPI endpoints, validators and test clients can be generated from the documentation.\n\nIn addition to this documentation, MaaS maintains a [reference implementation (**TODO**)](https://github.com/maasglobal/maas-tsp-api) with test cases. It is also running as a [reference service (**TODO**)](https://tsp.maas.global/).\n\nRight now MaaS TSP API consists of the Booking API. In addition, there is a need for customer feedback API (for mediating customer feedback to a TSP) and administration API (for changing API keys etc.) may be defined.\n",
     "termsOfService": "http://api.maas.global/terms/",
     "contact": {
       "name": "MaaS API Team",
-      "email": "developers@maas.fi",
+      "email": "tech@maas.fi",
+      "hiring": true,
       "url": "http://maas.fi/"
     },
     "license": {
