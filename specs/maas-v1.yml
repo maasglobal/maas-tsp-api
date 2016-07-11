@@ -28,10 +28,11 @@ tags:
     externalDocs: 
       description: Booking scenarios
       url: https://github.com/maasglobal/maas-tsp-api/blob/master/specs/Booking.md
-
+  - name: Listing
+    description: Before a booking can be made via a TSP, available options at a given location can be listed as follows
   - name: TODO Feedback
     description: In order to receive customer feedback through MaaS, TSP may implement these APIs.
-      
+
   - name: TODO Admin
     description: In the future MaaS will implement machine-readable APIs that a TSP may use to update GTFS route information, API keys and other information that is needed for communicating between MaaS and a TSP.
 
@@ -46,6 +47,45 @@ security:
   - key: []
 
 paths:
+  /bookings/options/:
+    get:
+      description:
+        Returns available transport options for given coordinates. Start time
+        can be defined, but is optional. If startTime is not provided a default value of
+        "Date.now()" is used.
+      tags:
+        - Listing
+      schemes:
+        - https
+      consumes:
+        - query
+      produces:
+        - application/json
+      parameters:
+        - name: from
+          description: User's location in comma separated form e.g. 60.123,27.456
+          in: query
+          required: true
+          type: string
+          pattern: ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$
+        - name: to
+          description: A desired destination e.g. 60.123,27.456
+          in: query
+          required: false
+          type: string
+          pattern: ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$
+        - name: startTime
+          description: Check availability of transportation in future. Must be noted that not all providers (TSP's) support reservation or availability listing in future, thus optional.
+          in: query
+          required: false
+          $ref: '#/definitions/time'
+        - name: endTime
+          description: A possible end time e.g. for a car rental
+          required: false
+          $ref: '#/definitions/time'
+        - name: mode
+          required: false
+          $ref: '#/definitions/mode'
   /bookings/:
     get:
       description:
@@ -99,9 +139,9 @@ paths:
     post:
       description:
         Creates a new `Booking` for the TSP in **booked** state. The returned object will be a refrence that is passed back & forth throughout the booking life cycle.
-      
+
         The Booking may be modified in the response, e.g. location being adjusted for a more suitable pick-up location.
-        
+
         In addition, the service may contain a **meta** attribute for arbitrary TSP metadata that the TSP needs later, and **token** attribute depicting how long the current state is valid.
       tags:
         - Booking
@@ -241,7 +281,7 @@ definitions:
         $ref: '#/definitions/leg'
       customer:
         $ref: '#/definitions/customer'
-      
+
   booking:
     type: object
     description: The booking information describing the state and details of the transaction
@@ -359,7 +399,7 @@ definitions:
       - mode
       - startTime
       - endTime
-      
+
   place: 
     type: object
     additionalProperties: true
@@ -382,7 +422,7 @@ definitions:
     required: 
       - lon
       - lat
-      
+
   legGeometry: 
     type: object
     additionalProperties: true
@@ -390,9 +430,9 @@ definitions:
       points: 
         type: string
         minLength: 1
-  
+
   time: 
-    description: An UTC timestamp (number of milliseconds in a Date object since January 1, 1970, 00:00:00)
+    description: A UTC timestamp (number of milliseconds in a Date object since January 1, 1970, 00:00:00)
     type: integer
     maximum: 2147483647
     minimum: 0

@@ -28,6 +28,10 @@
       }
     },
     {
+      "name": "Listing",
+      "description": "Before a booking can be made via a TSP, available options at a given location can be listed as follows"
+    },
+    {
       "name": "TODO Feedback",
       "description": "In order to receive customer feedback through MaaS, TSP may implement these APIs."
     },
@@ -50,6 +54,58 @@
     }
   ],
   "paths": {
+    "/bookings/options/": {
+      "get": {
+        "description": "Returns available transport options for given coordinates. Start time can be defined, but is optional. If startTime is not provided a default value of \"Date.now()\" is used.",
+        "tags": [
+          "Listing"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "consumes": [
+          "query"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "description": "User's location in comma separated form e.g. 60.123,27.456",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$"
+          },
+          {
+            "name": "to",
+            "description": "A desired destination e.g. 60.123,27.456",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "pattern": "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$"
+          },
+          {
+            "name": "startTime",
+            "description": "Check availability of transportation in future. Must be noted that not all providers (TSP's) support reservation or availability listing in future, thus optional.",
+            "in": "query",
+            "required": false,
+            "$ref": "#/definitions/time"
+          },
+          {
+            "name": "endTime",
+            "description": "A possible end time e.g. for a car rental",
+            "required": false,
+            "$ref": "#/definitions/time"
+          },
+          {
+            "name": "mode",
+            "$ref": "#/definitions/mode"
+          }
+        ]
+      }
+    },
     "/bookings/": {
       "get": {
         "description": "Returns the `Booking` that has been created earlier",
@@ -506,7 +562,7 @@
       }
     },
     "time": {
-      "description": "An UTC timestamp (number of milliseconds in a Date object since January 1, 1970, 00:00:00)",
+      "description": "A UTC timestamp (number of milliseconds in a Date object since January 1, 1970, 00:00:00)",
       "type": "integer",
       "maximum": 2147483647,
       "minimum": 0
