@@ -69,9 +69,23 @@
           },
           {
             "name": "mode",
+            "required": false,
             "$ref": "#/definitions/mode"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Available transport methods matching the given query parameters",
+            "schema": {
+              "name": "options",
+              "type": "array",
+              "description": "Available transport options for the queried TSP",
+              "items": {
+                "$ref": "#/definitions/options"
+              }
+            }
+          }
+        }
       }
     },
     "/bookings/": {
@@ -474,6 +488,73 @@
         "firstName",
         "lastName"
       ]
+    },
+    "options": {
+      "type": "object",
+      "description": "Containing an array of available options matching the query",
+      "properties": {
+        "leg": {
+          "$ref": "#/definitions/options_leg"
+        },
+        "meta": {
+          "$ref": "#/definitions/options_meta"
+        }
+      }
+    },
+    "options_leg": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "$ref": "#/definitions/time"
+        },
+        "endTime": {
+          "$ref": "#/definitions/time"
+        },
+        "from": {
+          "$ref": "#/definitions/options_coordinates"
+        },
+        "to": {
+          "$ref": "#/definitions/options_coordinates"
+        }
+      }
+    },
+    "options_coordinates": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        }
+      }
+    },
+    "options_meta": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string",
+          "format": "url"
+        },
+        "car": {
+          "type": "object",
+          "properties": {
+            "passengers": {
+              "type": "integer"
+            }
+          }
+        }
+      }
     },
     "leg": {
       "x-oad-type": "object",
