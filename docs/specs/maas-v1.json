@@ -3,11 +3,11 @@
   "info": {
     "version": "v1",
     "title": "MaaS-TSP",
-    "description": "This is a API specification of REST endpoints that a Transport Service Provider (TSP) should implement to receive messages from MaaS. It is written in machine readable [Swagger](http://swagger.io/) format, so thatAPI endpoints, validators and test clients can be generated from the documentation.\n\nIn addition to this documentation, MaaS maintains a [reference implementation](https://github.com/maasglobal/maas-tsp-reference) with test cases. It is also running as a [reference service ](https://tsp.maas.global/).\n\nRight now MaaS TSP API consists of the Booking API. In addition, there is a need for customer feedback API (for mediating customer feedback to a TSP) and administration API (for changing API keys etc.) may be defined.\n",
+    "description": "This is a API specification of REST endpoints that a Transport Service Provider (TSP) should implement to receive messages from MaaS. It is written in machine readable [Swagger](http://swagger.io/) format, so thatAPI endpoints, validators and test clients can be generated from the documentation.\n\nIn addition to this documentation, MaaS maintains a [reference implementation (**TODO**)](https://github.com/maasglobal/maas-tsp-api) with test cases. It is also running as a [reference service (**TODO**)](https://tsp.maas.global/).\n\nRight now MaaS TSP API consists of the Booking API. In addition, a need for customer feedback API (for mediating customer feedback to a TSP) and administration API (for changing API keys etc.) may be defined.\n",
     "termsOfService": "http://api.maas.global/terms/",
     "contact": {
       "name": "MaaS API Team",
-      "email": "tech@maas.fi",
+      "email": "developers@maas.fi",
       "url": "http://maas.fi/"
     },
     "license": {
@@ -26,6 +26,10 @@
         "description": "Booking scenarios",
         "url": "https://github.com/maasglobal/maas-tsp-api/blob/master/specs/Booking.md"
       }
+    },
+    {
+      "name": "Listing",
+      "description": "Before a booking can be made via a TSP, available options at a given location can be listed as follows"
     },
     {
       "name": "TODO Feedback",
@@ -50,6 +54,58 @@
     }
   ],
   "paths": {
+    "/bookings/options/": {
+      "get": {
+        "description": "Returns available transport options for given coordinates. Start time can be defined, but is optional. If startTime is not provided a default value of \"Date.now()\" is used.",
+        "tags": [
+          "Listing"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "consumes": [
+          "query"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "description": "User's location in comma separated form e.g. 60.123,27.456",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$"
+          },
+          {
+            "name": "to",
+            "description": "A desired destination e.g. 60.123,27.456",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "pattern": "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?),\\s*[-+]?(180(\\.0+)?|((1[0-7]\\d)|([1-9]?\\d))(\\.\\d+)?)$"
+          },
+          {
+            "name": "startTime",
+            "description": "Check availability of transportation in future. Must be noted that not all providers (TSP's) support reservation or availability listing in future, thus optional.",
+            "in": "query",
+            "required": false,
+            "$ref": "#/definitions/time"
+          },
+          {
+            "name": "endTime",
+            "description": "A possible end time e.g. for a car rental",
+            "required": false,
+            "$ref": "#/definitions/time"
+          },
+          {
+            "name": "mode",
+            "$ref": "#/definitions/mode"
+          }
+        ]
+      }
+    },
     "/bookings/": {
       "get": {
         "description": "Returns the `Booking` that has been created earlier",
@@ -506,7 +562,7 @@
       }
     },
     "time": {
-      "description": "An UTC timestamp (number of milliseconds in a Date object since January 1, 1970, 00:00:00)",
+      "description": "A UTC timestamp (number of milliseconds in a Date object since January 1, 1970, 00:00:00)",
       "type": "integer",
       "maximum": 2147483647,
       "minimum": 0
