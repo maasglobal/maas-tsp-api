@@ -24,7 +24,7 @@
   "paths": {
     "/bookings/options/": {
       "get": {
-        "description": "Returns available transport options for given coordinates. Start time can be defined, but is optional. If startTime is not provided a default value of \"Date.now()\" is used.",
+        "description": "Returns available transport options for given coordinates. Start time can be defined, but is optional. If startTime is not provided, but required by the third party API, a default value of \"Date.now()\" is used.",
         "tags": [
           "Listing"
         ],
@@ -75,7 +75,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Available transport methods matching the given query parameters",
+            "description": "Available transport methods matching the given query parameters. If no transport methods are available, an empty array is returned.",
             "schema": {
               "name": "options",
               "type": "array",
@@ -83,6 +83,12 @@
               "items": {
                 "$ref": "#/definitions/options"
               }
+            }
+          },
+          "400": {
+            "description": "If coordinates given in the request are invalid the server returns 400 Bad request as a response.",
+            "schema": {
+              "$ref": "#/definitions/error"
             }
           }
         }
@@ -522,14 +528,10 @@
       "type": "object",
       "properties": {
         "lat": {
-          "type": "number",
-          "minimum": -90,
-          "maximum": 90
+          "$ref": "#/definitions/lat"
         },
         "lon": {
-          "type": "number",
-          "minimum": -180,
-          "maximum": 180
+          "$ref": "#/definitions/lon"
         }
       }
     },
@@ -653,22 +655,26 @@
           "title": "Stop code"
         },
         "lat": {
-          "x-oad-type": "number",
-          "type": "number",
-          "title": "Latitude",
-          "format": "float"
+          "$ref": "#/definitions/lat"
         },
         "lon": {
-          "x-oad-type": "number",
-          "type": "number",
-          "title": "Longitude",
-          "format": "float"
+          "$ref": "#/definitions/lon"
         }
       },
       "required": [
         "lon",
         "lat"
       ]
+    },
+    "lat": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "lon": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180
     },
     "legGeometry": {
       "x-oad-type": "object",
