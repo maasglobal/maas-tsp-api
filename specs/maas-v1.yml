@@ -50,9 +50,7 @@ paths:
   /bookings/options/:
     get:
       description:
-        Returns available transport options for given coordinates. Start time
-        can be defined, but is optional. If startTime is not provided a default value of
-        "Date.now()" is used.
+        Returns available transport options for given coordinates. Start time can be defined, but is optional. If startTime is not provided, but required by the third party API, a default value of "Date.now()" is used.
       tags:
         - Listing
       schemes:
@@ -89,13 +87,17 @@ paths:
 
       responses:
         200:
-          description: Available transport methods matching the given query parameters
+          description: Available transport methods matching the given query parameters. If no transport methods are available, an empty array is returned.
           schema:
             name: options
             type: array
             description: Available transport options for the queried TSP
             items:
               $ref: '#/definitions/options'
+        400:
+          description: If coordinates given in the request are invalid the server returns 400 Bad request as a response.
+          schema:
+            $ref: '#/definitions/error'
 
   /bookings/:
     get:
@@ -394,13 +396,9 @@ definitions:
     type: object
     properties:
       lat: 
-        type: number
-        minimum: -90
-        maximum: 90
+        $ref: "#/definitions/lat"
       lon: 
-        type: number
-        minimum: -180
-        maximum: 180 
+        $ref: "#/definitions/lon"
 
   options_meta:
     type: object
@@ -472,16 +470,21 @@ definitions:
       stopCode: 
         type: string
       lat: 
-        type: number
-        minimum: -90
-        maximum: 90
+        $ref: "#/definitions/lat"
       lon: 
-        type: number
-        minimum: -180
-        maximum: 180
+        $ref: "#/definitions/lon"
     required: 
       - lon
       - lat
+  lat:
+    type: number
+    minimum: -90
+    maximum: 90
+
+  lon:
+    type: number
+    minimum: -180
+    maximum: 180
 
   legGeometry: 
     type: object
