@@ -9,7 +9,7 @@ below. It should be noted from the picture that MaaS more often acts as a
 caller than a callee for Transport Service Provider. 
 
 The cases of how MaaS interacts with TSP are depicted below
-![Maas-TSP Business Process](https://github.com/maasglobal/maas-tsp-api/blob/master/specs/maas-v1-overall.svg)
+![Maas-TSP Business Process](https://cdn.rawgit.com/maasglobal/maas-tsp-api/master/specs/maas-v1-overall.svg)
 [source](https://github.com/maasglobal/maas-tsp-api/blob/master/specs/maas-v1-overall.svg "MaaS-TSP Business Process").
 
 ## Planning a Route
