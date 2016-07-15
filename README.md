@@ -4,6 +4,8 @@ This is the MaaS Transport service provider API repository, containing a test su
 
 Up-to-date documentation is published at [API docs](http://maasglobal.github.io/maas-tsp-api/).
 
+For a brief walk through of a booking process [see here](specs/Booking.md)
+
 ## Building the documentation
 
 Building the documentation:
