@@ -13,7 +13,7 @@
     "maas"
   ],
   "author": "Lauri Svan <lauri.svan@sc5.io> (https://github.com/laurisvan)",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",
