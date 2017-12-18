@@ -8,7 +8,7 @@ const swaggerRoot = 'specs/maas-v1.json'
 
 gulp.task('copy-swagger-ui', function() {
   // Copies everything
-  return gulp.src(['node_modules/swagger-ui/dist/**/*', '!node_modules/swagger-ui/dist/index.html'])
+  return gulp.src(['node_modules/swagger-ui-dist/*', '!node_modules/swagger-ui-dist/index.html'])
     .pipe(gulp.dest('docs'));
 });
 
@@ -28,7 +28,7 @@ gulp.task('transform-yaml', function() {
 });
 
 gulp.task('clean:docs', function () {
-  return del(['docs/**/*', '!docs/index.html']);
+  return del(['docs/*', '!docs/index.html']);
 });
 
 gulp.task('serve', function() {
