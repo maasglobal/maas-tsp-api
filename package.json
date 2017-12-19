@@ -15,12 +15,12 @@
   "author": "Lauri Svan <lauri.svan@sc5.io> (https://github.com/laurisvan)",
   "license": "MIT",
   "devDependencies": {
-    "del": "^2.2.0",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-connect": "^4.0.0",
-    "gulp-replace": "^0.5.4",
+    "gulp-connect": "^5.0.0",
+    "gulp-replace": "^0.6.1",
     "gulp-yaml": "^1.0.1",
-    "swagger-ui": "^2.1.4"
+    "swagger-ui": "^3.4.3"
   },
   "dependencies": {}
 }
