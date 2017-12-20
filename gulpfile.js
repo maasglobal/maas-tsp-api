@@ -6,19 +6,21 @@ const connect = require('gulp-connect');
 
 const swaggerRoot = 'specs/maas-v1.json'
 
-gulp.task('copy-swagger-ui', function() {
+// Wait for clean:docs to finish to avoid filesystem errors
+gulp.task('copy-swagger-ui', ['clean:docs'], function() {
   // Copies everything
   return gulp.src(['node_modules/swagger-ui/dist/**/*', '!node_modules/swagger-ui/dist/index.html'])
     .pipe(gulp.dest('docs'));
 });
 
-gulp.task('copy-specs', function() {
+// Wait for clean:docs to finish to avoid filesystem errors
+gulp.task('copy-specs', ['clean:docs'], function() {
   return gulp.src(['specs/**/*.json', 'specs/**/*.png', 'specs/**/*.svg'])
     .pipe(gulp.dest('docs/specs'));
 });
 
 gulp.task('watch-specs', function() {
-  gulp.watch(['specs/**/*.yml'], ['transform-yaml', 'copy-specs']);
+  gulp.watch(['specs/**/*.yml'], ['clean:docs', 'transform-yaml', 'copy-swagger-ui', 'copy-specs']);
 })
 
 gulp.task('transform-yaml', function() {
@@ -43,3 +45,4 @@ gulp.task('serve', function() {
 gulp.task('docs', ['copy-swagger-ui', 'copy-specs']);
 gulp.task('build', ['transform-yaml']);
 gulp.task('clean', ['clean:docs']);
+gulp.task('watch', ['watch-specs']);
