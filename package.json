@@ -1,6 +1,6 @@
 {
   "name": "maas-tsp-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MaaS TSP (Transport Service Provider) API",
   "private": true,
   "main": "lib/index.js",
@@ -21,7 +21,7 @@
     "gulp-connect": "^4.0.0",
     "gulp-replace": "^0.5.4",
     "gulp-yaml": "^1.0.1",
-    "swagger-ui": "^2.1.4"
+    "swagger-ui-dist": "^3.0.0"
   },
   "dependencies": {}
 }
