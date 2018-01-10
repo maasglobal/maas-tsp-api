@@ -20,6 +20,7 @@
     "gulp": "^3.9.1",
     "gulp-connect": "^4.0.0",
     "gulp-replace": "^0.5.4",
+    "gulp-shell": "^0.6.5",
     "gulp-yaml": "^1.0.1",
     "swagger-ui-dist": "^3.0.0"
   },
