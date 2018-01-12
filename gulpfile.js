@@ -46,7 +46,7 @@ gulp.task(
   shell.task(
     [
       'git checkout -b gh-pages-tmp',
-      'rm .gitignore'
+      'mv .gitignore .gitignore.backup'
     ]
   )
 )
