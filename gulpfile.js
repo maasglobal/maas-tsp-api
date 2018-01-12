@@ -48,6 +48,8 @@ gulp.task(
       'git checkout -b gh-pages-tmp',
       // Remove .gitignore, so it won't be active
       'rm .gitignore',
+      // ignore node modules for temp gh pages branch commit
+      'echo "node_modules/" >> .gitignore'
       // Add all files, including the newly built site files
       'git add .',
       // Commit all changes for deployment
