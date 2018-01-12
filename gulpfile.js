@@ -59,7 +59,7 @@ gulp.task(
       // Switch back to master branch
       'git checkout master',
       // Cleanup temp GitHub Pages branch
-      'git branch --delete gh-pages-tmp',
+      'git branch -D gh-pages-tmp',
       // Put .gitignore back in place
       'git reset --hard HEAD'
     ]
