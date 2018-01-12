@@ -6,13 +6,27 @@ Up-to-date documentation is published at [API docs](http://maasglobal.github.io/
 
 For a brief walk through of a booking process [see here](specs/Booking.md)
 
-## Building the documentation
+## Running live server
+The live development server can be started by running:
 
-Building the documentation:
+```
+npm start
+```
 
-    npm run-script build  # builds the documentation
-    npm start	          # starts the development server
-    
-Updating the documentation (MaaS contributors) [using git subtrees for gh-pages](https://gist.github.com/cobyism/4730490):
+## Build and deploy the documentation
+In order to update the GitHub Pages branch, you will need to:
+1. build the documentation
+2. deploy the documentation
 
-    git subtree push --prefix docs origin gh-pages
+### Build the documentation
+
+```
+npm run-script build
+```
+
+
+### Deploy the documentation
+
+```sh
+npm run-script deploy-temp-gh-pages-deployment-branch
+```
