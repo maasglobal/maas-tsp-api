@@ -46,7 +46,9 @@ gulp.task(
   shell.task(
     [
       'git checkout -b gh-pages-tmp',
+      // Move .gitignore, so it won't be active
       'mv .gitignore .gitignore.backup',
+      // Add all files, including the newly built site files
       'git add .',
       'git commit -am "Remove gitignore; add built docs"',
     ]
@@ -67,9 +69,11 @@ gulp.task(
   'delete-temp-gh-pages-deployment-branch',
   shell.task(
     [
-      // TODO: change the following line to 'git checkout master' after test
+      // Switch back to master branch
       'git checkout gh-pages-deploy-script',
+      // Cleanup temp GitHub Pages branch
       'git branch --delete gh-pages-tmp',
+      // Put .gitignore back in place
       'mv .gitignore.backup .gitignore'
     ]
   )
