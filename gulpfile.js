@@ -46,7 +46,9 @@ gulp.task(
   shell.task(
     [
       'git checkout -b gh-pages-tmp',
-      'mv .gitignore .gitignore.backup'
+      'mv .gitignore .gitignore.backup',
+      'git add .',
+      'git commit -am "Remove gitignore; add built docs"',
     ]
   )
 )
@@ -55,10 +57,6 @@ gulp.task(
   'deploy-temp-gh-pages-deployment-branch',
   shell.task(
     [
-      'git checkout -b gh-pages-tmp',
-      'mv .gitignore .gitignore.backup',
-      'git add .',
-      'git commit -am "Remove gitignore; add built docs"',
       // Push the docs folder to the Github Pages branch
       'git subtree push --prefix docs upstream gh-pages',
     ]
