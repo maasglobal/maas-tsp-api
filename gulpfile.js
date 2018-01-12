@@ -42,7 +42,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task(
-  'create-temp-gh-pages-deployment-branch',
+  'deploy',
   shell.task(
     [
       'git checkout -b gh-pages-tmp',
@@ -50,27 +50,12 @@ gulp.task(
       'rm .gitignore',
       // Add all files, including the newly built site files
       'git add .',
+      // Commit all changes for deployment
       'git commit -am "Remove gitignore; add built docs"',
-    ]
-  )
-)
-
-gulp.task(
-  'deploy-temp-gh-pages-deployment-branch',
-  shell.task(
-    [
-      // Delete existing gh-pages branch
+      // Delete upstream gh-pages branch
       'git push upstream --delete gh-pages',
-      // Push the docs folder to the Github Pages branch
+      // Push the docs folder to the upstream Github Pages branch
       'git subtree push --prefix docs upstream gh-pages',
-    ]
-  )
-)
-
-gulp.task(
-  'delete-temp-gh-pages-deployment-branch',
-  shell.task(
-    [
       // Switch back to master branch
       'git checkout master',
       // Cleanup temp GitHub Pages branch
@@ -87,8 +72,3 @@ gulp.task('docs', ['copy-swagger-ui', 'copy-specs']);
 gulp.task('build', ['transform-yaml']);
 gulp.task('clean', ['clean:docs']);
 gulp.task('watch', ['watch-specs']);
-gulp.task('deploy', [
-  'create-temp-gh-pages-deployment-branch',
-  'deploy-temp-gh-pages-deployment-branch',
-  'delete-temp-gh-pages-deployment-branch',
-])
