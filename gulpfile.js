@@ -56,7 +56,7 @@ gulp.task(
   shell.task(
     [
       'git checkout -b gh-pages-tmp',
-      'rm .gitignore',
+      'mv .gitignore .gitignore.backup',
       'git add .',
       'git commit -am "Remove gitignore; add built docs"',
       // Push the docs folder to the Github Pages branch
@@ -71,7 +71,8 @@ gulp.task(
     [
       // TODO: change the following line to 'git checkout master' after test
       'git checkout gh-pages-deploy-script',
-      'git -d gh-pages-tmp'
+      'git -D gh-pages-tmp',
+      'mv .gitignore.backup .gitignore'
     ]
   )
 )
@@ -82,7 +83,7 @@ gulp.task('docs', ['copy-swagger-ui', 'copy-specs']);
 gulp.task('build', ['transform-yaml']);
 gulp.task('clean', ['clean:docs']);
 gulp.task('watch', ['watch-specs']);
-gulp.task('deploy' [
+gulp.task('deploy', [
   'create-temp-gh-pages-deployment-branch',
   'deploy-temp-gh-pages-deployment-branch',
   'delete-temp-gh-pages-deployment-branch',
