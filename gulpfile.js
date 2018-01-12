@@ -71,7 +71,7 @@ gulp.task(
     [
       // TODO: change the following line to 'git checkout master' after test
       'git checkout gh-pages-deploy-script',
-      'git -D gh-pages-tmp',
+      'git branch --delete gh-pages-tmp',
       'mv .gitignore.backup .gitignore'
     ]
   )
