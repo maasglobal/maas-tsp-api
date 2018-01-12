@@ -59,6 +59,8 @@ gulp.task(
   'deploy-temp-gh-pages-deployment-branch',
   shell.task(
     [
+      // Delete existing gh-pages branch
+      'git push upstream --delete gh-pages',
       // Push the docs folder to the Github Pages branch
       'git subtree push --prefix docs upstream gh-pages',
     ]
