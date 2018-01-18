@@ -6,24 +6,27 @@ An interactive version of this documentation is published at [docs.maas-api.org]
 
 For a brief walk through of a booking process [see here](specs/Booking.md)
 
-## Building the documentation
-
-In order to see the latest documents in Swagger UI, you need to build the docs with the following command:
-
-```
-npm run-script build
-```
-    
-## Development
-You can start a development server with the following command:
+## Run live server
+The live development server can be started by running:
 
 ```
 npm start
 ```
-    
-## Deployment
-*After* you have built the documentation, you can deploy to GitHub pages with the following command:
+
+## Build and deploy the documentation
+In order to update the GitHub Pages branch, you will need to:
+1. build the documentation
+2. deploy the documentation
+
+### Build the documentation
 
 ```
+npm run-script build
+```
+
+
+### Deploy the documentation
+
+```sh
 npm run-script deploy
 ```
