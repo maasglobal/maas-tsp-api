@@ -1,4 +1,24 @@
 {
+  "info": {
+    "title": "MaaS-TSP",
+    "version": "v1",
+    "description": "This is a API specification of REST endpoints that a Transport Service Provider (TSP) should implement to receive messages from MaaS. It is written in machine readable [Swagger](http://swagger.io/) format, so thatAPI endpoints, validators and test clients can be generated from the documentation.\n\nIn addition to this documentation, MaaS maintains a [reference implementation (**TODO**)](https://github.com/maasglobal/maas-tsp-api) with test cases. It is also running as a [reference service (**TODO**)](https://tsp.maas.global/).\n\nRight now MaaS TSP API consists of the Booking API. In addition, a need for customer feedback API (for mediating customer feedback to a TSP) and administration API (for changing API keys etc.) may be defined.\n",
+    "termsOfService": "http://api.maas.global/terms/",
+    "contact": {
+      "name": "MaaS API Team",
+      "email": "developers@maas.fi",
+      "url": "http://maas.fi/"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  },
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
   "tags": [
     {
       "name": "Booking",
@@ -113,39 +133,30 @@
           "200": {
             "description": "The bookings matching the query",
             "schema": {
-              "x-oad-type": "array",
               "type": "array",
               "description": "The bookings that matched the query (zero or more)",
               "items": {
-                "x-oad-type": "reference",
                 "$ref": "#/definitions/booking"
               }
-            },
-            "x-oad-type": "response"
+            }
           },
           "400": {
             "description": "Bad request (invalid query parameters)",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           },
           "401": {
             "description": "Authorization error (invalid API key)",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           },
           "default": {
             "description": "unexpected error",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           }
         },
         "parameters": [
@@ -155,8 +166,7 @@
             "description": "The state the booking to fetch",
             "required": true,
             "type": "string",
-            "format": "enum - BOOKED - CANCELLED - PAID - UPDATE_REQUESTED - UPDATED - STARTED - FINISHED",
-            "x-oad-type": "parameter"
+            "format": "enum - BOOKED - CANCELLED - PAID - UPDATE_REQUESTED - UPDATED - STARTED - FINISHED"
           }
         ]
       },
@@ -178,34 +188,26 @@
           "200": {
             "description": "A new booking was succesfully created",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/booking"
-            },
-            "x-oad-type": "response"
+            }
           },
           "400": {
             "description": "Bad request (invalid body parameters)",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           },
           "401": {
             "description": "Authorization error (invalid API key)",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           }
         },
         "parameters": [
@@ -215,14 +217,11 @@
             "description": "New `Booking` data",
             "required": true,
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/newBooking"
-            },
-            "x-oad-type": "parameter"
+            }
           }
         ]
-      },
-      "x-oad-type": "operation"
+      }
     },
     "/bookings/{id}": {
       "get": {
@@ -243,42 +242,32 @@
           "200": {
             "description": "The booking was found",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/booking"
-            },
-            "x-oad-type": "response"
+            }
           },
           "400": {
             "description": "Bad request (invalid query or body parameters)",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           },
           "401": {
             "description": "Authorization error (invalid API key)",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           },
           "404": {
             "description": "The booking was not found",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           }
         },
         "parameters": [
@@ -287,8 +276,7 @@
             "in": "path",
             "description": "Booking identifier",
             "required": true,
-            "type": "string",
-            "x-oad-type": "parameter"
+            "type": "string"
           }
         ]
       },
@@ -310,18 +298,14 @@
           "200": {
             "description": "The booking was modified",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/booking"
-            },
-            "x-oad-type": "response"
+            }
           },
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/error"
-            },
-            "x-oad-type": "response"
+            }
           }
         },
         "parameters": [
@@ -330,8 +314,7 @@
             "in": "path",
             "description": "Booking identifier",
             "required": true,
-            "type": "string",
-            "x-oad-type": "parameter"
+            "type": "string"
           },
           {
             "name": "booking",
@@ -339,31 +322,25 @@
             "description": "New `Booking` data",
             "required": true,
             "schema": {
-              "x-oad-type": "reference",
               "$ref": "#/definitions/booking"
-            },
-            "x-oad-type": "parameter"
+            }
           }
         ]
-      },
-      "x-oad-type": "operation"
+      }
     }
   },
   "definitions": {
     "error": {
-      "x-oad-type": "object",
       "type": "object",
       "title": "Error",
       "description": "An error that the service may send, e.g. in case of invalid input, missing authorization or internal service error.",
       "properties": {
         "message": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Message",
           "description": "A human readable error message (preferrably in English)"
         },
         "code": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Code",
           "description": "A TSP internal error code, used for reference"
@@ -375,13 +352,11 @@
       ]
     },
     "newBooking": {
-      "x-oad-type": "object",
       "type": "object",
       "title": "New booking",
       "description": "A new booking, created by MaaS POST request in 'new' state",
       "properties": {
         "state": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Booking state",
           "description": "The state of the booking (always new for new bookings)",
@@ -390,11 +365,9 @@
           ]
         },
         "leg": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/leg"
         },
         "customer": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/customer"
         }
       },
@@ -404,31 +377,25 @@
       ]
     },
     "booking": {
-      "x-oad-type": "object",
       "type": "object",
       "title": "Booking",
       "description": "The booking information describing the state and details of the transaction",
       "properties": {
         "id": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "ID",
           "description": "The identifier MaaS will be using to referring to the booking"
         },
         "state": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/bookingState"
         },
         "terms": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/bookingState"
         },
         "token": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/token"
         },
         "meta": {
-          "x-oad-type": "object",
           "type": "object",
           "title": "Meta",
           "description": "Arbitrary metadata that a TSP can add"
@@ -443,7 +410,6 @@
       ]
     },
     "bookingState": {
-      "x-oad-type": "string",
       "type": "string",
       "title": "Booking state",
       "description": "The life-cycle state of the booking (from NEW to FINISHED)",
@@ -460,30 +426,25 @@
     },
     "token": {},
     "customer": {
-      "x-oad-type": "object",
       "type": "object",
       "title": "Customer",
       "properties": {
         "id": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "ID",
           "description": "The identifier MaaS uses to identify the customer"
         },
         "firstName": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "First name",
           "description": "First name of the customer (e.g. John)"
         },
         "lastName": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Last name",
           "description": "Last name of the customer (e.g. Doe)"
         },
         "phone": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Phone",
           "description": "Phone number that the customer may be reached from"
@@ -559,69 +520,54 @@
       }
     },
     "leg": {
-      "x-oad-type": "object",
       "type": "object",
       "title": "Leg",
       "description": "A OpenTripPlanner compatible definition of a leg (see OpenTripPlanner docs for reference)",
       "properties": {
         "from": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/place"
         },
         "to": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/place"
         },
         "startTime": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/time"
         },
         "endTime": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/time"
         },
         "mode": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/mode"
         },
         "departureDelay": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/duration"
         },
         "arrivalDelay": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/duration"
         },
         "distance": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/distance"
         },
         "fare": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/fare"
         },
         "route": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Route"
         },
         "routeShortName": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Route short name"
         },
         "routeLongName": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Route long name"
         },
         "agencyId": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Agency ID"
         },
         "legGeometry": {
-          "x-oad-type": "reference",
           "$ref": "#/definitions/legGeometry"
         }
       },
@@ -634,23 +580,19 @@
       ]
     },
     "place": {
-      "x-oad-type": "object",
       "type": "object",
       "title": "Place",
       "properties": {
         "name": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Name",
           "description": "Human readable name of the place"
         },
         "stopId": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Stop ID"
         },
         "stopCode": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Stop code"
         },
@@ -677,46 +619,39 @@
       "maximum": 180
     },
     "legGeometry": {
-      "x-oad-type": "object",
       "type": "object",
       "title": "Leg geometry",
       "properties": {
         "points": {
-          "x-oad-type": "string",
           "type": "string",
           "title": "Points"
         }
       }
     },
     "time": {
-      "x-oad-type": "integer",
       "description": "A UTC timestamp (number of milliseconds in a Date object since January 1, 1970, 00:00:00)",
       "type": "integer",
       "title": "Time",
       "format": "int32"
     },
     "duration": {
-      "x-oad-type": "integer",
       "type": "integer",
       "title": "Duration",
       "description": "A duration of some time (relative to time) in milliseconds",
       "format": "int32"
     },
     "distance": {
-      "x-oad-type": "integer",
       "type": "integer",
       "title": "Distance",
       "description": "The estimated distance travelled in the leg (in meters)",
       "format": "int32"
     },
     "fare": {
-      "x-oad-type": "object",
       "type": "object",
       "title": "Fare",
       "description": "Arbitrary fare data that MaaS will use internally"
     },
     "mode": {
-      "x-oad-type": "string",
       "type": "string",
       "title": "Mode",
       "description": "The type of the leg MaaS uses to identify the leg",
@@ -753,24 +688,4 @@
       "type": "apiKey"
     }
   },
-  "info": {
-    "title": "MaaS-TSP",
-    "version": "v1",
-    "description": "This is a API specification of REST endpoints that a Transport Service Provider (TSP) should implement to receive messages from MaaS. It is written in machine readable [Swagger](http://swagger.io/) format, so thatAPI endpoints, validators and test clients can be generated from the documentation.\n\nIn addition to this documentation, MaaS maintains a [reference implementation (**TODO**)](https://github.com/maasglobal/maas-tsp-api) with test cases. It is also running as a [reference service (**TODO**)](https://tsp.maas.global/).\n\nRight now MaaS TSP API consists of the Booking API. In addition, a need for customer feedback API (for mediating customer feedback to a TSP) and administration API (for changing API keys etc.) may be defined.\n",
-    "termsOfService": "http://api.maas.global/terms/",
-    "contact": {
-      "name": "MaaS API Team",
-      "email": "developers@maas.fi",
-      "url": "http://maas.fi/"
-    },
-    "license": {
-      "name": "MIT",
-      "url": "http://opensource.org/licenses/MIT"
-    }
-  },
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0"
 }
