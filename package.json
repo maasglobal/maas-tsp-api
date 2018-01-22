@@ -8,7 +8,8 @@
     "test": "node_modules/mocha/bin/mocha --require source-map-support/register test",
     "build": "node_modules/gulp/bin/gulp.js build docs",
     "start": "node_modules/gulp/bin/gulp.js serve",
-    "watch": "node_modules/gulp/bin/gulp.js watch serve"
+    "watch": "node_modules/gulp/bin/gulp.js watch serve",
+    "deploy": "node_modules/gulp/bin/gulp.js deploy"
   },
   "keywords": [
     "maas"
@@ -20,6 +21,7 @@
     "gulp": "^3.9.1",
     "gulp-connect": "^4.0.0",
     "gulp-replace": "^0.5.4",
+    "gulp-shell": "^0.6.5",
     "gulp-yaml": "^1.0.1",
     "swagger-ui-dist": "^3.0.0"
   },

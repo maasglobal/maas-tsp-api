@@ -2,11 +2,11 @@
 
 This is the MaaS Transport service provider API repository, containing a test suite, reference implementation and specifications. Using these documents, a third party transport service provider can implement a MaaS compatible API.
 
-Up-to-date documentation is published at [API docs](http://maasglobal.github.io/maas-tsp-api/).
+An interactive version of this documentation is published at [docs.maas-api.org](http://docs.maas-api.org/).
 
 For a brief walk through of a booking process [see here](specs/Booking.md)
 
-## Running live server
+## Run live server
 The live development server can be started by running:
 
 ```
@@ -28,5 +28,5 @@ npm run-script build
 ### Deploy the documentation
 
 ```sh
-npm run-script deploy-temp-gh-pages-deployment-branch
+npm run-script deploy
 ```
