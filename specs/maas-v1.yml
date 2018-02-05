@@ -1,30 +1,25 @@
 openapi: 3.0.0
 servers: []
 info:
-  version: v1
+  version: 1.0.0
   title: MaaS-TSP
-  description: >
+  description: >-
     This is a API specification of REST endpoints that a Transport Service
-    Provider (TSP) should implement to receive messages from MaaS. It is written
-    in machine readable [Swagger](http://swagger.io/) format, so thatAPI
-    endpoints, validators and test clients can be generated from the
-    documentation.
+    Provider (TSP) should implement to receive messages from a MaaS provider.
 
 
-    In addition to this documentation, MaaS maintains a [reference
-    implementation (**TODO**)](https://github.com/maasglobal/maas-tsp-api) with
-    test cases. It is also running as a [reference service
-    (**TODO**)](https://tsp.maas.global/).
+    API endpoints, validators, and software clients can be generated from this
+    documentation, so that new TSPs can easily scaffold their digital service.
 
 
-    Right now MaaS TSP API consists of the Booking API. In addition, a need for
+    Currently, MaaS TSP API consists of the Booking API. At a later point, a
     customer feedback API (for mediating customer feedback to a TSP) and
     administration API (for changing API keys etc.) may be defined.
-  termsOfService: 'http://api.maas.global/terms/'
+  termsOfService: ''
   contact:
     name: MaaS API Team
-    email: developers@maas.fi
-    url: 'http://maas.fi/'
+    email: tech@maas.global
+    url: 'https://maas.global/'
   license:
     name: MIT
     url: 'http://opensource.org/licenses/MIT'
