@@ -12,9 +12,7 @@ info:
     documentation, so that new TSPs can easily scaffold their digital service.
 
 
-    Currently, MaaS TSP API consists of the Booking API. At a later point, a
-    customer feedback API (for mediating customer feedback to a TSP) and
-    administration API (for changing API keys etc.) may be defined.
+    Currently, MaaS TSP API consists of the Booking API.
   termsOfService: ''
   contact:
     name: MaaS API Team
@@ -36,15 +34,6 @@ tags:
     description: >-
       Before a booking can be made via a TSP, available options at a given
       location can be listed as follows
-  - name: TODO Feedback
-    description: >-
-      In order to receive customer feedback through MaaS, TSP may implement
-      these APIs.
-  - name: TODO Admin
-    description: >-
-      In the future MaaS will implement machine-readable APIs that a TSP may use
-      to update GTFS route information, API keys and other information that is
-      needed for communicating between MaaS and a TSP.
 security:
   - key: []
 paths:
