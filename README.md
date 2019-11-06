@@ -5,7 +5,7 @@ containing OpenAPI specification used in communication with TSP.
 
 Using these documents, a third party transport service provider can implement a MaaS compatible API.
 
-An interactive version of this documentation is published at [docs.maas-api.org](http://docs.maas-api.org/).
+An interactive version of this documentation is published at [maasglobal.github.io](https://maasglobal.github.io/maas-tsp-api).
 
 For a brief walk through of a booking process [see here](specs/Booking.md)
 
