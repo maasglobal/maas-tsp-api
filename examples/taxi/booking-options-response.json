@@ -1,0 +1,86 @@
+[
+    {
+        "cost": {
+            "amount": 11,
+            "currency": "EUR"
+        },
+        "leg": {
+            "from": {
+                "name": "Siltasaarenkatu 1 Helsinki",
+                "address": "streetName:Siltasaarenkatu|streetNumber:1|city:Helsinki|zipCode:00530|country:Suomi",
+                "lat": 60.1769789,
+                "lon": 24.9504135
+            },
+            "to": {
+                "name": "Ida Aalbergin tie 3 Helsinki",
+                "address": "streetName:Ida Aalbergin tie|streetNumber:3|city:Helsinki|zipCode:00400|country:Suomi",
+                "lat": 60.23044350000001,
+                "lon": 24.8990183
+            },
+            "startTime": 1572347575000,
+            "endTime": 1572347575000,
+            "mode": "TAXI"
+        },
+        "terms": {
+            "validity": {
+                "startTime": 1572347613941,
+                "endTime": 1572347575000
+            }
+        },
+        "meta": {
+            "MODE_TAXI": {
+                "driver": {},
+                "taxiCenter": {
+                    "name": "Taksi Test",
+                    "phone": "+358400000101"
+                },
+                "vehicleType": "any"
+            }
+        },
+        "tspProduct": {
+            "id": "taxitest1-any"
+        }
+    },
+    {
+        "cost": {
+            "amount": 22,
+            "currency": "EUR"
+        },
+        "leg": {
+            "from": {
+                "name": "Siltasaarenkatu 1 Helsinki",
+                "address": "streetName:Siltasaarenkatu|streetNumber:1|city:Helsinki|zipCode:00530|country:Suomi",
+                "lat": 60.1769789,
+                "lon": 24.9504135
+            },
+            "to": {
+                "name": "Ida Aalbergin tie 3 Helsinki",
+                "address": "streetName:Ida Aalbergin tie|streetNumber:3|city:Helsinki|zipCode:00400|country:Suomi",
+                "lat": 60.23044350000001,
+                "lon": 24.8990183
+            },
+            "startTime": 1572347575000,
+            "endTime": 1572347575000,
+            "mode": "TAXI"
+        },
+        "terms": {
+            "validity": {
+                "startTime": 1572347613941,
+                "endTime": 1572347575000
+            }
+        },
+        "meta": {
+            "MODE_TAXI": {
+                "driver": {},
+                "taxiCenter": {
+                    "name": "Taksi Test1",
+                    "phone": "+358400000101"
+                },
+                "vehicleType": "minibus"
+            }
+        },
+        "tspProduct": {
+            "id": "taxitest1-minibus"
+        }
+    }
+]

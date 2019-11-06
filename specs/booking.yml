@@ -1,0 +1,208 @@
+openapi: 3.0.0
+servers: 
+  - url: /
+    description: Run locally
+  - url: https://demo.maas.global/tsp/
+    description: Run demo server
+info:
+  version: v1
+  title: MaaS-TSP
+  description: >-
+    Booking API
+    Implements booking APIs, see workflow in ../booking.md
+
+    ## More information
+
+    Here are markdown
+    and image (links absolute only?!)
+
+    ## Even more information
+
+    ![Image](../assets/whim.png)
+  termsOfService: '../terms.md'
+  contact:
+    name: MaaS API Team
+    email: team@maas-global.fi
+    url: 'https://maas-global.fi/'
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+  x-logo:
+      url: "../assets/whim-logo.png"
+      backgroundColor: "#FFFFFF"
+      altText: "Whim logo"
+tags:
+
+  - name: Rate limits
+    description: >-
+      This is just a doc section
+    x-traitTag: true
+  - name: Pagination
+    description: >-
+      This is just a doc section
+    x-traitTag: true
+  - name: Booking
+    description: >-
+      Booking related APIs are the core of a TSP implementation.
+      Correspondingly, a Booking is the main object exchanged between MaaS and a
+      TSP.
+
+      ### More markdown for tag
+    x-traitTag: false
+    x-displayName: Booking API
+  - name: About MaaS Global
+    description: >-
+      This is just a doc section
+
+      ## It have more docs here
+
+    x-traitTag: true
+components:
+  securitySchemes:
+    apiKeyHeader:
+      in: header
+      name: X-API-Key
+      type: apiKey
+      description: API key header description
+security:
+  - apiKeyHeader: []
+paths:
+  /bookings/options/:
+    get:
+      summary: Available transport options
+      description: >-
+        Returns available transport options or offers.
+        Start time can be defined, but is optional. If startTime is not provided, but
+        required by the third party API, a default value of "Date.now()" is
+        used.
+
+        ### Markdown here
+
+        Some markdown
+
+        Some code (double tabs)
+
+            [
+              {
+                  "cost": {
+                    "amount": 11,
+                    "currency": "EUR"
+                  }
+              }
+            ]
+      tags:
+        - Booking
+      parameters:
+        - name: from
+          description: 'User''s location in comma separated form e.g. 60.123,27.456'
+          in: query
+          required: true
+          schema:
+            $ref: ../schemas/core/components/units-geo.json#/definitions/shortLocationString
+        - name: to
+          description: 'A desired destination e.g. 60.123,27.456'
+          in: query
+          required: false
+          schema:
+            $ref: ../schemas/core/components/units-geo.json#/definitions/shortLocationString
+      x-code-samples:
+          - lang: Shell
+            label: Query for taxi
+            source: >-
+              curl --location --request GET 'http://localhost:3000/bookings/options? \
+                customer[clientId]=whim&customer[locale]=en& \
+                customer[opaqueId]=deadbeef-deadbeef& \
+                customer[phone]=+35840000000& \
+                distance=9734&endTime=1572347575000& \
+                from=60.1769789,24.9504135& \
+                fromAddress=streetName:Siltasaarenkatu|streetNumber:1|city:Helsinki|zipCode:00530|country:Suomi&fromName=Siltasaarenkatu%201%20Helsinki& \
+                mode=TAXI& \
+                startTime=1572347575000& \
+                to=60.23044350000001,24.8990183& \
+                toAddress=streetName:Ida%20Aalbergin%20tie|streetNumber:3|city:Helsinki|zipCode:00400|country:Suomi& \
+                toName=Ida%20Aalbergin%20tie%203%20Helsinki' \
+                  --header "x-api-key: pieY8Oezeicioyei5eisheeb7sheeLie"
+      responses:
+        '200':
+          x-summary: Array of options
+          description: >-
+            Available transport methods matching the given query parameters. If
+            no transport methods are available, an empty array is returned.
+
+            ### Taxi TSP 
+
+            Return taxi options available locally
+
+                [
+                  {
+                      "cost": {
+                        "amount": 11,
+                        "currency": "EUR"
+                      }
+                  }
+                ]
+          content:  
+            application/json:
+              schema:
+                $ref: ../schemas/tsp/booking-options-list/response.json
+              examples:
+                Taxi:
+                  summary: Taxi
+                  externalValue: "../examples/taxi/booking-options-response.json"
+  /booking/create:
+    post:
+      summary: Create booking
+      description: >-
+        Creates booking, optionally referrring to the offer generated on previous step.
+
+        ### JSON Schema documentation
+
+        Full schema documented here: 
+        https://maasglobal.github.io/maas-schemas/docs/tsp/booking-create/request.html
+      tags:
+        - Booking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/tsp/booking-create/request.json
+        description: >-
+          order placed for purchasing the pet
+
+          #### Specify create request here
+        required: true 
+      x-code-samples:
+          - lang: Javascript
+            label: Taxi
+            source: >-
+              {
+                "dsadsads": "dsdsds"
+              }
+          - lang: Javascript
+            label: E-bike
+            source: >-
+              {
+                "dsadsads": "dsdsds"
+              }
+      responses:
+        '200':
+          x-summary: Booking
+          description: >-
+            Booking informations
+
+            dsds
+            ds
+            ds
+          content:
+              application/json:
+                schema:
+                  $ref: ../schemas/tsp/booking-create/response.json
+                examples:
+                  Taxi:
+                    summary: Taxi
+                    externalValue: "../examples/taxi/booking-create-response.json"
+                  E-Bike:
+                    summary: E-Bike
+                    value:
+                      id: 10
+                      name: Jessica Smith
