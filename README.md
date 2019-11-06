@@ -22,7 +22,7 @@ npm install
 npm start
 ```
 
-Open browser and navigate to documentation portal.
+Open browser and navigate to documentation portal (http://localhost:3000)
 
   * Redoc UI for documentation
   * Examples
@@ -35,5 +35,6 @@ npm run build
 
 ## Links
 
+  * https://github.com/maasglobal/maas-schemas/
   * https://swagger.io/specification/
-  * https://github.com/Redocly/redoc
+  * https://github.com/Redocly/redoc/
