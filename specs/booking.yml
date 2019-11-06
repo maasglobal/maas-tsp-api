@@ -1,24 +1,16 @@
 openapi: 3.0.0
-servers: 
-  - url: /
-    description: Run locally
-  - url: https://demo.maas.global/tsp/
-    description: Run demo server
 info:
   version: v1
   title: MaaS-TSP
   description: >-
-    Booking API
-    Implements booking APIs, see workflow in ../booking.md
-
-    ## More information
-
-    Here are markdown
-    and image (links absolute only?!)
-
-    ## Even more information
-
-    ![Image](../assets/whim.png)
+    This is a API specification of REST endpoints that a Transport Service
+    Provider (TSP) should implement to offer their services through the 
+    [Whim application](https://whimapp.com/).
+    
+    It is written in machine readable 
+    [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format, 
+    so that API endpoints, validators and test clients can be generated from the
+    documentation.
   termsOfService: '../terms.md'
   contact:
     name: MaaS API Team
@@ -32,42 +24,36 @@ info:
       backgroundColor: "#FFFFFF"
       altText: "Whim logo"
 tags:
-
-  - name: Rate limits
-    description: >-
-      This is just a doc section
-    x-traitTag: true
-  - name: Pagination
-    description: >-
-      This is just a doc section
-    x-traitTag: true
   - name: Booking
     description: >-
       Booking related APIs are the core of a TSP implementation.
+
+
       Correspondingly, a Booking is the main object exchanged between MaaS and a
       TSP.
-
-      ### More markdown for tag
     x-traitTag: false
     x-displayName: Booking API
-  - name: About MaaS Global
-    description: >-
-      This is just a doc section
-
-      ## It have more docs here
-
-    x-traitTag: true
 components:
   securitySchemes:
     apiKeyHeader:
       in: header
       name: X-API-Key
       type: apiKey
-      description: API key header description
+      description: >-
+        Authorization scheme to use with TSP API should be based on specifying `X-API-Key`
+        header when Whim App makes request to the TSP API.
+
+
+        Please not what due to serverless nature of our infrastructure we are unable to provide
+        you with a set of IP addresses HTTP request will be originating from.
+
+
+        To cope with that we propose using *optional* JSON payload signing, see here for more 
+        information: https://developer.github.com/webhooks/securing/#validating-payloads-from-github
 security:
   - apiKeyHeader: []
 paths:
-  /bookings/options/:
+  /bookings/options:
     get:
       summary: Available transport options
       description: >-
@@ -75,21 +61,6 @@ paths:
         Start time can be defined, but is optional. If startTime is not provided, but
         required by the third party API, a default value of "Date.now()" is
         used.
-
-        ### Markdown here
-
-        Some markdown
-
-        Some code (double tabs)
-
-            [
-              {
-                  "cost": {
-                    "amount": 11,
-                    "currency": "EUR"
-                  }
-              }
-            ]
       tags:
         - Booking
       parameters:
@@ -128,19 +99,6 @@ paths:
           description: >-
             Available transport methods matching the given query parameters. If
             no transport methods are available, an empty array is returned.
-
-            ### Taxi TSP 
-
-            Return taxi options available locally
-
-                [
-                  {
-                      "cost": {
-                        "amount": 11,
-                        "currency": "EUR"
-                      }
-                  }
-                ]
           content:  
             application/json:
               schema:
@@ -149,11 +107,136 @@ paths:
                 Taxi:
                   summary: Taxi
                   externalValue: "../examples/taxi/booking-options-response.json"
-  /booking/create:
+  /bookings/{tspId}:
+    get:
+      summary: Get booking
+      description: Returns the Booking that has been created earlier
+      tags:
+        - Booking
+      parameters:
+        - name: tspId
+          description: ID of the booking created earlier
+          in: path
+          required: true
+          schema:
+            $ref: ../schemas/core/booking.json#/definitions/tspId
+      responses:
+        '200':
+          description: The bookings matching the query
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/booking.json
+        '400':
+          description: Bad request (invalid query parameters)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+    patch:
+      summary: Update booking
+      description: Update booking if it is possible
+      tags:
+        - Booking
+      parameters:
+        - name: tspId
+          description: ID of the booking created earlier
+          in: path
+          required: true
+          schema:
+            $ref: ../schemas/core/booking.json#/definitions/tspId
+      responses:
+        '200':
+          description: Updated, old booking returned
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/booking.json
+        '204':
+          description: Updated, no content returned
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+    delete:
+      summary: Delete booking
+      description: Deletes booking if it is possible
+      tags:
+        - Booking
+      parameters:
+        - name: tspId
+          description: ID of the booking created earlier
+          in: path
+          required: true
+          schema:
+            $ref: ../schemas/core/booking.json#/definitions/tspId
+      responses:
+        '200':
+          description: Deleted, old booking returned
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/booking.json
+        '204':
+          description: Deleted, no content returned
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+  /bookings:
     post:
       summary: Create booking
       description: >-
-        Creates booking, optionally referrring to the offer generated on previous step.
+        Creates a new `Booking` for the TSP in **booked** state. The returned
+        object will be a refrence that is passed back & forth throughout the
+        booking life cycle.
+
+        The Booking may be modified in the response, e.g. location being
+        adjusted for a more suitable pick-up location.
+
+        In addition, the service may contain a **meta** attribute for arbitrary
+        TSP metadata that the TSP needs later, and **token** attribute depicting
+        how long the current state is valid.
 
         ### JSON Schema documentation
 
@@ -166,33 +249,19 @@ paths:
           application/json:
             schema:
               $ref: ../schemas/tsp/booking-create/request.json
+            examples: 
+              taxi:
+                summary: Taxi
+                externalValue: ../examples/taxi/booking-create-request.json
         description: >-
-          order placed for purchasing the pet
-
-          #### Specify create request here
+          Parameters of booking to be created, optionally referencing 
+          offerId returned on the `/bookings/options` call.
         required: true 
-      x-code-samples:
-          - lang: Javascript
-            label: Taxi
-            source: >-
-              {
-                "dsadsads": "dsdsds"
-              }
-          - lang: Javascript
-            label: E-bike
-            source: >-
-              {
-                "dsadsads": "dsdsds"
-              }
       responses:
         '200':
           x-summary: Booking
           description: >-
-            Booking informations
-
-            dsds
-            ds
-            ds
+            Booking information
           content:
               application/json:
                 schema:
@@ -200,9 +269,4 @@ paths:
                 examples:
                   Taxi:
                     summary: Taxi
-                    externalValue: "../examples/taxi/booking-create-response.json"
-                  E-Bike:
-                    summary: E-Bike
-                    value:
-                      id: 10
-                      name: Jessica Smith
+                    externalValue: ../examples/taxi/booking-create-response.json

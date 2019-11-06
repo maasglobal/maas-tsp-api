@@ -27,9 +27,13 @@ Open browser and navigate to documentation portal.
   * Redoc UI for documentation
   * Examples
 
-### Build the documentation
+## Build the documentation
 
 ```
 npm run build
 ```
 
+## Links
+
+  * https://swagger.io/specification/
+  * https://github.com/Redocly/redoc
