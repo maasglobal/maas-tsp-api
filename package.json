@@ -5,7 +5,7 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
-    "start": "node utils/adopt-schemas.js && nodemon src/index.js -w spec -w docs -w assets -w schemas -w src -e js,md,yml,yaml,json"
+    "start": "node utils/adopt-schemas.js && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -e js,md,yml,yaml,json"
   },
   "keywords": [
     "maas"
