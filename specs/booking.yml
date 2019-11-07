@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: v1
+  version: v1.1
   title: Whim TSP API
   description: >-
     This is a API specification of REST endpoints that a Transport Service
@@ -12,6 +12,18 @@ info:
     [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format, 
     so that API endpoints, validators and test clients can be generated from the
     documentation.
+
+
+    ## Versions
+
+    ### v1. Initial release (2018)
+      
+      [Specification](?maas-v1.yml) available locally, 
+      Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)
+
+    ### v1.1 Latest version
+
+      [Specification](?booking.json) available locally (**under development**)
   termsOfService: "https://github.com/maasglobal/maas-tsp-api/blob/master/terms.md"
   contact:
     name: Maas Global Team
@@ -38,12 +50,13 @@ tags:
       caller than a callee for Transport Service Provider. 
 
 
-      The cases of how MaaS interacts with TSP are depicted below
+      The cases of how MaaS interacts with TSP are depicted in [business process diagram](https://cawemo.com/embed/09a7739f-f8ce-4fe4-a5e5-a8f66ecedb8c)
       <html>
         <iframe src="https://cawemo.com/embed/09a7739f-f8ce-4fe4-a5e5-a8f66ecedb8c" 
           style="width:600px; height:500px; border:1px solid #ccc" allowfullscreen="allowfullscreen">
         </iframe>
       <html>
+
 
       ## Planning a Route
 
