@@ -1,4 +1,7 @@
 openapi: 3.0.0
+servers:
+  - url: http://localhost:3000
+    description: Local server
 info:
   version: v1.1
   title: Whim TSP API
@@ -205,6 +208,7 @@ security:
 paths:
   /bookings/options:
     get:
+      operationId: bookingOptionsGet
       summary: Available transport options
       description: >-
         Returns available transport options or offers.
@@ -259,6 +263,7 @@ paths:
                   externalValue: "../examples/taxi/booking-options-response.json"
   /bookings/{tspId}:
     get:
+      operationId: bookingGet
       summary: Get booking
       description: Returns the Booking that has been created earlier
       tags:
@@ -296,6 +301,7 @@ paths:
               schema:
                 $ref: ../schemas/core/error.json
     patch:
+      operationId: bookingUpdate
       summary: Update booking
       description: Update booking if it is possible
       tags:
@@ -335,6 +341,7 @@ paths:
               schema:
                 $ref: ../schemas/core/error.json
     delete:
+      operationId: bookingDelete
       summary: Delete booking
       description: Deletes booking if it is possible
       tags:
@@ -375,6 +382,7 @@ paths:
                 $ref: ../schemas/core/error.json
   /bookings:
     post:
+      operationId: bookingCreate
       summary: Create booking
       description: >-
         Creates a new `Booking` for the TSP in **booked** state. The returned
@@ -422,6 +430,7 @@ paths:
                   externalValue: ../examples/taxi/booking-create-response.json
   /bookings/{tspId}/receipt:
     get:
+      operationId: bookingGetReceipt
       summary: Get final booking receipt
       description: Get finalized pricing and receipt for booking
       tags:
