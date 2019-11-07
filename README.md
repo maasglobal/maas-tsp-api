@@ -27,7 +27,7 @@ Open browser and navigate to documentation portal (http://localhost:3000)
   * Redoc UI for documentation
   * Examples
 
-## Build the documentation
+## Build the static website with documentation
 
 ```
 npm run build
