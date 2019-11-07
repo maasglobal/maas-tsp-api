@@ -5,6 +5,9 @@ servers:
 info:
   version: v1.1
   title: Whim TSP API
+  ## NB: All Markdown paragraphs need to be 2 empty lines and all Markdown links must be resolved against repo root (not against this file path)
+  ## Also x-logo must be resolved against repo root (not against this file path)
+  ## Examples (externalValue) and $ref are resolved relative to this file path
   description: >-
     This is a API specification of REST endpoints that a Transport Service
     Provider (TSP) should implement to offer their services through the 
@@ -21,19 +24,30 @@ info:
 
     ### v1. Initial release (2018)
       
-      * [OpenAPI Specification](../specs/maas-v1.yml)
+      * [OpenAPI Specification](specs/maas-v1.yml)
       * [Documentation](?maas-v1.yml)
-      * [SwaggerUI](../swagger-ui/?urls.primaryName=maas-v1.yml)
+      * [SwaggerUI](swagger-ui.html?urls.primaryName=maas-v1.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)
 
     ### v1.1 Latest version
 
       **under development**
 
-      * [OpenAPI Specification](../specs/booking.json)
+      * [OpenAPI Specification](specs/booking.json)
       * [Documentation](?booking.json)
-      * [SwaggerUI](../swagger-ui/?urls.primaryName=booking.yml)
+      * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)
+
+    ## Running local server
+
+    To run local server and execute API via [Swagger UI](swagger-ui.html?urls.primaryName=maas-v1.yml), follow the instruction in the [GitHub repo](https://github.com/maasglobal/maas-tsp-api/)
+
+        git clone https://github.com/maasglobal/maas-tsp-api/
+        cd maas-tsp-api
+        npm install
+        npm start
+
+    Open your browser and navigate to http://localhost:3000
 
   termsOfService: "https://github.com/maasglobal/maas-tsp-api/blob/master/terms.md"
   contact:
@@ -44,7 +58,7 @@ info:
     name: MIT
     url: "https://opensource.org/licenses/MIT"
   x-logo:
-    url: "../assets/whim-logo.png"
+    url: "assets/whim-logo.png"
     backgroundColor: "#FFFFFF"
     altText: "Whim logo"
     href: "https://whimapp.com"

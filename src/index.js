@@ -5,16 +5,6 @@ const fs = require("fs")
 const path = require("path")
 const { loadAndBundleSpec } = require("redoc")
 
-var options = {
-    explorer: true,
-    swaggerOptions: {
-        urls: fs.readdirSync("./specs").filter(f => f.endsWith(".yml")).map(f => ({
-            url: "/specs/" + f,
-            name: path.basename(f)
-        }))
-    }
-};
-
 app.use('/', express.static('docs'))
 app.use('/assets', express.static('assets'))
 app.use('/specs', express.static('specs'))
@@ -25,6 +15,6 @@ app.get('/specs/booking.json', async (req, res) => {
 })
 app.use('/examples', express.static('examples'))
 app.use('/schemas', express.static('schemas'))
-app.use('/swagger-ui', swaggerUi.serve, swaggerUi.setup(null, options));
+app.use('/swagger-ui', express.static(path.resolve(__dirname, '../node_modules/swagger-ui-dist')))
 app.use('/redoc.standalone.js', async (req, res) => res.sendFile(path.resolve(__dirname, '../node_modules/redoc/bundles/redoc.standalone.js')))
 app.listen(process.env.PORT || 3000)
