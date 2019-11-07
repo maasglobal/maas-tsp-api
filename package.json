@@ -6,15 +6,20 @@
   "main": "src/index.js",
   "scripts": {
     "clean": "shx rm -Rf dist node_modules",
+    "build": "node utils/adopt-schemas.js",
     "start": "node utils/adopt-schemas.js && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -e js,md,yml,yaml,json",
     "lint": "node utils/adopt-schemas.js && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint specs/booking.yml",
     "lint-schemas": "node utils/adopt-schemas.js && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint schemas",
     "copy-resources": "shx cp -r assets dist/ && shx cp -r assets dist/ && shx cp docs/*.html dist && shx cp -r examples dist/ && shx cp -r schemas dist/ && shx cp -r specs dist/ && shx cp node_modules/redoc/bundles/redoc.standalone* dist/ && shx mkdir -p dist/swagger-ui && shx cp -r node_modules/swagger-ui-dist/* dist/swagger-ui/",
-    "build": "node utils/adopt-schemas.js && shx mkdir -p dist/specs && node utils/bundle-spec.js && npm run copy-resources",
+    "dist": "node utils/adopt-schemas.js && shx mkdir -p dist/specs && node utils/bundle-spec.js && npm run copy-resources",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [
-    "maas"
+    "maas",
+    "tsp",
+    "transport",
+    "api",
+    "openapi"
   ],
   "author": "Lauri Svan <lauri.svan@sc5.io> (https://github.com/laurisvan), Ruslan Gainutdinov (https://github.com/huksley), tech@maas.global",
   "license": "MIT",
