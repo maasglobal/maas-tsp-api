@@ -23,6 +23,8 @@ info:
     ## Versions
 
     ### v1. Initial release (2018)
+
+    **deprecated**
       
       * [OpenAPI Specification](specs/maas-v1.yml)
       * [Documentation](?maas-v1.yml)
@@ -31,7 +33,7 @@ info:
 
     ### v1.1 Latest version
 
-      **under development**
+    **under development**
 
       * [OpenAPI Specification](specs/booking.json)
       * [Documentation](?booking.json)

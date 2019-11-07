@@ -4,6 +4,9 @@ info:
   version: v1
   title: MaaS-TSP
   description: >
+    **DISCLAIMER** This version of TSP API are **deprecated**. Please consult latest version at source code [repository](https://github.com/maasglobal/maas-tsp-api/)
+
+
     This is a API specification of REST endpoints that a Transport Service
     Provider (TSP) should implement to receive messages from MaaS. It is written
     in machine readable [Swagger](http://swagger.io/) format, so thatAPI
@@ -25,19 +28,21 @@ info:
     ## Versions
 
     ### v1. Initial release (2018)
+
+    **deprecated**
       
-      * [OpenAPI Specification](../specs/maas-v1.yml)
+      * [OpenAPI Specification](specs/maas-v1.yml)
       * [Documentation](?maas-v1.yml)
-      * [SwaggerUI](../swagger-ui/?urls.primaryName=maas-v1.yml)
+      * [SwaggerUI](swagger-ui.html?urls.primaryName=maas-v1.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)
 
     ### v1.1 Latest version
 
-      **under development**
+    **under development**
 
-      * [OpenAPI Specification](../specs/booking.json)
+      * [OpenAPI Specification](specs/booking.json)
       * [Documentation](?booking.json)
-      * [SwaggerUI](../swagger-ui/?urls.primaryName=booking.yml)
+      * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)
   termsOfService: "http://api.maas.global/terms/"
   contact:
