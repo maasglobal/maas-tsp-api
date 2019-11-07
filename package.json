@@ -30,12 +30,10 @@
     "maas-schemas": "github:huksley/maas-schemas#make-docs",
     "nodemon": "^1.19.4",
     "redoc": "^2.0.0-rc.18",
-    "redoc-cli": "^0.9.2",
     "shx": "^0.3.2",
     "swagger-ui-dist": "^3.24.2",
-    "yamljs": "^0.3.0"
+    "gh-pages": "^2.1.1",
+    "redoc-cli": "^0.9.2"
   },
-  "dependencies": {
-    "gh-pages": "^2.1.1"
-  }
+  "dependencies": {}
 }
