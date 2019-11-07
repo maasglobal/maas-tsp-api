@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
 
-    <link rel="icon" type="image/png" href="/assets/openapi-icon.png" />
-    <link rel="apple-touch-icon" type="image/png" href="/assets/openapi-icon.png" />
+    <link rel="icon" type="image/png" href="assets/openapi-icon.png" />
+    <link rel="apple-touch-icon" type="image/png" href="assets/openapi-icon.png" />
     <link rel="canonical" href="https://github.com/maasglobal/maas-tsp-api" />
     <meta name="author" content="MaaS Global Oy" />
     <meta name="theme-color" content="#0095eb" />
@@ -24,7 +24,7 @@
         content="Documetation for Whim App TSP API which enables developers to integrate their transport services into WhimApp." />
     <meta property="og:locale" content="en-GB" />
     <meta property="og:updated_time" content="2019-11-07T20:58:10.862Z" />
-    <meta property="og:image" content="/assets/openapi-icon.png" />
+    <meta property="og:image" content="assets/openapi-icon.png" />
     <meta property="og:type" content="article" />
 
     <!--
@@ -40,10 +40,10 @@
 
 <body>
     <div id="redoc-container"></div>
-    <script src="/redoc/redoc.standalone.js"> </script>
+    <script src="redoc.standalone.js"> </script>
     <script>
         const spec = window.location.search ? window.location.search.substring(1) : 'booking.json'
-        Redoc.init("/specs/" + spec.replace(/[^a-z0-9.-]/gi, ''), {
+        Redoc.init("specs/" + spec.replace(/[^a-z0-9.-]/gi, ''), {
             // https://github.com/Redocly/redoc/#redoc-options-object
             scrollYOffset: 0,
             suppressWarnings: false,

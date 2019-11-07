@@ -26,5 +26,5 @@ app.get('/specs/booking.json', async (req, res) => {
 app.use('/examples', express.static('examples'))
 app.use('/schemas', express.static('schemas'))
 app.use('/swagger-ui', swaggerUi.serve, swaggerUi.setup(null, options));
-app.use('/redoc', express.static('./node_modules/redoc/bundles'))
+app.use('/redoc.standalone.js', async (req, res) => res.sendFile(path.resolve(__dirname, '../node_modules/redoc/bundles/redoc.standalone.js')))
 app.listen(process.env.PORT || 3000)

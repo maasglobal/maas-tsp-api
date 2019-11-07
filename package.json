@@ -5,13 +5,17 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
+    "clean": "shx rm -Rf dist node_modules",
     "start": "node utils/adopt-schemas.js && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -e js,md,yml,yaml,json",
-    "lint": "node utils/adopt-schemas.js && NODE_OPTIONS=--max_old_space_size=4096 spectral lint specs/booking.yml"
+    "lint": "node utils/adopt-schemas.js && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint specs/booking.yml",
+    "lint-schemas": "node utils/adopt-schemas.js && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint schemas",
+    "copy-resources": "shx cp -r assets dist/ && shx cp -r assets dist/ && shx cp docs/*.html dist && shx cp -r examples dist/ && shx cp -r schemas dist/ && shx cp -r specs dist/ && shx cp node_modules/redoc/bundles/redoc.standalone* dist/",
+    "build": "node utils/adopt-schemas.js && shx mkdir -p dist/specs && node utils/bundle-spec.js && npm run copy-resources"
   },
   "keywords": [
     "maas"
   ],
-  "author": "Lauri Svan <lauri.svan@sc5.io> (https://github.com/laurisvan), tech@maas.global",
+  "author": "Lauri Svan <lauri.svan@sc5.io> (https://github.com/laurisvan), Ruslan Gainutdinov (https://github.com/huksley), tech@maas.global",
   "license": "MIT",
   "devDependencies": {
     "express": "^4.17.1",
@@ -22,7 +26,10 @@
     "swagger-ui-dist": "^3.24.0",
     "swagger-ui-express": "^4.1.2",
     "yamljs": "^0.3.0",
-    "@stoplight/spectral": "^4.2.0"
+    "@stoplight/spectral": "^4.2.0",
+    "cross-env": "^6.0.3",
+    "shx": "^0.3.2"
   },
-  "dependencies": {}
+  "dependencies": {
+  }
 }
