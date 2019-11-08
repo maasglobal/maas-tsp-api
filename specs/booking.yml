@@ -51,19 +51,19 @@ info:
 
     Open your browser and navigate to http://localhost:3000
 
-  termsOfService: "https://github.com/maasglobal/maas-tsp-api/blob/master/terms.md"
+  termsOfService: 'https://github.com/maasglobal/maas-tsp-api/blob/master/terms.md'
   contact:
     name: Maas Global Team
     email: tech@maas-global.fi
-    url: "https://github.com/maasglobal/maas-tsp-api"
+    url: 'https://github.com/maasglobal/maas-tsp-api'
   license:
     name: MIT
-    url: "https://opensource.org/licenses/MIT"
+    url: 'https://opensource.org/licenses/MIT'
   x-logo:
-    url: "assets/whim-logo.png"
-    backgroundColor: "#FFFFFF"
-    altText: "Whim logo"
-    href: "https://whimapp.com"
+    url: 'assets/whim-logo.png'
+    backgroundColor: '#FFFFFF'
+    altText: 'Whim logo'
+    href: 'https://whimapp.com'
 tags:
   - name: Booking process
     description: >-
@@ -241,7 +241,7 @@ paths:
           schema:
             $ref: ../schemas/core/components/units-geo.json#/definitions/shortLocationString
         - name: to
-          description: "A desired destination e.g. 60.123,27.456"
+          description: 'A desired destination e.g. 60.123,27.456'
           in: query
           required: false
           schema:
@@ -264,7 +264,7 @@ paths:
               toName=Ida%20Aalbergin%20tie%203%20Helsinki' \
                 --header "x-api-key: pieY8Oezeicioyei5eisheeb7sheeLie"
       responses:
-        "200":
+        '200':
           x-summary: Array of options
           description: >-
             Available transport methods matching the given query parameters. If
@@ -276,7 +276,7 @@ paths:
               examples:
                 Taxi:
                   summary: Taxi
-                  externalValue: "../examples/taxi/booking-options-response.json"
+                  externalValue: '../examples/taxi/booking-options-response.json'
   /bookings/{tspId}:
     get:
       operationId: bookingGet
@@ -292,19 +292,19 @@ paths:
           schema:
             $ref: ../schemas/core/booking.json#/definitions/tspId
       responses:
-        "200":
+        '200':
           description: The bookings matching the query
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/booking.json
-        "400":
+        '400':
           description: Bad request (invalid query parameters)
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/error.json
-        "401":
+        '401':
           description: Authorization error (invalid API key)
           content:
             application/json:
@@ -330,21 +330,21 @@ paths:
           schema:
             $ref: ../schemas/core/booking.json#/definitions/tspId
       responses:
-        "200":
+        '200':
           description: Updated, old booking returned
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/booking.json
-        "204":
+        '204':
           description: Updated, no content returned
-        "400":
+        '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/error.json
-        "401":
+        '401':
           description: Authorization error (invalid API key)
           content:
             application/json:
@@ -370,21 +370,21 @@ paths:
           schema:
             $ref: ../schemas/core/booking.json#/definitions/tspId
       responses:
-        "200":
+        '200':
           description: Deleted, old booking returned
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/booking.json
-        "204":
+        '204':
           description: Deleted, no content returned
-        "400":
+        '400':
           description: Bad request
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/error.json
-        "401":
+        '401':
           description: Authorization error (invalid API key)
           content:
             application/json:
@@ -432,7 +432,7 @@ paths:
           offerId returned on the `/bookings/options` call.
         required: true
       responses:
-        "200":
+        '200':
           x-summary: Booking
           description: >-
             Booking information
@@ -459,25 +459,25 @@ paths:
           schema:
             $ref: ../schemas/core/booking.json#/definitions/tspId
       responses:
-        "200":
+        '200':
           description: The bookings matching the query
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/booking.json
-        "400":
+        '400':
           description: Bad request (invalid query parameters)
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/error.json
-        "401":
+        '401':
           description: Authorization error (invalid API key)
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/error.json
-        "404":
+        '404':
           description: Receipt not ready
           content:
             application/json:

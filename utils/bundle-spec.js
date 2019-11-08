@@ -1,14 +1,17 @@
-const fs = require("fs")
-const { loadAndBundleSpec } = require("redoc")
+'use strict';
 
-const spec = process.argv[2] || "./specs/booking.yml"
-const out = process.argv[3] || "./dist/specs/booking.json"
+const fs = require('fs');
+const { loadAndBundleSpec } = require('redoc');
 
-const main = async () => {
-    console.info("Loading", spec)
-    const json = await loadAndBundleSpec(spec)
-    console.info("Writing", out)
-    fs.writeFileSync(out, JSON.stringify(json, null, 2))
+const spec = process.argv[2] || './specs/booking.yml';
+const out = process.argv[3] || './dist/specs/booking.json';
+
+/**
+ * Load and bundle specification using redoc library method.
+ */
+async function main() {
+  const json = await loadAndBundleSpec(spec);
+  fs.writeFileSync(out, JSON.stringify(json, null, 2));
 }
 
-main()
+main();

@@ -1,47 +1,47 @@
 {
-    "leg": {
-        "from": {
-            "name": "Siltasaarenkatu 1, Helsinki",
-            "address": "streetName:Siltasaarenkatu|streetNumber:1|city:Helsinki|zipCode:00530|country:Suomi",
-            "lat": 60.177252,
-            "lon": 24.950388
-        },
-        "to": {
-            "name": "Ida Aalbergin tie 3, Helsinki",
-            "address": "streetName:Ida%20Aalbergin%20tie|streetNumber:1|city:Helsinki|zipCode:00400|country:Suomi",
-            "lat": 60.231538,
-            "lon": 24.892568
-        },
-        "startTime": 1572440451838,
-        "endTime": 1572441571838,
-        "mode": "TAXI",
-        "departureDelay": 900000
+  "leg": {
+    "from": {
+      "name": "Siltasaarenkatu 1, Helsinki",
+      "address": "streetName:Siltasaarenkatu|streetNumber:1|city:Helsinki|zipCode:00530|country:Suomi",
+      "lat": 60.177252,
+      "lon": 24.950388
     },
-    "state": "RESERVED",
-    "tspId": "a0a8cbc134469792ef914e5ccb31421d-182340-131457",
-    "terms": {
-        "reusable": false,
-        "validity": {
-            "endTime": 1572355249017,
-            "startTime": 1572355193128
-        },
-        "reconcilable": false
+    "to": {
+      "name": "Ida Aalbergin tie 3, Helsinki",
+      "address": "streetName:Ida%20Aalbergin%20tie|streetNumber:1|city:Helsinki|zipCode:00400|country:Suomi",
+      "lat": 60.231538,
+      "lon": 24.892568
     },
-    "tspProduct": {
-        "id": "testtaxi1-product1"
+    "startTime": 1572440451838,
+    "endTime": 1572441571838,
+    "mode": "TAXI",
+    "departureDelay": 900000
+  },
+  "state": "RESERVED",
+  "tspId": "a0a8cbc134469792ef914e5ccb31421d-182340-131457",
+  "terms": {
+    "reusable": false,
+    "validity": {
+      "endTime": 1572355249017,
+      "startTime": 1572355193128
     },
-    "meta": {
-        "MODE_TAXI": {
-            "driver": {},
-            "taxiCenter": {
-                "name": "Taksi Test1",
-                "phone": "+358400001010"
-            },
-            "vehicleType": "any"
-        }
-    },
-    "cost": {
-        "amount": 22,
-        "currency": "EUR"
+    "reconcilable": false
+  },
+  "tspProduct": {
+    "id": "testtaxi1-product1"
+  },
+  "meta": {
+    "MODE_TAXI": {
+      "driver": {},
+      "taxiCenter": {
+        "name": "Taksi Test1",
+        "phone": "+358400001010"
+      },
+      "vehicleType": "any"
     }
+  },
+  "cost": {
+    "amount": 22,
+    "currency": "EUR"
+  }
 }

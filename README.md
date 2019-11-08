@@ -1,7 +1,7 @@
 # MaaS TSP (Transport Service Provider) API
 
-This is the MaaS Transport service provider API repository, 
-containing OpenAPI specification used in communication with TSP. 
+This is the MaaS Transport service provider API repository,
+containing OpenAPI specification used in communication with TSP.
 
 Using these documents, a third party transport service provider can implement a MaaS compatible API.
 
@@ -11,9 +11,9 @@ For a brief walk through of a booking process [see here](specs/Booking.md)
 
 ## Getting started
 
-  * spec/booking.yml - MaaS schema for TSP provider booking
+- spec/booking.yml - MaaS schema for TSP provider booking
 
-## Living documentation 
+## Living documentation
 
 To run it locally, execute
 
@@ -24,8 +24,8 @@ npm start
 
 Open browser and navigate to documentation portal (http://localhost:3000)
 
-  * Redoc UI for documentation
-  * Examples
+- Redoc UI for documentation
+- Examples
 
 ## Build the static website with documentation
 
@@ -35,6 +35,6 @@ npm run build
 
 ## Links
 
-  * https://github.com/maasglobal/maas-schemas/
-  * https://swagger.io/specification/
-  * https://github.com/Redocly/redoc/
+- https://github.com/maasglobal/maas-schemas/
+- https://swagger.io/specification/
+- https://github.com/Redocly/redoc/

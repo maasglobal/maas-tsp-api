@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Whim TSP documentation</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet" />
 
     <link rel="icon" type="image/png" href="assets/openapi-icon.png" />
     <link rel="apple-touch-icon" type="image/png" href="assets/openapi-icon.png" />
     <link rel="canonical" href="https://github.com/maasglobal/maas-tsp-api" />
     <meta name="author" content="MaaS Global Oy" />
     <meta name="theme-color" content="#0095eb" />
-    <meta name="description"
-        content="Documetation for Whim App TSP API which enables developers to integrate their transport services into WhimApp." />
+    <meta
+      name="description"
+      content="Documetation for Whim App TSP API which enables developers to integrate their transport services into WhimApp."
+    />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:site" content="@maas_global" />
     <meta property="og:site_name" content="Whim App TSP API" />
     <meta property="og:url" content="https://github.com/maasglobal/maas-tsp-api" />
     <meta property="og:title" content="Whim App TSP API" />
-    <meta property="og:description"
-        content="Documetation for Whim App TSP API which enables developers to integrate their transport services into WhimApp." />
+    <meta
+      property="og:description"
+      content="Documetation for Whim App TSP API which enables developers to integrate their transport services into WhimApp."
+    />
     <meta property="og:locale" content="en-GB" />
     <meta property="og:updated_time" content="2019-11-07T20:58:10.862Z" />
     <meta property="og:image" content="assets/openapi-icon.png" />
@@ -31,53 +34,57 @@
     ReDoc doesn't change outer page styles
     -->
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="redoc-container"></div>
-    <script src="redoc.standalone.js"> </script>
+    <script src="redoc.standalone.js"></script>
     <script>
-        const spec = window.location.search ? window.location.search.substring(1) : 'booking.json'
-        Redoc.init("specs/" + spec.replace(/[^a-z0-9.-]/gi, ''), {
-            // https://github.com/Redocly/redoc/#redoc-options-object
-            scrollYOffset: 0,
-            suppressWarnings: false,
-            requiredPropsFirst: true,
-            nativeScrollbars: true,
-            hideLoading: false,
-            expandResponses: "200",
-            hideDownloadButton: true,
-            jsonSampleExpandLevel: 5,
-            // https://github.com/Redocly/redoc/blob/master/src/theme.ts
-            theme: {
-                spacing: {
-                    sectionVertical: "5px"
-                }
+      const spec = window.location.search ? window.location.search.substring(1) : 'booking.json';
+      Redoc.init(
+        'specs/' + spec.replace(/[^a-z0-9.-]/gi, ''),
+        {
+          // https://github.com/Redocly/redoc/#redoc-options-object
+          scrollYOffset: 0,
+          suppressWarnings: false,
+          requiredPropsFirst: true,
+          nativeScrollbars: true,
+          hideLoading: false,
+          expandResponses: '200',
+          hideDownloadButton: true,
+          jsonSampleExpandLevel: 5,
+          // https://github.com/Redocly/redoc/blob/master/src/theme.ts
+          theme: {
+            spacing: {
+              sectionVertical: '5px',
+            },
+          },
+        },
+        document.getElementById('redoc-container'),
+        () => {
+          window.setTimeout(() => {
+            console.info('Initialized');
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#')) {
+              const id = hash.substring(1);
+              const element = document.getElementById(id);
+              if (element !== undefined) {
+                console.info('Scrolling');
+                element.scrollIntoView();
+              } else {
+                console.warn('Can not find element: ' + id);
+              }
+            } else {
+              console.info(hash);
             }
-        }, document.getElementById('redoc-container'), () => {
-            window.setTimeout(() => {
-                console.info("Initialized")
-                const hash = window.location.hash
-                if (hash && hash.startsWith("#")) {
-                    const id = hash.substring(1)
-                    const element = document.getElementById(id)
-                    if (element !== undefined) {
-                        console.info("Scrolling")
-                        element.scrollIntoView()
-                    } else {
-                        console.warn("Can not find element: " + id)
-                    }
-                } else {
-                    console.info(hash)
-                }
-            }, 50)
-        })
+          }, 50);
+        }
+      );
     </script>
-</body>
-
+  </body>
 </html>

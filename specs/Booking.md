@@ -6,18 +6,18 @@ is represented, it is imprinted in **bold**.
 
 This scenario, with a few extra details is detailed in the process diagram
 below. It should be noted from the picture that MaaS more often acts as a
-caller than a callee for Transport Service Provider. 
+caller than a callee for Transport Service Provider.
 
 The cases of how MaaS interacts with TSP are depicted below
 ![Maas-TSP Business Process](https://cdn.rawgit.com/maasglobal/maas-tsp-api/master/specs/maas-v1-overall.svg)
-[source](https://github.com/maasglobal/maas-tsp-api/blob/master/specs/maas-v1-overall.svg "MaaS-TSP Business Process").
+[source](https://github.com/maasglobal/maas-tsp-api/blob/master/specs/maas-v1-overall.svg 'MaaS-TSP Business Process').
 
 ## Planning a Route
 
 **User** **queries** for a **Route** with an address or latitude-logitude
 pair from one place to another. MaaS queries the route from a third party
 **Routing Engine** that contains the data for **TSP** routes. At this point
-MaaS makes no queries to the TSP - it expects the Routing Engine contains 
+MaaS makes no queries to the TSP - it expects the Routing Engine contains
 valid GTFS data for the TSP.
 
 **MaaS** shows several possible **Plans**, each containing a valid
