@@ -17,8 +17,17 @@
     "mode": "TAXI",
     "departureDelay": 900000
   },
+  "customer": {
+    "email": "test@example.com",
+    "phone": "+358400001010",
+    "locale": "en",
+    "clientId": "whim",
+    "lastName": "Tester",
+    "opaqueId": "cafecaca",
+    "firstName": "Test"
+  },
   "state": "RESERVED",
-  "tspId": "a0a8cbc134469792ef914e5ccb31421d-182340-131457",
+  "tspId": "deadbeefdeadbeefdeadcafebeef",
   "terms": {
     "reusable": false,
     "validity": {
@@ -43,5 +52,6 @@
   "cost": {
     "amount": 22,
     "currency": "EUR"
-  }
+  },
+  "tspProductId": "testtaxi1-product1"
 }

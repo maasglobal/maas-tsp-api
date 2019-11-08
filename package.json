@@ -15,7 +15,8 @@
     "lint-schemas": "node utils/adopt-schemas.js && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint schemas",
     "copy-resources": "shx cp -r assets dist/ && shx cp -r assets dist/ && shx cp docs/*.html dist && shx cp -r examples dist/ && shx cp -r schemas dist/ && shx cp -r specs dist/ && shx cp node_modules/redoc/bundles/redoc.standalone* dist/ && shx mkdir -p dist/swagger-ui && shx cp -r node_modules/swagger-ui-dist/* dist/swagger-ui/",
     "dist": "node utils/adopt-schemas.js && shx mkdir -p dist/specs && node utils/bundle-spec.js && npm run copy-resources",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test": "(cd node_modules/maas-schemas && node build.js) && mocha"
   },
   "keywords": [
     "maas",
@@ -49,7 +50,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint-code && pretty-quick --staged --pattern \"**/*.*(js|jsx|ts|tsx)\""
+      "pre-commit": "npm run test && npm run lint-code && pretty-quick --staged --pattern \"**/*.*(js|jsx|ts|tsx)\""
     }
   }
 }

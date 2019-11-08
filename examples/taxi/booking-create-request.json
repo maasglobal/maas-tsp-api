@@ -23,7 +23,7 @@
     "locale": "en",
     "clientId": "whim",
     "lastName": "Tester",
-    "opaqueId": "deadbeef-deadbeef",
+    "opaqueId": "cafecaca",
     "firstName": "Test"
   },
   "meta": {
@@ -47,5 +47,8 @@
   "configurator": {},
   "customerSelection": {},
   "cost": null,
-  "tspId": null
+  "tspId": null,
+  "tspProduct": {
+    "id": "testtaxi1-product1"
+  }
 }
