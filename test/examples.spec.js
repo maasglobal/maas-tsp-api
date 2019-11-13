@@ -28,5 +28,19 @@ describe('Check examples', () => {
         require('../examples/taxi/booking-options-response.json')
       );
     });
+
+    it('booking-read-by-id-response.json', () => {
+      return schemas.validate(
+        require('../schemas/tsp/booking-read-by-id/response.json'),
+        require('../examples/taxi/booking-read-by-id-response.json')
+      );
+    });
+
+    it('booking-read-by-id-response-activated.json', () => {
+      return schemas.validate(
+        require('../schemas/tsp/booking-read-by-id/response.json'),
+        require('../examples/taxi/booking-read-by-id-response-activated.json')
+      );
+    });
   });
 });

@@ -4,7 +4,7 @@ servers:
     description: Local server
 info:
   version: v1.1
-  title: Whim TSP API
+  title: WhimApp TSP API
   ## NB: All Markdown paragraphs need to be 2 empty lines and all Markdown links must be resolved against repo root (not against this file path)
   ## Also x-logo must be resolved against repo root (not against this file path)
   ## Examples (externalValue) and $ref are resolved relative to this file path
@@ -19,6 +19,25 @@ info:
     so that API endpoints, validators and test clients can be generated from the
     documentation.
 
+    ## Terminology
+
+    * **endpoint** Publically resolvable URL either managed by MaaS Global (Whim Backend API) or by TSP (Booking API).
+
+    * **booking** Information about single leg during the customer trip, together with customer information and state.§
+
+    * **journey** Multi-leg journey which user plans via WhimApp. 
+
+    * **leg** Single trip which is performed by TSP. Booking created and contain the state of this trip.
+
+    * **TSP** Transport service provider. MaaS Global partner which offers their services via WhimApp.
+
+    * **route** One of the possible journey. To determine it, we call TSP booking options endpoint to get available offers.
+
+    * **WhimApp** Mobile application or similar which is used by Whim User to perform journeys. Collectively we treat all interaction from the point of WhimApp and user experience during the time user uses application.
+
+    * **Whim backend** Caller of TSP API endpoints. WhimApp never calls TSP endpoints directly. All invocations are done from cloud-native infrastructure managed by MaaS Global.
+
+    * **MaaS Global** MaaS Global is the world’s first true Mobility-as-a-Service (MaaS) operator with its award-winning Whim app, which provides users all city transport services in one app.
 
     ## Versions
 
@@ -77,7 +96,8 @@ tags:
       caller than a callee for Transport Service Provider. 
 
 
-      The cases of how MaaS interacts with TSP are depicted in [business process diagram](https://cawemo.com/embed/09a7739f-f8ce-4fe4-a5e5-a8f66ecedb8c)
+      The cases of how WhimApp interacts with TSP are depicted in 
+      [business process diagram](https://cawemo.com/embed/09a7739f-f8ce-4fe4-a5e5-a8f66ecedb8c)
 
 
       <html>
@@ -90,13 +110,13 @@ tags:
       ## Planning a Route
 
       **User** **queries** for a **Route** with an address or latitude-logitude
-      pair from one place to another. MaaS queries the route from a third party
+      pair from one place to another. WhimApp queries the route from a third party
       **Routing Engine** that contains the data for **TSP** routes. At this point
-      MaaS makes no queries to the TSP - it expects the Routing Engine contains 
+      WhimApp makes no queries to the TSP - it expects the Routing Engine contains 
       valid GTFS data for the TSP.
 
 
-      **MaaS** shows several possible **Plans**, each containing a valid
+      **WhimApp** shows several possible **Plans**, each containing a valid
       **Route** with several **Legs** with a part of a route using a specific
       TSP.
 
@@ -105,7 +125,7 @@ tags:
 
 
       User browses through the Plans and chooses to book a trip. For each Leg
-      in the Plan Route, MaaS creates a new **Booking** for a TSP.
+      in the Plan Route, WhimApp creates a new **Booking** by invoking corresponding endpoint in TSP.
       It should be noted that the booking may be hours or days in
       advance - a bit like in booking a hotel. The booking contains the
       individual Leg as the detailed travel plan for the TSP, as well as
@@ -120,19 +140,19 @@ tags:
       the latest **cancellation time**.
 
 
-      MaaS checks that the booking succeeded and stores the Booking for future
+      WhimApp checks that the booking succeeded and stores the Booking for future
       reference.
 
 
       ## Navigating a Route
 
-      User starts to navigate the Route. MaaS tracks for the user location to
-      know if there are any changes needed in the plan. MaaS triggers the changes
+      User starts to navigate the Route. WhimApp tracks for the user location to
+      know if there are any changes needed in the plan. WhimApp triggers the changes
       for bookings by monitoring the individual Legs.
 
 
-      MaaS monitors the Booking terms and Leg **start time**.
-      When the actual Leg starts, MaaS **starts** the Leg and notifies the TSP.
+      WhimApp monitors the Booking terms and Leg **start time**.
+      When the actual Leg starts, WhimApp **starts** the Leg and notifies the TSP.
       User or TSP may request changes to the Booking, e.g. in a case of a delay
       or cancellation.
 
@@ -143,13 +163,13 @@ tags:
       ## Updating a Booking
 
 
-      A Booking may be updated by a User, MaaS or TSP when any party receives
+      A Booking may be updated by a User, WhimApp or TSP when any party receives
       new information that the Leg needs to be changed. Since the update may need
       confirmation from User or a 3rd party system, it is an asynchronous
       operation.
 
 
-      Either party (MaaS or TSP) may send an updated Booking with
+      Either party (WhimApp or TSP) may send an updated Booking with
       **UPDATE_REQUESTED** state. The recipient processes the request
       asynchronously and either confirms the request with **UPDATED** state,
       sends its proposal with **UPDATE_REQUESTED**, or cancels the leg with
@@ -158,8 +178,8 @@ tags:
       ## Cancelling a Booking
 
 
-      A Booking may be cancelled by User or MaaS within **cancellation time** in
-      **terms** of the Booking without a specific request. MaaS sends a modified
+      A Booking may be cancelled by User or WhimApp within **cancellation time** in
+      **terms** of the Booking without a specific request. WhimApp sends a modified
       Booking with state **CANCELLED** information. TSP confirms and updates its
       own systems.
 
@@ -174,34 +194,101 @@ tags:
       ## Paying a Booking
 
       A Booking may be paid (e.g. confirmed) before the **cancellation time**
-      in **terms** has expired. MaaS sends a modified Booking with **PAID**
+      in **terms** has expired. WhimApp sends a modified Booking with **PAID**
       state wich the TSP confirms.
 
       TSP can assume Booking as paid if the cancellation time has passed and no
-      cancellation has been received from MaaS.
+      cancellation has been received from WhimApp.
 
 
       ## Error Cases
 
-
-      It may be possible that MaaS sends an invalid request or the TSP cannot
+      It may be possible that WhimApp sends an invalid request or the TSP cannot
       fulfill a request. In any such case, TSP may respond with an error. If
-      TSP responds with an error, MaaS assumes the state was not changed (e.g.
-      a transaction was rolled back). MaaS may repeat the request
+      TSP responds with an error, WhimApp assumes the state was not changed (e.g.
+      a transaction was rolled back). WhimApp may repeat the request
       with the same or different data later on.
 
 
-      The same principle applies when TSP is communicating with MaaS.
+      The same principle applies when TSP is communicating with WhimApp.
+
+    x-traitTag: true
+  - name: User management
+    description: >-
+      The booking processes does not present separate user management process.
+
+      All information about the WhimApp user are passed at the [Create booking](#operation/bookingCreate)
+      invocation.
+
+      During this invocation we also pass persistent user id together with user information (e-mail, phone, full-name).
+
+      If required, user creation (or update) are managed at the TSP side transparently during the creation of booking.
+    x-traitTag: true
+  - name: KYC
+    description: >-
+      MaaS Global Oy performs due diligence
+      when registering user. Also we check user to have a valid payment instrument (credit or debit card).
+
+
+      If required, additional KYC process (for example, driver license check) can be performed before booking are created.
+
+
+      This is out of scope of this APIs and to be defined in a separate aggreement.
+    x-traitTag: true
+  - name: Payment
+    description: >-
+      WhimApp offers two modes of operation for bookings which are created.
+
+      ## Offline invoicing.
+
+      **Preferred.** We are charging customer before the trip and expect to be invoiced by TSP according to the expenses for booking.
+
+      Invoicing are handled via API (TBA) or via e-mail and expected to be processed every 1, 2 weeks or monthly.
+
+      ## MaaS Global credit card.
+
+      Instead of specifying user credit card (we never do this!) we specify our credit card to be used by TSP for payment.
+      This are not recommended
     x-traitTag: true
   - name: Booking
     description: >-
       Booking related APIs are the core of a TSP implementation.
 
-      Correspondingly, a Booking is the main object exchanged between MaaS and a
+      Correspondingly, a Booking is the main object exchanged between WhimApp and a
       TSP.
     x-traitTag: false
     x-displayName: Booking API
+  - name: WebHook
+    description: >-
+      Publically available API which you can call to send booking state changes immediately when they
+      happen, without the need to for us to poll our system by calling [Get booking](#operation/bookingGet) multiple times.
 
+
+      This endpoinds are treated as Webhooks which you **may** call to make communication faster and booking process smoother.
+
+
+      **WARNING**: The specific endpoing URL to be invoked are subject to change and aggreement between 
+      TSP and MaaS Global.
+    x-traitTag: false
+    x-displayName: Whim Backend API
+  - name: Support
+    description: >-
+      We would like to help you with code and other questions you might have.
+
+      Search our documentation, contact support, or connect with our sales team.
+
+      ### Improving documentation
+
+      It would be great if you have anything to contribute to our documentation, 
+      you can do it by creating a fork and issuing a pull-request.
+
+      Or you can file an [issue](https://github.com/maasglobal/maas-tsp-api/issues) 
+      if you discover some problem or invalid information.
+
+
+      You also can reach team via tech@maas-global.fi
+    x-traitTag: true
+    x-displayName: Support
 components:
   securitySchemes:
     apiKeyHeader:
@@ -210,7 +297,7 @@ components:
       type: apiKey
       description: >-
         Authorization scheme to use with TSP API should be based on specifying `X-API-Key`
-        header when Whim App makes request to the TSP API.
+        header when WhimApp makes request to the TSP API.
 
 
         Please not what due to serverless nature of our infrastructure we are unable to provide
@@ -277,6 +364,54 @@ paths:
                 Taxi:
                   summary: Taxi
                   externalValue: '../examples/taxi/booking-options-response.json'
+  /bookings:
+    post:
+      operationId: bookingCreate
+      summary: Create booking
+      description: >-
+        Creates a new `Booking` for the TSP in **booked** state. The returned
+        object will be a refrence that is passed back & forth throughout the
+        booking life cycle.
+
+        The Booking may be modified in the response, e.g. location being
+        adjusted for a more suitable pick-up location.
+
+        In addition, the service may contain a **meta** attribute for arbitrary
+        TSP metadata that the TSP needs later, and **token** attribute depicting
+        how long the current state is valid.
+
+        ### JSON Schema documentation
+
+        Full schema documented here: 
+        https://maasglobal.github.io/maas-schemas/docs/tsp/booking-create/request.html
+      tags:
+        - Booking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/tsp/booking-create/request.json
+            examples:
+              taxi:
+                summary: Taxi
+                externalValue: ../examples/taxi/booking-create-request.json
+        description: >-
+          Parameters of booking to be created, optionally referencing 
+          offerId returned on the `/bookings/options` call.
+        required: true
+      responses:
+        '200':
+          x-summary: Booking
+          description: >-
+            Booking information
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/tsp/booking-create/response.json
+              examples:
+                Taxi:
+                  summary: Taxi
+                  externalValue: ../examples/taxi/booking-create-response.json
   /bookings/{tspId}:
     get:
       operationId: bookingGet
@@ -293,11 +428,18 @@ paths:
             $ref: ../schemas/core/booking.json#/definitions/tspId
       responses:
         '200':
-          description: The bookings matching the query
+          description: The booking matching the query
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/booking.json
+              examples:
+                Taxi1:
+                  summary: Taxi, reserved
+                  externalValue: '../examples/taxi/booking-read-by-id-response.json'
+                Taxi2:
+                  summary: Taxi, activated
+                  externalValue: '../examples/taxi/booking-read-by-id-response-activated.json'
         '400':
           description: Bad request (invalid query parameters)
           content:
@@ -396,59 +538,12 @@ paths:
             application/json:
               schema:
                 $ref: ../schemas/core/error.json
-  /bookings:
-    post:
-      operationId: bookingCreate
-      summary: Create booking
-      description: >-
-        Creates a new `Booking` for the TSP in **booked** state. The returned
-        object will be a refrence that is passed back & forth throughout the
-        booking life cycle.
-
-        The Booking may be modified in the response, e.g. location being
-        adjusted for a more suitable pick-up location.
-
-        In addition, the service may contain a **meta** attribute for arbitrary
-        TSP metadata that the TSP needs later, and **token** attribute depicting
-        how long the current state is valid.
-
-        ### JSON Schema documentation
-
-        Full schema documented here: 
-        https://maasglobal.github.io/maas-schemas/docs/tsp/booking-create/request.html
-      tags:
-        - Booking
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../schemas/tsp/booking-create/request.json
-            examples:
-              taxi:
-                summary: Taxi
-                externalValue: ../examples/taxi/booking-create-request.json
-        description: >-
-          Parameters of booking to be created, optionally referencing 
-          offerId returned on the `/bookings/options` call.
-        required: true
-      responses:
-        '200':
-          x-summary: Booking
-          description: >-
-            Booking information
-          content:
-            application/json:
-              schema:
-                $ref: ../schemas/tsp/booking-create/response.json
-              examples:
-                Taxi:
-                  summary: Taxi
-                  externalValue: ../examples/taxi/booking-create-response.json
   /bookings/{tspId}/receipt:
     get:
       operationId: bookingGetReceipt
       summary: Get final booking receipt
-      description: Get finalized pricing and receipt for booking
+      description: >-
+        Get finalized pricing and receipt for booking
       tags:
         - Booking
       parameters:
@@ -485,6 +580,47 @@ paths:
                 $ref: ../schemas/core/error.json
         default:
           description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+  /backend/booking/{tspId}:
+    patch:
+      operationId: backendBookingReceive
+      summary: Update booking state
+      x-state: review
+      description: >-
+        Updates booking information at the WhimApp backend. 
+
+        Called by TSP whenever the state of the booking are updated.
+      parameters:
+        - name: tspId
+          description: ID of the booking created earlier
+          in: path
+          required: true
+          schema:
+            $ref: ../schemas/core/booking.json#/definitions/tspId
+      tags:
+        - WebHook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/tsp/booking-read-by-id/response.json
+            examples:
+              Taxi:
+                summary: Taxi
+                externalValue: '../examples/taxi/booking-read-by-id-response-activated.json'
+        description: >-
+          Booking information with updated state.
+        required: true
+      responses:
+        '204':
+          x-summary: Acknowledged
+          description: >-
+            Received, no state.
+        '400':
+          description: Bad request (data failed validation)
           content:
             application/json:
               schema:
