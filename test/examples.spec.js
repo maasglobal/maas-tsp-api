@@ -17,7 +17,7 @@ describe('Check examples', () => {
 
     it('booking-create-response.json', () => {
       return schemas.validate(
-        require('../schemas/tsp/booking-create/request.json'),
+        require('../schemas/tsp/booking-create/response.json'),
         require('../examples/taxi/booking-create-response.json')
       );
     });
