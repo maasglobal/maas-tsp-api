@@ -53,5 +53,6 @@
     "amount": 22,
     "currency": "EUR"
   },
-  "tspProductId": "testtaxi1-product1"
+  "tspProductId": "testtaxi1-product1",
+  "token": {}
 }

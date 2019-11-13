@@ -2,6 +2,12 @@
 
 const schemas = require('maas-schemas');
 
+const BookingCreateRequest = require('maas-schemas-ts/lib/tsp/booking-create/request').Default;
+const BookingCreateResponse = require('maas-schemas-ts/lib/tsp/booking-create/response').Default;
+const BookingOptionsResponse = require('maas-schemas-ts/lib/tsp/booking-options-list/response').Default;
+const typePromise = require('io-ts-promise');
+const assert = require('assert');
+
 beforeEach(() => {
   schemas.init();
 });
@@ -9,24 +15,27 @@ beforeEach(() => {
 describe('Check examples', () => {
   describe('taxi', () => {
     it('booking-create-request.json', () => {
-      return schemas.validate(
-        require('../schemas/tsp/booking-create/request.json'),
-        require('../examples/taxi/booking-create-request.json')
-      );
+      return typePromise.decode(BookingCreateRequest, require('../examples/taxi/booking-create-request.json'));
+    });
+
+    it('should fail decode', async () => {
+      let failed = false;
+      try {
+        await typePromise.decode(BookingCreateResponse, {});
+      } catch (e) {
+        failed = true;
+        // eslint-disable-next-line no-console
+        console.info('Received expected error', e.message.substring(0, 32) + '...');
+      }
+      return assert.equal(failed, true);
     });
 
     it('booking-create-response.json', () => {
-      return schemas.validate(
-        require('../schemas/tsp/booking-create/request.json'),
-        require('../examples/taxi/booking-create-response.json')
-      );
+      return typePromise.decode(BookingCreateResponse, require('../examples/taxi/booking-create-response.json'));
     });
 
     it('booking-options-response.json', () => {
-      return schemas.validate(
-        require('../schemas/tsp/booking-options-list/response.json'),
-        require('../examples/taxi/booking-options-response.json')
-      );
+      return typePromise.decode(BookingOptionsResponse, require('../examples/taxi/booking-options-response.json'));
     });
   });
 });
