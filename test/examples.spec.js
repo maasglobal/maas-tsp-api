@@ -3,6 +3,7 @@
 const BookingCreateRequest = require('maas-schemas-ts/lib/tsp/booking-create/request').Default;
 const BookingCreateResponse = require('maas-schemas-ts/lib/tsp/booking-create/response').Default;
 const BookingOptionsResponse = require('maas-schemas-ts/lib/tsp/booking-options-list/response').Default;
+const BookingReadByIdResponse = require('maas-schemas-ts/lib/tsp/booking-read-by-id/response').Default;
 const typePromise = require('io-ts-promise');
 const assert = require('assert');
 
@@ -40,6 +41,20 @@ describe('Check examples', () => {
       return typePromise.decode(
         BookingOptionsResponse,
         JSON.parse(fs.readFileSync('./examples/taxi/booking-options-response.json'))
+      );
+    });
+
+    it('booking-read-by-id-response.json', () => {
+      return typePromise.decode(
+        BookingReadByIdResponse,
+        JSON.parse(fs.readFileSync('./examples/taxi/booking-read-by-id-response.json'))
+      );
+    });
+
+    it('booking-read-by-id-response-activated.json', () => {
+      return typePromise.decode(
+        BookingReadByIdResponse,
+        JSON.parse(fs.readFileSync('./examples/taxi/booking-read-by-id-response-activated.json'))
       );
     });
   });

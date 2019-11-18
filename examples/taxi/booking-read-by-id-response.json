@@ -1,0 +1,14 @@
+{
+  "tspId": "deadbeef-deadbeef-deadbeef-beefdead-121111-211211",
+  "meta": {
+    "MODE_TAXI": {
+      "driver": {},
+      "taxiCenter": {
+        "name": "Taksi Test1",
+        "phone": "+3580000010"
+      },
+      "dispatchOrderId": "212111"
+    }
+  },
+  "state": "RESERVED"
+}
