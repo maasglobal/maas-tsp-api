@@ -50,7 +50,7 @@
     "maas-schemas-ts": "0.0.13"
   },
   "dependencies": {
-    "maas-schemas": "github:huksley/maas-schemas#make-docs"
+    "maas-schemas": "github:maasglobal/maas-schemas#v9.8.0-dev"
   },
   "husky": {
     "hooks": {
