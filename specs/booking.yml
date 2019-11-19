@@ -78,7 +78,6 @@ info:
     url: 'https://opensource.org/licenses/MIT'
   x-logo:
     url: 'assets/whim-logo.svg'
-    backgroundColor: '#FFFFFF'
     altText: 'Whim logo'
     href: 'https://whimapp.com'
 tags:
