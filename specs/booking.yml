@@ -73,13 +73,13 @@ info:
   termsOfService: 'https://github.com/maasglobal/maas-tsp-api/blob/master/terms.md'
   contact:
     name: Maas Global Team
-    email: tech@maas-global.fi
+    email: tech@maas.global
     url: 'https://github.com/maasglobal/maas-tsp-api'
   license:
     name: MIT
     url: 'https://opensource.org/licenses/MIT'
   x-logo:
-    url: 'assets/whim-logo.png'
+    url: 'assets/whim-logo.svg'
     backgroundColor: '#FFFFFF'
     altText: 'Whim logo'
     href: 'https://whimapp.com'
@@ -275,7 +275,7 @@ tags:
     description: >-
       We would like to help you with code and other questions you might have.
 
-      Search our documentation, contact support, or connect with our sales team.
+      Search our documentation, contact our [tech team](mailto:tech@maas.global), or connect with our [sales team](https://whimapp.com/partners/).
 
       ### Improving documentation
 
@@ -286,7 +286,7 @@ tags:
       if you discover some problem or invalid information.
 
 
-      You also can reach team via tech@maas-global.fi
+      You also can reach team via tech@maas.global
     x-traitTag: true
     x-displayName: Support
 components:
