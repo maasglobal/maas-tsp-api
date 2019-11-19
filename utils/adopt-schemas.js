@@ -34,6 +34,27 @@ function copyFolderRecursiveSync(source, target, reader) {
   }
 }
 
+/**
+ * Replace references with relative path against parent (repo root)
+ *
+ * @param {string} schemaContent - String content of schema
+ * @param {string} relativePath - Relative path for this schema
+ */
+function convertSchemaToRelativeReferences(schemaContent, relativePath) {
+  const dots = relativePath
+    .split('/')
+    .map(p => '..')
+    .join('/');
+  // Fix schema $id
+  let str = schemaContent.replace(
+    '"$id": "http://maasglobal.com/core/booking.json#",',
+    '"$id": "http://maasglobal.com/core/booking.json",'
+  );
+  // Reference locally, relative
+  str = str.replace(/"\$ref": "http:\/\/maasglobal.com/g, '"$ref": "' + dots + '/schemas');
+  return str;
+}
+
 const rootSource = process.argv[2] || './node_modules/maas-schemas/schemas';
 const rootDest = process.argv[3] || './schemas';
 
@@ -43,21 +64,8 @@ const rootDest = process.argv[3] || './schemas';
  */
 copyFolderRecursiveSync(rootSource, rootDest, f => {
   if (f.endsWith('.json')) {
-    // Produce relative to the root folder path for a schemas
-    const paths = path
-      .resolve(f)
-      .substring(path.resolve(rootSource).length + 1)
-      .split('/');
-    const dots = paths.map(p => '..').join('/');
-    let str = fs.readFileSync(f, { encoding: 'utf-8' });
-    // Fix schema $id
-    str = str.replace(
-      '"$id": "http://maasglobal.com/core/booking.json#",',
-      '"$id": "http://maasglobal.com/core/booking.json",'
-    );
-    // Reference locally, relative
-    str = str.replace(/"\$ref": "http:\/\/maasglobal.com/g, '"$ref": "' + dots + '/schemas');
-    return str;
+    const relativePath = path.resolve(f).substring(path.resolve(rootSource).length + 1);
+    return convertSchemaToRelativeReferences(fs.readFileSync(f, { encoding: 'utf-8' }), relativePath);
   }
 
   return fs.readFileSync(f);
