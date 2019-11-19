@@ -4,6 +4,9 @@ info:
   version: v1
   title: MaaS-TSP
   description: >
+    **DISCLAIMER** This version of TSP API are **deprecated**. Please consult latest version at source code [repository](https://github.com/maasglobal/maas-tsp-api/)
+
+
     This is a API specification of REST endpoints that a Transport Service
     Provider (TSP) should implement to receive messages from MaaS. It is written
     in machine readable [Swagger](http://swagger.io/) format, so thatAPI
@@ -20,6 +23,27 @@ info:
     Right now MaaS TSP API consists of the Booking API. In addition, a need for
     customer feedback API (for mediating customer feedback to a TSP) and
     administration API (for changing API keys etc.) may be defined.
+
+
+    ## Versions
+
+    ### v1. Initial release (2018)
+
+    **deprecated**
+      
+      * [OpenAPI Specification](specs/maas-v1.yml)
+      * [Documentation](?maas-v1.yml)
+      * [SwaggerUI](swagger-ui.html?urls.primaryName=maas-v1.yml)
+      * Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)
+
+    ### v1.1 Latest version
+
+    **under development**
+
+      * [OpenAPI Specification](specs/booking.json)
+      * [Documentation](?booking.json)
+      * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)
+      * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)
   termsOfService: 'http://api.maas.global/terms/'
   contact:
     name: MaaS API Team
@@ -64,7 +88,7 @@ paths:
         - Listing
       parameters:
         - name: from
-          description: 'User''s location in comma separated form e.g. 60.123,27.456'
+          description: "User's location in comma separated form e.g. 60.123,27.456"
           in: query
           required: true
           schema:
@@ -297,7 +321,7 @@ components:
           description: 'A TSP internal error code, used for reference'
     newBooking:
       type: object
-      description: 'A new booking, created by MaaS POST request in ''new'' state'
+      description: "A new booking, created by MaaS POST request in 'new' state"
       required:
         - leg
         - customer
