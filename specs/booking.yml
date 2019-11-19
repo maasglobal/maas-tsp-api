@@ -52,16 +52,14 @@ info:
 
     ### v1.1 Latest version
 
-    **under development**
-
       * [OpenAPI Specification](specs/booking.json)
       * [Documentation](?booking.json)
       * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)
 
-    ## Running local server
+    ## Running local documentation server
 
-    To run local server and execute API via [Swagger UI](swagger-ui.html?urls.primaryName=maas-v1.yml), follow the instruction in the [GitHub repo](https://github.com/maasglobal/maas-tsp-api/)
+    To run local documentation server, follow the instructions in the [GitHub repo](https://github.com/maasglobal/maas-tsp-api/)
 
         git clone https://github.com/maasglobal/maas-tsp-api/
         cd maas-tsp-api
@@ -101,7 +99,7 @@ tags:
 
 
       <html>
-        <iframe src="https://cawemo.com/embed/acc4149c-8d04-4245-a047-c7dd94b97d88" 
+        <iframe src="https://cawemo.com/embed/09a7739f-f8ce-4fe4-a5e5-a8f66ecedb8c" 
           style="width: 100%; height:300px; border:1px solid #ccc" allowfullscreen="allowfullscreen">
         </iframe>
       <html>
@@ -213,43 +211,6 @@ tags:
       The same principle applies when TSP is communicating with WhimApp.
 
     x-traitTag: true
-  - name: User management
-    description: >-
-      The booking processes does not present separate user management process.
-
-      All information about the WhimApp user are passed at the [Create booking](#operation/bookingCreate)
-      invocation.
-
-      During this invocation we also pass persistent user id together with user information (e-mail, phone, full-name).
-
-      If required, user creation (or update) are managed at the TSP side transparently during the creation of booking.
-    x-traitTag: true
-  - name: KYC
-    description: >-
-      MaaS Global Oy performs due diligence
-      when registering user. We check for example user to have a valid payment instrument (credit or debit card).
-
-
-      If required, additional KYC process (for example, driver license check) can be performed before booking are created.
-
-
-      This is out of scope of this APIs and to be defined in a separate aggreement.
-    x-traitTag: true
-  - name: Payment
-    description: >-
-      WhimApp offers two modes of operation for bookings which are created.
-
-      ## Offline invoicing
-
-      **Preferred** We are charging customer before the trip and will be invoiced by TSP according to the expenses for booking.
-
-      Invoicing are handled via API (TBA) or via e-mail and expected to be processed every 1, 2 weeks or monthly.
-
-      ## MaaS Global credit card
-
-      Instead of specifying user credit card (we never do this!) we specify our credit card to be used by TSP for payment.
-      This are not recommended
-    x-traitTag: true
   - name: Booking
     description: >-
       Booking related APIs are the core of a TSP implementation.
@@ -300,12 +261,8 @@ components:
         header when WhimApp makes request to the TSP API.
 
 
-        Please not what due to serverless nature of our infrastructure we are unable to provide
+        *Please note* what due to serverless nature of our infrastructure we are unable to provide
         you with a set of IP addresses HTTP request will be originating from.
-
-
-        To cope with that we propose using *optional* JSON payload signing, see here for more 
-        information: https://developer.github.com/webhooks/securing/#validating-payloads-from-github
 security:
   - apiKeyHeader: []
 paths:
