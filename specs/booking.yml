@@ -271,9 +271,9 @@ paths:
       summary: Available transport options
       description: >-
         Returns available transport options or offers.
-        Start time can be defined, but is optional. If startTime is not provided, but
-        required by the third party API, a default value of "Date.now()" is
-        used.
+
+
+        Full schema for parameters defined in [maas-schemas](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list/request.json) project
       tags:
         - Booking
       parameters:
@@ -289,6 +289,24 @@ paths:
           required: false
           schema:
             $ref: ../schemas/core/components/units-geo.json#/definitions/shortLocationString
+        - name: startTime
+          description: "Start journey time"
+          in: query
+          required: true
+          schema:
+            $ref: ../schemas/core/components/units.json#/definitions/time
+        - name: endTime
+          description: "End journey time"
+          in: query
+          required: false
+          schema:
+            $ref: ../schemas/core/components/units.json#/definitions/time
+        - name: mode
+          description: "Transfer mode"
+          in: query
+          required: false
+          schema:
+            $ref: ../schemas/core/components/travel-mode.json
       x-code-samples:
         - lang: Shell
           label: Query for taxi
@@ -338,8 +356,7 @@ paths:
 
         ### JSON Schema documentation
 
-        Full schema documented here: 
-        https://maasglobal.github.io/maas-schemas/docs/tsp/booking-create/request.html
+        Full schema for parameters defined in [maas-schemas](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create/request.json) project
       tags:
         - Booking
       requestBody:
