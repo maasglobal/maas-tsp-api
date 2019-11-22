@@ -3,7 +3,7 @@ servers:
   - url: http://localhost:3000
     description: Local server
 info:
-  version: v1.1
+  version: 1.1.0
   title: WhimApp TSP API
   ## NB: All Markdown paragraphs need to be 2 empty lines and all Markdown links must be resolved against repo root (not against this file path)
   ## Also x-logo must be resolved against repo root (not against this file path)
@@ -41,7 +41,7 @@ info:
 
     ## Versions
 
-    ### v1. Initial release (2018)
+    ### 1.0.0 Initial release (2018)
 
     **deprecated**
       
@@ -50,7 +50,7 @@ info:
       * [SwaggerUI](swagger-ui.html?urls.primaryName=maas-v1.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)
 
-    ### v1.1 Latest version
+    ### 1.1.0 Latest version
 
       * [OpenAPI Specification](specs/booking.json)
       * [Documentation](?booking.json)
