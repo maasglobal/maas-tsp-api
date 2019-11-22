@@ -11,7 +11,7 @@ For a brief walk through of a booking process [see here](specs/Booking.md)
 
 ## Getting started
 
-- spec/booking.yml - MaaS schema for TSP provider booking
+- spec/booking.yml - OpenAPI Specification for TSP provider booking
 
 ## Living documentation
 
@@ -31,6 +31,7 @@ Open browser and navigate to documentation portal (http://localhost:3000)
 
 ```
 npm run build
+npm run dist
 ```
 
 ## Links
