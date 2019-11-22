@@ -1,9 +1,9 @@
-# MaaS TSP (Transport Service Provider) API
+# WhimApp TSP (Transport Service Provider) API
 
-This is the MaaS Transport service provider API repository,
-containing OpenAPI specification used in communication with TSP.
+This is the WhimApp TSP (Transport service provider) API repository,
+containing OpenAPI specification, JSON schema for data model and examples.
 
-Using these documents, a third party transport service provider can implement a MaaS compatible API.
+Using these documents, a third party transport service provider can implement a MaaS compatible API ready to be integrated into [WhimApp](https://whimapp.com)
 
 An interactive version of this documentation is published at [maasglobal.github.io](https://maasglobal.github.io/maas-tsp-api).
 
@@ -33,6 +33,12 @@ Open browser and navigate to documentation portal (http://localhost:3000)
 npm run build
 npm run dist
 ```
+
+## Related projects
+
+Data model are provided by [maas-schemas](https://github.com/maasglobal/maas-schemas/) which are used in API specification to declare and validate request and response payloads.
+
+To create local, OpenAPI specification compatible copy of this schemas, execute `npm run build`. This will create local `schemas` folder which are referenced in [specs/booking.yml](specs/booking.yml)
 
 ## Links
 
