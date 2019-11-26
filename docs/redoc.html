@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="redoc-custom.css" />
   </head>
 
-  <body>
+  <body class="redoc">
     <a href="https://github.com/maasglobal/maas-tsp-api" class="github-corner" aria-label="View source on Github">
       <img src="assets/github.svg" />
     </a>
@@ -72,7 +72,6 @@
               const id = hash.substring(1);
               const element = document.getElementById(id);
               if (element !== undefined) {
-                console.info('Scrolling');
                 element.scrollIntoView();
               } else {
                 console.warn('Can not find element: ' + id);
@@ -80,7 +79,7 @@
             } else {
               console.info(hash);
             }
-          }, 50);
+          }, 200);
         }
       );
     </script>

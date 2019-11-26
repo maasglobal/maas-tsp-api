@@ -12,3 +12,14 @@ body {
   right: 0;
   z-index: 9999;
 }
+
+/* Make blockquote look like an informational panel, not a quotation */
+
+.redoc #redoc-container blockquote {
+  border: 1px solid #d0d0d0;
+  padding: 16px;
+}
+
+.redoc #redoc-container blockquote p {
+  margin: 0px;
+}
