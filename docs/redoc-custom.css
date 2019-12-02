@@ -22,4 +22,5 @@ body {
 
 .redoc #redoc-container blockquote p {
   margin: 0px;
+  color: black;
 }
