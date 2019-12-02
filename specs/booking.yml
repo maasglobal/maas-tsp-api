@@ -10,7 +10,7 @@ info:
   ## Examples (externalValue) and $ref are resolved relative to this file path
   description: |
     ## Introduction
-  
+
     This is a API specification of REST endpoints that a Transport Service
     Provider (TSP) should implement to offer their services through the 
     [Whim application](https://whimapp.com/).
@@ -66,7 +66,9 @@ info:
       * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)
 
-    ## Running local documentation server
+    ## Getting started
+
+    ### Running local documentation server
 
     To run local documentation server, follow the instructions in the [GitHub repo](https://github.com/maasglobal/maas-tsp-api/)
 
@@ -131,7 +133,7 @@ tags:
       | **FINISHED** | Ride was completed. We are waiting for this state update from TSP. |
       | **CANCELLED** | Cancelled by user. Booking can be subject to a fee or/and not be refundable as specified by TSP in booking cancellation rules. |
       | **REJECTED** | Rejected by TSP. We can update with this state on **PENDING**, **RESERVED**, **CONFIRMED**, **ACTIVATED** state and show User message about the reason for rejection, as received from TSP. |
-      
+
       ### Structure
 
       See examples for a [Create Booking](#operation/bookingCreate) or schema for [Booking create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) to understand all available data in a booking.
@@ -150,7 +152,7 @@ tags:
       | `meta` | Y | Information about TSP. Also contains driver for TAXI |
       | `tspId` | Y | TSP specifid ID for this booking |
       | `cost` | Y | Amount and currency this booking will cost |
-      
+
       ## Planning a Route
 
       **User** **queries** for a **Route** with an address or latitude-logitude
