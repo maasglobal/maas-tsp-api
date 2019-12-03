@@ -1,0 +1,18 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/tsp-auth/init/request.json",
+  "description": "Request schema for tsp-auth init",
+  "type": "object",
+  "properties": {
+    "identityId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "agencyId": {
+      "$ref": "../../../../schemas/core/components/common.json#/definitions/agencyId"
+    },
+    "headers": {
+      "$ref": "../../../../schemas/core/components/api-common.json#/definitions/headers"
+    }
+  },
+  "required": ["identityId", "agencyId"],
+  "additionalProperties": false
+}

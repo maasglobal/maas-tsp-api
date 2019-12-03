@@ -1,0 +1,19 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/push-notification/response.json",
+  "description": "MaaS push notification response schema.",
+  "type": "object",
+  "properties": {
+    "identityId": {
+      "$ref": "../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "results": {
+      "properties": {
+        "successCount": { "type": "integer", "minimum": 0 },
+        "failureCount": { "type": "integer", "minimum": 0 }
+      },
+      "required": ["successCount", "failureCount"]
+    }
+  },
+  "required": ["identityId", "results"],
+  "additionalProperties": false
+}

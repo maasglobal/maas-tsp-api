@@ -1,0 +1,553 @@
+openapi: 3.0.0
+servers: []
+info:
+  version: 1.0.0
+  title: MaaS-TSP
+  description: >
+    **DISCLAIMER** This version of TSP API are **deprecated**. Please consult latest version at source code [repository](https://github.com/maasglobal/maas-tsp-api/)
+
+
+    This is a API specification of REST endpoints that a Transport Service
+    Provider (TSP) should implement to receive messages from MaaS. It is written
+    in machine readable [Swagger](http://swagger.io/) format, so thatAPI
+    endpoints, validators and test clients can be generated from the
+    documentation.
+
+
+    In addition to this documentation, MaaS maintains a [reference
+    implementation (**TODO**)](https://github.com/maasglobal/maas-tsp-api) with
+    test cases. It is also running as a [reference service
+    (**TODO**)](https://tsp.maas.global/).
+
+
+    Right now MaaS TSP API consists of the Booking API. In addition, a need for
+    customer feedback API (for mediating customer feedback to a TSP) and
+    administration API (for changing API keys etc.) may be defined.
+
+
+    ## Versions
+
+    ### 1.0.0. Initial release (2018)
+
+    **deprecated**
+      
+      * [OpenAPI Specification](specs/maas-v1.yml)
+      * [Documentation](?maas-v1.yml)
+      * [SwaggerUI](swagger-ui.html?urls.primaryName=maas-v1.yml)
+      * Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)
+
+    ### 1.1.0. Latest version
+
+    **under development**
+
+      * [OpenAPI Specification](specs/booking.json)
+      * [Documentation](?booking.json)
+      * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)
+      * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)
+  termsOfService: 'http://api.maas.global/terms/'
+  contact:
+    name: MaaS API Team
+    email: developers@maas.fi
+    url: 'http://maas.fi/'
+  license:
+    name: MIT
+    url: 'http://opensource.org/licenses/MIT'
+tags:
+  - name: Booking
+    description: >-
+      Booking related APIs are the core of a TSP implementation.
+      Correspondingly, a Booking is the main object exchanged between MaaS and a
+      TSP.
+    externalDocs:
+      description: Booking scenarios
+      url: 'https://github.com/maasglobal/maas-tsp-api/blob/master/specs/Booking.md'
+  - name: Listing
+    description: >-
+      Before a booking can be made via a TSP, available options at a given
+      location can be listed as follows
+  - name: TODO Feedback
+    description: >-
+      In order to receive customer feedback through MaaS, TSP may implement
+      these APIs.
+  - name: TODO Admin
+    description: >-
+      In the future MaaS will implement machine-readable APIs that a TSP may use
+      to update GTFS route information, API keys and other information that is
+      needed for communicating between MaaS and a TSP.
+security:
+  - key: []
+paths:
+  /bookings/options/:
+    get:
+      description: >-
+        Returns available transport options for given coordinates. Start time
+        can be defined, but is optional. If startTime is not provided, but
+        required by the third party API, a default value of "Date.now()" is
+        used.
+      tags:
+        - Listing
+      parameters:
+        - name: from
+          description: "User's location in comma separated form e.g. 60.123,27.456"
+          in: query
+          required: true
+          schema:
+            type: string
+            pattern: >-
+              ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$
+        - name: to
+          description: 'A desired destination e.g. 60.123,27.456'
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: >-
+              ^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$
+      responses:
+        '200':
+          description: >-
+            Available transport methods matching the given query parameters. If
+            no transport methods are available, an empty array is returned.
+          content:
+            application/json:
+              schema:
+                name: options
+                type: array
+                description: Available transport options for the queried TSP
+                items:
+                  $ref: '#/components/schemas/options'
+        '400':
+          description: >-
+            If coordinates given in the request are invalid the server returns
+            400 Bad request as a response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+  /bookings/:
+    get:
+      description: Returns the `Booking` that has been created earlier
+      tags:
+        - Booking
+      parameters:
+        - name: state
+          description: The state the booking to fetch
+          in: query
+          required: true
+          schema:
+            type: string
+            format: >-
+              enum - BOOKED - CANCELLED - PAID - UPDATE_REQUESTED - UPDATED -
+              STARTED - FINISHED
+      responses:
+        '200':
+          description: The bookings matching the query
+          content:
+            application/json:
+              schema:
+                type: array
+                description: The bookings that matched the query (zero or more)
+                minItems: 0
+                items:
+                  $ref: '#/components/schemas/booking'
+        '400':
+          description: Bad request (invalid query parameters)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      x-serverless-endpoint: echo~GET
+    post:
+      description: >-
+        Creates a new `Booking` for the TSP in **booked** state. The returned
+        object will be a refrence that is passed back & forth throughout the
+        booking life cycle.
+
+        The Booking may be modified in the response, e.g. location being
+        adjusted for a more suitable pick-up location.
+
+        In addition, the service may contain a **meta** attribute for arbitrary
+        TSP metadata that the TSP needs later, and **token** attribute depicting
+        how long the current state is valid.
+      tags:
+        - Booking
+      responses:
+        '200':
+          description: A new booking was succesfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/booking'
+        '400':
+          description: Bad request (invalid body parameters)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/newBooking'
+        description: New `Booking` data
+        required: true
+      parameters: []
+  '/bookings/{id}':
+    get:
+      description: Returns the `Bookings` that have been created through the system.
+      tags:
+        - Booking
+      parameters:
+        - name: id
+          in: path
+          description: Booking identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The booking was found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/booking'
+        '400':
+          description: Bad request (invalid query or body parameters)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        '404':
+          description: The booking was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+    put:
+      description: >-
+        Modifies the state of a `Booking`, e.g. **cancels**, **pays** or
+        **reschedules** it. The previous booking information is passed forward
+        as-is for reference.
+      tags:
+        - Booking
+      parameters:
+        - name: id
+          in: path
+          description: Booking identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The booking was modified
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/booking'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/booking'
+        description: New `Booking` data
+        required: true
+components:
+  securitySchemes:
+    key:
+      description: >
+        MaaS can authenticate using an access token as part of the HTTP(S)
+        headers. The keys are sent as part of every request that MaaS makes to
+        the TSP API with a `x-api-key` custom header option.
+      type: apiKey
+      name: X-Api-Key
+      in: header
+  schemas:
+    error:
+      type: object
+      description: >-
+        An error that the service may send, e.g. in case of invalid input,
+        missing authorization or internal service error.
+      required:
+        - message
+        - code
+      properties:
+        message:
+          type: string
+          description: A human readable error message (preferrably in English)
+        code:
+          type: string
+          description: 'A TSP internal error code, used for reference'
+    newBooking:
+      type: object
+      description: "A new booking, created by MaaS POST request in 'new' state"
+      required:
+        - leg
+        - customer
+      properties:
+        state:
+          type: string
+          description: The state of the booking (always new for new bookings)
+          enum:
+            - NEW
+        leg:
+          $ref: '#/components/schemas/leg'
+        customer:
+          $ref: '#/components/schemas/customer'
+    booking:
+      type: object
+      description: >-
+        The booking information describing the state and details of the
+        transaction
+      allOf:
+        - $ref: '#/components/schemas/newBooking'
+      properties:
+        id:
+          description: The identifier MaaS will be using to referring to the booking
+          type: string
+        state:
+          $ref: '#/components/schemas/bookingState'
+        terms:
+          $ref: '#/components/schemas/bookingState'
+        token:
+          $ref: '#/components/schemas/token'
+        meta:
+          description: Arbitrary metadata that a TSP can add
+          type: object
+      required:
+        - id
+        - state
+        - leg
+        - customer
+        - token
+    bookingState:
+      description: The life-cycle state of the booking (from NEW to FINISHED)
+      type: string
+      enum:
+        - NEW
+        - BOOKED
+        - CANCELLED
+        - PAID
+        - UPDATE_REQUESTED
+        - UPDATED
+        - STARTED
+        - FINISHED
+    token:
+      description: >-
+        The validity token (such as booking ID, travel ticket etc.) that MaaS
+        clients will display to validate the trip when starting the leg.
+      properties:
+        validityDuration:
+          description: >-
+            The rules that MaaS will interpret to schedule, re-validate or
+            cancel the booking.
+          type: object
+          properties:
+            from:
+              description: The starting time from which the ticket is valid
+              $ref: '#/components/schemas/time'
+            to:
+              description: The finishing time the ticket is valid for
+              $ref: '#/components/schemas/time'
+        meta:
+          description: >-
+            Arbitrary metadata the TSP may pass along the ticket to the client
+            (e.g. a booking code, base64 encoded binary)
+          type: object
+    customer:
+      type: object
+      required:
+        - id
+        - firstName
+        - lastName
+      properties:
+        id:
+          description: The identifier MaaS uses to identify the customer
+          type: string
+        firstName:
+          description: First name of the customer (e.g. John)
+          type: string
+        lastName:
+          description: Last name of the customer (e.g. Doe)
+          type: string
+        phone:
+          description: Phone number that the customer may be reached from
+          type: string
+    options:
+      type: object
+      description: Containing an array of available options matching the query
+      properties:
+        leg:
+          $ref: '#/components/schemas/options_leg'
+        meta:
+          $ref: '#/components/schemas/options_meta'
+    options_leg:
+      type: object
+      properties:
+        startTime:
+          $ref: '#/components/schemas/time'
+        endTime:
+          $ref: '#/components/schemas/time'
+        from:
+          $ref: '#/components/schemas/options_coordinates'
+        to:
+          $ref: '#/components/schemas/options_coordinates'
+    options_coordinates:
+      type: object
+      properties:
+        lat:
+          $ref: '#/components/schemas/lat'
+        lon:
+          $ref: '#/components/schemas/lon'
+    options_meta:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+          format: url
+        car:
+          type: object
+          properties:
+            passengers:
+              type: integer
+    leg:
+      type: object
+      description: >-
+        A OpenTripPlanner compatible definition of a leg (see OpenTripPlanner
+        docs for reference)
+      additionalProperties: true
+      properties:
+        from:
+          description: The coordinates the TSP should use to resolve leg start location
+          $ref: '#/components/schemas/place'
+        to:
+          description: The coordinates the TSP should use to resolve leg finish location
+          $ref: '#/components/schemas/place'
+        startTime:
+          $ref: '#/components/schemas/time'
+        endTime:
+          $ref: '#/components/schemas/time'
+        mode:
+          $ref: '#/components/schemas/mode'
+        departureDelay:
+          $ref: '#/components/schemas/duration'
+        arrivalDelay:
+          $ref: '#/components/schemas/duration'
+        distance:
+          $ref: '#/components/schemas/distance'
+        fare:
+          $ref: '#/components/schemas/fare'
+        route:
+          type: string
+        routeShortName:
+          type: string
+        routeLongName:
+          type: string
+        agencyId:
+          type: string
+        legGeometry:
+          $ref: '#/components/schemas/legGeometry'
+      required:
+        - from
+        - to
+        - mode
+        - startTime
+        - endTime
+    place:
+      type: object
+      additionalProperties: true
+      properties:
+        name:
+          description: Human readable name of the place
+          type: string
+        stopId:
+          type: string
+        stopCode:
+          type: string
+        lat:
+          $ref: '#/components/schemas/lat'
+        lon:
+          $ref: '#/components/schemas/lon'
+      required:
+        - lon
+        - lat
+    lat:
+      type: number
+      minimum: -90
+      maximum: 90
+    lon:
+      type: number
+      minimum: -180
+      maximum: 180
+    legGeometry:
+      type: object
+      additionalProperties: true
+      properties:
+        points:
+          type: string
+          minLength: 1
+    time:
+      description: >-
+        A UTC timestamp (number of milliseconds in a Date object since January
+        1, 1970, 00:00:00)
+    duration:
+      description: A duration of some time (relative to time) in milliseconds
+      type: integer
+      maximum: 2147483647
+      minimum: 0
+    distance:
+      description: The estimated distance travelled in the leg (in meters)
+      type: integer
+      minimum: 0
+    fare:
+      description: Arbitrary fare data that MaaS will use internally
+      type: object
+    mode:
+      description: The type of the leg MaaS uses to identify the leg
+  links: {}
+  callbacks: {}

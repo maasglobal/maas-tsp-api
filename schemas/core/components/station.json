@@ -1,0 +1,104 @@
+{
+  "$id": "http://maasglobal.com/core/components/station.json",
+  "description": "MaaS station schemas",
+  "type": "object",
+  "definitions": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "code": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "location": {
+      "$ref": "../../../schemas/core/components/units-geo.json#/definitions/shortLocationString"
+    },
+    "address": {
+      "$ref": "../../../schemas/core/components/address.json#/definitions/address"
+    },
+    "city": {
+      "$ref": "../../../schemas/core/components/address.json#/definitions/city"
+    },
+    "country": {
+      "$ref": "../../../schemas/core/components/address.json#/definitions/country"
+    },
+    "agencyId": {
+      "$ref": "../../../schemas/core/components/common.json#/definitions/agencyId"
+    },
+    "openingHours": {
+      "description": "Opening hour of the station, object format is left for TSP to decide",
+      "type": "object"
+    },
+    "facilities": {
+      "description": "Station facilities, including services and features",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "services": {
+      "description": "What agency and mode of transport will occupy this station",
+      "type": "array",
+      "items": {
+        "$ref": "../../../schemas/core/components/travel-mode.json"
+      }
+    },
+    "timetables": {
+      "description": "Timetable for passing by / originating transports",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "mode": {
+            "$ref": "../../../schemas/core/components/travel-mode.json"
+          },
+          "name": {
+            "type": "string"
+          },
+          "longName": {
+            "type": "string"
+          },
+          "schedule": {
+            "$ref": "../../../schemas/core/components/units.json#/definitions/time"
+          },
+          "realtime": {
+            "$ref": "../../../schemas/core/components/units.json#/definitions/time"
+          },
+          "isRealtime": {
+            "type": "boolean",
+            "description": "A flag indicating whether this transport mode is realtime or not"
+          }
+        }
+      }
+    },
+    "zone": {
+      "description": "Geofencing zone defined by provider that the station is within",
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "platformCode": {
+      "description": "Platform number",
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  }
+}

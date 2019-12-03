@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>WhimApp TSP API documentation</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" href="assets/whim-favicon.png" />
+    <link rel="apple-touch-icon" type="image/png" href="assets/whim-favicon.png" />
+    <link rel="canonical" href="https://github.com/maasglobal/maas-tsp-api" />
+    <meta name="author" content="MaaS Global Oy" />
+    <meta name="theme-color" content="#0095eb" />
+    <meta
+      name="description"
+      content="Documentation for WhimApp TSP API which enables transport service providers to integrate their services into WhimApp."
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:site" content="@maas_global" />
+    <meta property="og:site_name" content="WhimApp TSP API" />
+    <meta property="og:url" content="https://github.com/maasglobal/maas-tsp-api" />
+    <meta property="og:title" content="WhimApp TSP API" />
+    <meta
+      property="og:description"
+      content="Documentation for WhimApp TSP API which enables transport service providers to integrate their services into WhimApp."
+    />
+    <meta property="og:locale" content="en-GB" />
+    <meta property="og:updated_time" content="2019-11-07T20:58:10.862Z" />
+    <meta property="og:image" content="assets/whim-logo.png" />
+    <meta property="og:type" content="article" />
+    <link rel="stylesheet" href="redoc-custom.css" />
+  </head>
+
+  <body class="redoc">
+    <a href="https://github.com/maasglobal/maas-tsp-api" class="github-corner" aria-label="View source on Github">
+      <img src="assets/github.svg" />
+    </a>
+    <div id="redoc-container"></div>
+    <script src="redoc.standalone.js"></script>
+    <script>
+      const spec = window.location.search ? window.location.search.substring(1) : 'booking.json';
+      Redoc.init(
+        'specs/' + spec.replace(/[^a-z0-9.-]/gi, ''),
+        {
+          // https://github.com/Redocly/redoc/#redoc-options-object
+          scrollYOffset: 0,
+          suppressWarnings: false,
+          requiredPropsFirst: true,
+          nativeScrollbars: true,
+          hideLoading: false,
+          expandResponses: '200',
+          hideDownloadButton: true,
+          jsonSampleExpandLevel: 5,
+          showExtensions: true,
+          // https://github.com/Redocly/redoc/blob/master/src/theme.ts
+          theme: {
+            spacing: {
+              sectionVertical: '5px',
+            },
+            typography: {
+              fontSize: '16px',
+            },
+            text: {
+              primary: '#333333',
+            },
+          },
+        },
+        document.getElementById('redoc-container'),
+        () => {
+          window.setTimeout(() => {
+            console.info('Initialized');
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#')) {
+              const id = hash.substring(1);
+              const element = document.getElementById(id);
+              if (element !== undefined) {
+                element.scrollIntoView();
+              } else {
+                console.warn('Can not find element: ' + id);
+              }
+            } else {
+              console.info(hash);
+            }
+          }, 200);
+        }
+      );
+    </script>
+  </body>
+</html>

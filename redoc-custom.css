@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+.github-corner {
+  position: absolute;
+  display: block;
+  top: 0;
+  border: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+/* Make blockquote look like an informational panel, not a quotation */
+
+.redoc #redoc-container blockquote {
+  border: 1px solid #d0d0d0;
+  padding: 16px;
+}
+
+.redoc #redoc-container blockquote p {
+  margin: 0px;
+  color: #333333;
+}

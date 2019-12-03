@@ -1,0 +1,15 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/profile/profile-webhook/response.json",
+  "description": "Response schema for profile-webhook",
+  "type": "object",
+  "properties": {
+    "profile": {
+      "$ref": "../../../../schemas/core/profile.json"
+    },
+    "maas": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

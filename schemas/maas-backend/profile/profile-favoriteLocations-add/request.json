@@ -1,0 +1,17 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/profile/profile-favoriteLocations-add/request.json",
+  "description": "Request schema for profile-favoriteLocations-add",
+  "type": "object",
+  "properties": {
+    "identityId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "payload": {
+      "$ref": "../../../../schemas/core/components/place.json"
+    },
+    "headers": {
+      "$ref": "../../../../schemas/core/components/api-common.json#/definitions/headers"
+    }
+  },
+  "additionalProperties": false
+}

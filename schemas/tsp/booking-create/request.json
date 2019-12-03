@@ -1,0 +1,30 @@
+{
+  "$id": "http://maasglobal.com/tsp/bookings-create/request.json",
+  "description": "Request schema for creating a booking through a TSP adapter",
+  "type": "object",
+  "properties": {
+    "leg": {
+      "$ref": "../../../schemas/core/booking-option.json#/definitions/leg"
+    },
+    "meta": {
+      "$ref": "../../../schemas/core/booking-meta.json"
+    },
+    "terms": {
+      "$ref": "../../../schemas/core/booking.json#/definitions/terms"
+    },
+    "customer": {
+      "$ref": "../../../schemas/core/customer.json"
+    },
+    "tspProduct": {
+      "$ref": "../../../schemas/core/booking-option.json#/definitions/tspProduct"
+    },
+    "configurator": {
+      "$ref": "../../../schemas/core/components/configurator.json"
+    },
+    "customerSelection": {
+      "$ref": "../../../schemas/core/components/customerSelection.json"
+    }
+  },
+  "required": ["leg", "meta", "terms", "customer", "tspProduct"],
+  "additionalProperties": true
+}

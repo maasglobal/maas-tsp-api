@@ -1,0 +1,77 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/bookings/bookings-agency-options/response.json",
+  "description": "Response schema for bookings-agency-options",
+  "type": "object",
+  "properties": {
+    "options": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/option"
+      }
+    },
+    "additional": {
+      "type": "object",
+      "properties": {
+        "bikeStations": {
+          "type": "array",
+          "items": {
+            "$ref": "../../../../schemas/core/components/bike-station.json"
+          }
+        }
+      }
+    },
+    "debug": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": ["options"],
+  "additionalProperties": false,
+  "definitions": {
+    "option": {
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "fares": {
+              "$ref": "../../../../schemas/core/booking.json#/definitions/fares"
+            },
+            "cost": {
+              "$ref": "../../../../schemas/core/booking.json#/definitions/cost"
+            },
+            "leg": {
+              "$ref": "../../../../schemas/core/booking.json#/definitions/leg"
+            },
+            "meta": {
+              "$ref": "../../../../schemas/core/booking-meta.json"
+            },
+            "terms": {
+              "$ref": "../../../../schemas/core/booking.json#/definitions/terms"
+            },
+            "tspProduct": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                }
+              }
+            },
+            "configurator": {
+              "$ref": "../../../../schemas/core/booking.json#/definitions/configurator"
+            }
+          }
+        },
+        {
+          "oneOf": [
+            {
+              "required": ["leg", "terms", "product", "fares"]
+            },
+            {
+              "required": ["leg", "terms", "product", "configurator"]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/subscriptions/subscriptions-update/request.json",
+  "description": "Request schema for subscriptions-update",
+  "type": "object",
+  "properties": {
+    "customerId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "userId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "replace": {
+      "type": "boolean"
+    },
+    "immediate": {
+      "type": "boolean"
+    },
+    "payload": {
+      "$ref": "../../../../schemas/maas-backend/subscriptions/subscription.json#/definitions/subscriptionUpdatePayload"
+    },
+    "headers": {
+      "$ref": "../../../../schemas/core/components/api-common.json#/definitions/headers"
+    }
+  },
+  "required": ["customerId", "userId", "payload"],
+  "additionalProperties": false
+}

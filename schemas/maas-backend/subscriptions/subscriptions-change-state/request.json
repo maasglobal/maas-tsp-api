@@ -1,0 +1,21 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/subscriptions/subscriptions-change-state/request.json",
+  "description": "Request schema for subscriptions-change-state",
+  "type": "object",
+  "properties": {
+    "customerId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "userId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "changeStateId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/uuid"
+    },
+    "headers": {
+      "$ref": "../../../../schemas/core/components/api-common.json#/definitions/headers"
+    }
+  },
+  "required": ["customerId", "userId", "changeStateId", "headers"],
+  "additionalProperties": false
+}

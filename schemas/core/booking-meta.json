@@ -1,0 +1,26 @@
+{
+  "$id": "http://maasglobal.com/core/booking-meta.json",
+  "description": "TSP/mode-specific additional information. The TSP adapter should set MODE_{mode} with defined data, otherwise 'meta' can be used freely.",
+  "type": "object",
+  "properties": {
+    "MODE_WALK": { "$ref": "../../schemas/core/modes/MODE_WALK.json" },
+    "MODE_BICYCLE": { "$ref": "../../schemas/core/modes/MODE_BICYCLE.json" },
+    "MODE_CAR": { "$ref": "../../schemas/core/modes/MODE_CAR.json" },
+    "MODE_TRAM": { "$ref": "../../schemas/core/modes/MODE_TRAM.json" },
+    "MODE_SUBWAY": { "$ref": "../../schemas/core/modes/MODE_SUBWAY.json" },
+    "MODE_RAIL": { "$ref": "../../schemas/core/modes/MODE_RAIL.json" },
+    "MODE_BUS": { "$ref": "../../schemas/core/modes/MODE_BUS.json" },
+    "MODE_FERRY": { "$ref": "../../schemas/core/modes/MODE_FERRY.json" },
+    "MODE_CABLE_CAR": { "$ref": "../../schemas/core/modes/MODE_CABLE_CAR.json" },
+    "MODE_GONDOLA": { "$ref": "../../schemas/core/modes/MODE_GONDOLA.json" },
+    "MODE_FUNICULAR": { "$ref": "../../schemas/core/modes/MODE_FUNICULAR.json" },
+    "MODE_SHARED_BICYCLE": { "$ref": "../../schemas/core/modes/MODE_SHARED_BICYCLE.json" },
+    "MODE_SHARED_CAR": { "$ref": "../../schemas/core/modes/MODE_SHARED_CAR.json" },
+    "MODE_TRANSIT": { "$ref": "../../schemas/core/modes/MODE_TRANSIT.json" },
+    "MODE_TRAIN": { "$ref": "../../schemas/core/modes/MODE_TRAIN.json" },
+    "MODE_TRAINISH": { "$ref": "../../schemas/core/modes/MODE_TRAINISH.json" },
+    "MODE_BUSISH": { "$ref": "../../schemas/core/modes/MODE_BUSISH.json" },
+    "MODE_TAXI": { "$ref": "../../schemas/core/modes/MODE_TAXI.json" },
+    "MODE_SCOOTER": { "$ref": "../../schemas/core/modes/MODE_SCOOTER.json" }
+  }
+}

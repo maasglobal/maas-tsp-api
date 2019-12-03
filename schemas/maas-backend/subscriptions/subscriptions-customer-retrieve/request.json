@@ -1,0 +1,18 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/subscriptions/subscriptions-customer-retrieve/request.json",
+  "description": "Request schema for subscriptions-customer-retrieve",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "customerId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "headers": {
+      "$ref": "../../../../schemas/core/components/api-common.json#/definitions/headers"
+    }
+  },
+  "required": ["customerId"],
+  "additionalProperties": false
+}

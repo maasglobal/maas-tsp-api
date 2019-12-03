@@ -1,0 +1,15 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/regions/regions-options/request.json",
+  "description": "Request schema for regions-options",
+  "type": "object",
+  "properties": {
+    "identityId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "headers": {
+      "$ref": "../../../../schemas/core/components/api-common.json#/definitions/headers"
+    }
+  },
+  "required": ["identityId"],
+  "additionalProperties": false
+}

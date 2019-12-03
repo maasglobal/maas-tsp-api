@@ -1,0 +1,139 @@
+{
+  "$id": "http://maasglobal.com/core/booking.json",
+  "type": "object",
+  "description": "The base booking object with all fields, to be inherited",
+  "properties": {
+    "id": {
+      "$ref": "#/definitions/id"
+    },
+    "tspId": {
+      "$ref": "#/definitions/tspId"
+    },
+    "state": {
+      "$ref": "../../schemas/core/components/state.json#/definitions/bookingState"
+    },
+    "stateLog": {
+      "$ref": "../../schemas/core/components/state-log.json"
+    },
+    "fares": {
+      "$ref": "#/definitions/fares"
+    },
+    "cost": {
+      "$ref": "#/definitions/cost"
+    },
+    "leg": {
+      "$ref": "#/definitions/leg"
+    },
+    "token": {
+      "$ref": "#/definitions/token"
+    },
+    "meta": {
+      "$ref": "../../schemas/core/booking-meta.json"
+    },
+    "terms": {
+      "$ref": "#/definitions/terms"
+    },
+    "customer": {
+      "description": "MaaS booking customer",
+      "allOf": [
+        {
+          "$ref": "../../schemas/core/customer.json"
+        },
+        {
+          "required": ["identityId"]
+        }
+      ]
+    },
+    "product": {
+      "$ref": "../../schemas/core/product.json"
+    },
+    "signature": {
+      "$ref": "../../schemas/core/components/common.json#/definitions/signature"
+    },
+    "configurator": {
+      "$ref": "#/definitions/configurator"
+    },
+    "customerSelection": {
+      "$ref": "../../schemas/core/components/customerSelection.json"
+    }
+  },
+  "required": ["id", "state", "leg", "meta", "terms", "token", "customer"],
+  "definitions": {
+    "id": {
+      "$ref": "../../schemas/core/components/units.json#/definitions/uuid"
+    },
+    "fares": {
+      "type": "array",
+      "items": {
+        "$ref": "../../schemas/core/components/fare.json"
+      }
+    },
+    "cost": {
+      "$ref": "../../schemas/core/components/cost.json"
+    },
+    "configurator": {
+      "$ref": "../../schemas/core/components/configurator.json"
+    },
+    "tspId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "leg": {
+      "type": "object",
+      "description": "MaaS response may return any subset of legCore",
+      "properties": {
+        "signature": { "$ref": "../../schemas/core/components/common.json#/definitions/signature" },
+        "state": { "$ref": "../../schemas/core/leg.json#/definitions/state" },
+        "from": { "$ref": "../../schemas/core/leg.json#/definitions/from" },
+        "to": { "$ref": "../../schemas/core/leg.json#/definitions/to" },
+        "startTime": { "$ref": "../../schemas/core/leg.json#/definitions/startTime" },
+        "endTime": { "$ref": "../../schemas/core/leg.json#/definitions/endTime" },
+        "mode": { "$ref": "../../schemas/core/leg.json#/definitions/mode" },
+        "stops": { "$ref": "../../schemas/core/leg.json#/definitions/stops" },
+        "departureDelay": { "$ref": "../../schemas/core/leg.json#/definitions/departureDelay" },
+        "arrivalDelay": { "$ref": "../../schemas/core/leg.json#/definitions/arrivalDelay" },
+        "distance": { "$ref": "../../schemas/core/leg.json#/definitions/distance" },
+        "route": { "$ref": "../../schemas/core/leg.json#/definitions/route" },
+        "routeShortName": { "$ref": "../../schemas/core/leg.json#/definitions/routeShortName" },
+        "routeLongName": { "$ref": "../../schemas/core/leg.json#/definitions/routeLongName" },
+        "agencyId": { "$ref": "../../schemas/core/leg.json#/definitions/agencyId" },
+        "legGeometry": { "$ref": "../../schemas/core/leg.json#/definitions/legGeometry" },
+        "tspProduct": { "$ref": "../../schemas/core/leg.json#/definitions/tspProduct" },
+        "productOption": { "$ref": "../../schemas/core/leg.json#/definitions/productOption" }
+      },
+      "additionalProperties": false
+    },
+    "terms": {
+      "$ref": "../../schemas/core/components/terms.json"
+    },
+    "token": {
+      "description": "The validity token (such as booking ID, travel ticket etc.) that MaaS clients will display to validate the trip when starting the leg.",
+      "type": "object",
+      "properties": {
+        "validityDuration": {
+          "description": "The rules that MaaS will interpret to schedule, re-validate or cancel the booking.",
+          "type": "object",
+          "properties": {
+            "startTime": {
+              "description": "The starting time from which the ticket is valid",
+              "$ref": "../../schemas/core/components/units.json#/definitions/time"
+            },
+            "endTime": {
+              "description": "The finishing time the ticket is valid for",
+              "$ref": "../../schemas/core/components/units.json#/definitions/time"
+            }
+          }
+        },
+        "data": {
+          "description": "Arbitrary ticket data for the client",
+          "type": "object"
+        },
+        "meta": {
+          "description": "Arbitrary metadata the TSP may pass along the ticket to the client (e.g. a booking code, base64 encoded binary)",
+          "type": "object"
+        }
+      }
+    }
+  }
+}

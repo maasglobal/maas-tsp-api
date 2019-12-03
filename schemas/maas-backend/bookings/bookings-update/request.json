@@ -1,0 +1,22 @@
+{
+  "$id": "http://maasglobal.com/maas-backend/bookings/bookings-update/request.json",
+  "description": "Request schema for bookings-update",
+  "type": "object",
+  "properties": {
+    "identityId": {
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "bookingId": {
+      "description": "bookingId of the requested booking",
+      "$ref": "../../../../schemas/core/components/units.json#/definitions/uuid"
+    },
+    "payload": {
+      "$ref": "../../../../schemas/core/booking.json"
+    },
+    "headers": {
+      "$ref": "../../../../schemas/core/components/api-common.json#/definitions/headers"
+    }
+  },
+  "required": ["identityId", "payload"],
+  "additionalProperties": false
+}

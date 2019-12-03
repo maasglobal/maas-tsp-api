@@ -1,0 +1,47 @@
+{
+  "$id": "http://maasglobal.com/core/iot-thing-shadow.json",
+  "description": "Schema for MaaS thing shadow",
+  "type": "object",
+  "properties": {
+    "desired": {
+      "type": "object",
+      "properties": {}
+    },
+    "reported": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "$ref": "../../schemas/core/components/units-geo.json#/definitions/latitude"
+            },
+            "lon": {
+              "$ref": "../../schemas/core/components/units-geo.json#/definitions/longitude"
+            },
+            "timestamp": {
+              "$ref": "../../schemas/core/components/units.json#/definitions/time"
+            },
+            "legId": {
+              "$ref": "../../schemas/core/components/units.json#/definitions/uuid"
+            }
+          }
+        },
+        "leg": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "$ref": "../../schemas/core/components/units.json#/definitions/uuid"
+            },
+            "timestamp": {
+              "$ref": "../../schemas/core/components/units.json#/definitions/time"
+            },
+            "state": {
+              "$ref": "../../schemas/core/components/state.json#/definitions/legState"
+            }
+          }
+        }
+      }
+    }
+  }
+}

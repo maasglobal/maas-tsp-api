@@ -1,0 +1,57 @@
+{
+  "$id": "http://maasglobal.com/tsp/stations-retrieve/response.json",
+  "description": "MaaS stations query response schema",
+  "type": "object",
+  "properties": {
+    "station": {
+      "type": "object",
+      "description": "Detailed station schema, coming as stations-retrieve response",
+      "properties": {
+        "id": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/id"
+        },
+        "code": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/code"
+        },
+        "name": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/name"
+        },
+        "location": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/location"
+        },
+        "agencyId": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/agencyId"
+        },
+        "address": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/address"
+        },
+        "city": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/city"
+        },
+        "country": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/country"
+        },
+        "openingHours": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/openingHours"
+        },
+        "facilities": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/facilities"
+        },
+        "timetables": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/timetables"
+        },
+        "zone": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/zone"
+        },
+        "services": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/services"
+        },
+        "platformCode": {
+          "$ref": "../../../schemas/core/components/station.json#/definitions/platformCode"
+        }
+      },
+      "required": ["id", "location", "agencyId"],
+      "additionalProperties": false
+    }
+  }
+}

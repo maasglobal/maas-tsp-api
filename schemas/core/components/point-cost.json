@@ -1,0 +1,6 @@
+{
+  "$id": "http://maasglobal.com/core/components/point-cost.json",
+  "description": "Subscription option's point cost",
+  "type": "number",
+  "minimum": 0
+}
