@@ -123,11 +123,9 @@ tags:
       Booking goes through multiple states during journey, here are most important states. Please see [Tracking booking](#section/Tracking-booking) on information how WhimApp and TSP exchange this information.
 
       | State | Description |
-      |-----|------| 
-      | **PENDING** | Booking created by calling [Create Booking](#operation/bookingCreate) endpoint. |
-      | **PAID** | Booking paid according to the cost specified by TSP. Can transition to **RESERVED** and notify TSP by invoking [Update Booking](#operation/bookingUpdate) endpoint. |
-      | **RESERVED** | Booking reserved with TSP and can transition to **CONFIRMED**. We are waiting for this state update from TSP by periodically calling [Get Booking](#operation/bookingGet) or waiting for webhook invocation via [Update booking state](#operation/backendBookingReceive) endpoint invocation. |
-      | **CONFIRMED** | Booking confirmed, e.g. TAXI driver have accepted this order. We are waiting for this state update from TSP. |
+      |-----|------|
+      | **RESERVED** | Booking created by calling [Create Booking](#operation/bookingCreate) endpoint. |
+      | **CONFIRMED** | Booking confirmed, e.g. TAXI driver have accepted this order. We are waiting for this state update from TSP by periodically calling [Get Booking](#operation/bookingGet) or waiting for webhook invocation via [Update booking state](#operation/backendBookingReceive) endpoint invocation. |
       | **ARRIVED** | Not applicable for all modes of transportation. For TAXI means driver have arrived to the pickup point. We are waiting for this state update from TSP. |
       | **ACTIVATED** | Booking has started. For TAXI means TAXI has picked up the passenger. We are waiting for this state update from TSP |
       | **FINISHED** | Ride was completed. We are waiting for this state update from TSP. |
@@ -151,7 +149,7 @@ tags:
       | `state` | Y | State of the booking |
       | `meta` | Y | Information about TSP. Also contains driver for TAXI |
       | `tspId` | Y | TSP specifid ID for this booking |
-      | `cost` | Y | Amount and currency this booking will cost |
+      | `cost` | Y | Amount and currency this booking cost |
 
       ## Planning a Route
 
@@ -165,6 +163,14 @@ tags:
 
       **WhimApp** shows several possible **Plans**, each containing a valid
       **Route** with several **Legs** with a part of a route using a specific TSP.
+
+      ## Booking options
+
+      To determine available mobility services, WhimApp calls [Available options](#operation/bookingOptionsGet) endpoint. Depending on the TSP mode of transportation this endpoint returns available TAXIs or cars or bikes for the specified location. After User selection, one of the options are used to create a booking by calling [Create Booking](#operation/bookingCreate) endpoint.
+
+      | Related API   | Related schemas | Examples | 
+      | --------- | --------- | ------ |
+      | [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json) |
 
       ## Creating a Booking
 
@@ -193,6 +199,12 @@ tags:
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
       | [Create Booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) |  TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json) |
+
+      ## Paying a Booking
+
+      When booking created it is already paid according to the options received and selected by User. See [Booking options](#section/Booking+options) for more information.
+      
+      If booking can not be created the paid amount will be refunded to the User.
 
       ## Navigating a Route
 
@@ -228,20 +240,9 @@ tags:
       It should be noted that cancellation is an exception case and is likely
       happen only when the user chooses to cancel the whole route Plan.
 
-      TSP can assume Booking as paid if no cancellation has been received from WhimApp.
-
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
       | [Cancel Booking](#operation/bookingCancel) | [tsp/booking-cancel](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-cancel) |  - |
-
-      ## Paying a Booking
-
-      When Booking are paid, WhimApp sends a modified Booking with **RESERVED**
-      state to TSP via [Update booking](#operation/bookingUpdate) endpoint.
-
-      | Related API   | Related schemas | Examples | 
-      | --------- | --------- | ------ |
-      | [Update Booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) |  - |
 
       ## Tracking booking
 
@@ -323,9 +324,11 @@ paths:
   /bookings/options:
     get:
       operationId: bookingOptionsGet
-      summary: Available transport options
+      summary: Available options
       description: |
-        Returns available transport options or offers.
+        Returns available options or offers.
+
+        The options are used to construct a booking to be created after User selects it by calling [Create booking](#operation/bookingCreate).
 
         Full schema for parameters defined in [maas-schemas](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list/request.json) project
       tags:
@@ -382,8 +385,8 @@ paths:
         '200':
           x-summary: Array of options
           description: |
-            Available transport methods matching the given query parameters. If
-            no transport methods are available, an empty array is returned.
+            Available transport options matching the given query parameters. If
+            no transport options are available, an empty array is returned.
           content:
             application/json:
               schema:
@@ -397,9 +400,11 @@ paths:
       operationId: bookingCreate
       summary: Create booking
       description: |
-        Creates a new `Booking` for the TSP in **booked** state. The returned
-        object will be a refrence that is passed back & forth throughout the
-        booking life cycle.
+        Creates a new `Booking` for the TSP in **RESERVED** state. The returned
+        object will be a reference that is passed back & forth throughout the
+        booking lifecycle.
+
+        Booking request are based upon the response returned by calling [Available options](#operation/bookingOptionsGet) endpoint.
 
         The Booking may be modified in the response, e.g. location being
         adjusted for a more suitable pick-up location.
@@ -559,6 +564,12 @@ paths:
                 $ref: ../schemas/core/error.json
         '401':
           description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '403':
+          description: Cancellation forbidden
           content:
             application/json:
               schema:
