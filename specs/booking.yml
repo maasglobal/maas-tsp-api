@@ -440,6 +440,30 @@ paths:
                 Taxi:
                   summary: Taxi
                   externalValue: ../examples/taxi/booking-create-response.json
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '409':
+          description: Booking exists for this User. If TSP does not support more than one booking per user, it can indicate it by sending this response when WhimApp creates a new booking.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
   /bookings/{tspId}:
     get:
       operationId: bookingGet
