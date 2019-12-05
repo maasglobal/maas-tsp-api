@@ -5,6 +5,7 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "clean": "shx rm -Rf dist node_modules",
     "build": "node utils/adopt-schemas.js",
     "start": "node utils/adopt-schemas.js && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -e js,md,yml,yaml,json",
@@ -51,6 +52,9 @@
   },
   "dependencies": {
     "maas-schemas": "github:maasglobal/maas-schemas#v9.8.0-dev"
+  },
+  "resolutions": {
+    "@stoplight/json": "^3.2.2"
   },
   "husky": {
     "hooks": {
