@@ -51,7 +51,7 @@
     "maas-schemas-ts": "0.0.13"
   },
   "dependencies": {
-    "maas-schemas": "github:maasglobal/maas-schemas#v9.8.0-dev"
+    "maas-schemas": "^10.0.1"
   },
   "resolutions": {
     "@stoplight/json": "^3.2.2"
