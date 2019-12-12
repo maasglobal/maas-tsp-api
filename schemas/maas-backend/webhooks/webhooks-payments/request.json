@@ -7,6 +7,9 @@
     },
     {
       "$ref": "../../../../schemas/maas-backend/webhooks/webhooks-payments/gateway/stripe.json#/definitions/request"
+    },
+    {
+      "$ref": "../../../../schemas/maas-backend/webhooks/webhooks-payments/gateway/yaband.json#/definitions/request"
     }
   ]
 }

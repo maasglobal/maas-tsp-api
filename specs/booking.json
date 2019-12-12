@@ -353,9 +353,30 @@
                                         "minLength": 1
                                       },
                                       "address": {
-                                        "description": "Encoded address components in form country:Finland|state:Uusimaa|city:Helsinki|zipCode:00100|streetName:Ludviginkatu|streetNumber:6",
+                                        "description": "Encoded address components. Check the regexr examples. Check https://regexr.com/4ofcq. In streetNumber, there are 2 dashes - they have 2 different unicodes, do not remove",
                                         "type": "string",
-                                        "pattern": "^(?:(?:(?:country:(?:\\p{L}|\\s|')+)|(?:state:(?:\\p{L}|[,\\.:\\-`'´\\s])+)|(?:city:(?:\\p{L}|[,\\.:\\-`'´\\s])+)|(?:zipCode:(?:[a-zA-Z0-9 ]{3,10}|(?:\\p{L}|\\d){2,4}(\\s(?:\\p{L}|\\d){2,4})?))|(?:streetName:[^|]+)|(?:streetNumber:\\d+))\\|?){4,6}$"
+                                        "regexp": "/(streetName:(\\p{L}|\\p{N}|-|\\/| (?=\\p{L}|&|\\p{N})|[#.,;:'&°’])+\\|?)|(city:(\\p{L}|['-]| (?=\\p{L}))+\\|?)|(state:(\\p{L}|[-]| (?=\\p{L}))+\\|?)|(zipCode:(\\p{L}|\\p{N}|-)+\\|?)|(country:(\\p{L}| (?=\\p{L}))+)\\|?|(streetNumber:(\\p{L}|\\p{N}|-|-|\\/)+)\\|?|(ward:(\\p{L}|\\p{N}|-|[']| (?=\\p{L}|\\p{N}))+)\\|?|(district:(\\p{L}|\\p{N}|-|[']| (?=\\p{L}|\\p{N}))+)\\|?/gui",
+                                        "examples": [
+                                          "state:Tōkyō-to|district:Kanda Nishikichō 3-chōme|streetNumber:4-パレステュディオ御茶ノ水駿河台参番館|zipCode:101-0054|city:Chiyoda-City|country:Japan",
+                                          "streetName:Tarkk'ampujänkätu|city:Helsinki|country:Finland|state:Uusimaa|streetNumber:1|zipCode:00100|district:Tapiola",
+                                          "streetName:Hämeentie Töölöntori Lähettilääntie Tarkk'ampujänkätu",
+                                          "streetName:Brädgårdsgatan",
+                                          "streetName:Żółkiewskiego",
+                                          "streetName:Øster Allé",
+                                          "streetName:شارع حمدان بن محمد",
+                                          "streetName:Karl-Marx-Straße",
+                                          "streetName:Küçük Ayasofya|city:İstanbul|district:Fatih",
+                                          "streetName:11 Avenue d’Ostende",
+                                          "streetName:Küçük Ayasofya, Küçük Ayasofya Cami Sk.",
+                                          "streetName:Kasumi'gaseki",
+                                          "streetName:St Martin's Lane",
+                                          "country:Åland",
+                                          "country:Puerto Rico",
+                                          "country:français",
+                                          "country:skandinavisk",
+                                          "streetNumber:1-1",
+                                          "streetNumber:1/2-d2"
+                                        ]
                                       },
                                       "localeAddress": {
                                         "type": "string",
@@ -1036,6 +1057,9 @@
                             "minLength": 1,
                             "maxLength": 256
                           },
+                          "noShowReportedByDriver": {
+                            "type": "boolean"
+                          },
                           "vehicleLocation": {
                             "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/additional/properties/bikeStations/items/properties/location"
                           },
@@ -1089,7 +1113,10 @@
                               "phone": {
                                 "description": "ITU-T E.164 phone number, see https://www.safaribooksonline.com/library/view/regular-expressions-cookbook/9781449327453/ch04s03.html",
                                 "type": "string",
-                                "pattern": "^\\+(?:\\d){6,14}\\d$"
+                                "pattern": "^\\+(?:\\d){6,14}\\d$",
+                                "examples": [
+                                  "+358401234567"
+                                ]
                               }
                             }
                           }
@@ -1127,11 +1154,18 @@
                         "anyOf": [
                           {
                             "type": "string",
-                            "pattern": "^[aepus]{2}-[\\w]{4}-\\d:[a-f\\d]{8}(-[a-f\\d]{4}){3}-[a-f\\d]{12}$"
+                            "pattern": "^[aepus]{2}-[\\w]{4}-\\d:[a-f\\d]{8}(-[a-f\\d]{4}){3}-[a-f\\d]{12}$",
+                            "examples": [
+                              "eu-west-1:4828507e-683f-41bf-9d87-689808fbf958"
+                            ]
                           },
                           {
                             "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/id"
                           }
+                        ],
+                        "examples": [
+                          "eu-west-1:4828507e-683f-41bf-9d87-689808fbf958",
+                          "4828507e-683f-41bf-9d87-689808fbf958"
                         ]
                       },
                       "firstName": {
@@ -1141,7 +1175,8 @@
                       "lastName": {
                         "description": "Last name of the customer (e.g. Doe)",
                         "type": "string",
-                        "pattern": "^(?:\\p{L})+(?:[`'´\\-\\.,]?\\s?(?:\\p{L})*)*$",
+                        "regexp": "/^[\\p{L}\\s`'´\\-\\.,]+$/gui",
+                        "minLength": 1,
                         "maxLength": 255
                       },
                       "phone": {
@@ -1152,7 +1187,10 @@
                         "description": "Rough validation of a valid e-mail address",
                         "type": "string",
                         "pattern": "^.+@.+\\..+$",
-                        "maxLength": 64
+                        "maxLength": 64,
+                        "examples": [
+                          "joe.customer@example.com"
+                        ]
                       },
                       "address": {
                         "description": "Street address (and optional number), http://www.bitboost.com/ref/international-address-formats.html",
@@ -1287,7 +1325,88 @@
                         "maxLength": 8192
                       }
                     },
-                    "additionalProperties": false
+                    "additionalProperties": false,
+                    "examples": [
+                      {
+                        "identityId": "eu-west-1:4828507e-683f-41bf-9d87-689808fbf958",
+                        "id": 1234,
+                        "favoriteLocations": [],
+                        "phone": "+358407654321",
+                        "email": "bob.customer@example.com",
+                        "firstName": "Bob",
+                        "lastName": "Customer",
+                        "created": 1553687004207,
+                        "modified": 1553688004207,
+                        "paymentMethod": {
+                          "type": "unknown",
+                          "valid": false
+                        },
+                        "subscriptionInstance": {
+                          "id": 10,
+                          "name": "Whim to Go",
+                          "plan": {
+                            "id": "fi-whim-payg_v2"
+                          },
+                          "addons": {
+                            "0": "eur-whim-rollover-100_v1",
+                            "1": "fi-whim-car"
+                          },
+                          "region": {
+                            "id": "fi-helsinki",
+                            "name": "Helsinki Region",
+                            "active": true,
+                            "hidden": false,
+                            "created": "2019-03-27T14:00:00.12345+00:00",
+                            "zipCode": "00100",
+                            "currency": "EUR",
+                            "location": {
+                              "lat": 60.1699,
+                              "lon": 24.9384
+                            },
+                            "geometryId": 2,
+                            "countryCode": "FI",
+                            "countryDefault": true
+                          },
+                          "coupons": [],
+                          "topUpId": "fi-whim-top-up",
+                          "wmpGrant": 0,
+                          "pointCost": 0.01,
+                          "description": "Pay for each trip as you go"
+                        },
+                        "balances": {
+                          "WMP": {
+                            "currency": "WMP",
+                            "amount": 1234,
+                            "type": "charge"
+                          },
+                          "cx-test-token_v2": {
+                            "currency": "TOKEN",
+                            "tokenId": "cx-test-token_v2",
+                            "amount": 1,
+                            "type": "charge"
+                          }
+                        },
+                        "regionId": "fi-helsinki",
+                        "region": {
+                          "id": "fi-helsinki",
+                          "name": "Helsinki Region",
+                          "countryCode": "FI",
+                          "countryDefault": true,
+                          "zipCode": "00100",
+                          "location": {
+                            "lat": 60.1699,
+                            "lon": 24.9384
+                          },
+                          "active": true,
+                          "hidden": false,
+                          "geometryId": 2,
+                          "created": 1553687004207,
+                          "modified": 0,
+                          "currency": "EUR"
+                        },
+                        "balance": 1234
+                      }
+                    ]
                   },
                   "tspProduct": {
                     "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/tspProduct"
@@ -1499,7 +1618,63 @@
                   "customer",
                   "tspProduct"
                 ],
-                "additionalProperties": true
+                "additionalProperties": true,
+                "examples": [
+                  {
+                    "leg": {
+                      "to": {
+                        "lat": 60.1769789,
+                        "lon": 24.9504135,
+                        "name": "Ida Aalbergin tie 3, Helsinki",
+                        "address": "streetName:Ida%20Aalbergin%20tie|streetNumber:1|city:Helsinki|zipCode:00400|country:Suomi"
+                      },
+                      "from": {
+                        "lat": 60.177252,
+                        "lon": 24.950388,
+                        "name": "Siltasaarenkatu 1, Helsinki",
+                        "address": "streetName:Siltasaarenkatu|streetNumber:1|city:Helsinki|zipCode:00530|country:Suomi"
+                      },
+                      "mode": "TAXI",
+                      "endTime": 1572441571838,
+                      "agencyId": "Test1",
+                      "startTime": 1572440451838
+                    },
+                    "customer": {
+                      "email": "test@example.com",
+                      "phone": "+358400001010",
+                      "locale": "en",
+                      "clientId": "whim",
+                      "lastName": "Tester",
+                      "opaqueId": "cafecaca",
+                      "firstName": "Test"
+                    },
+                    "meta": {
+                      "MODE_TAXI": {
+                        "driver": {},
+                        "taxiCenter": {
+                          "name": "Taksi",
+                          "phone": "+358100000011"
+                        },
+                        "vehicleType": "any"
+                      }
+                    },
+                    "terms": {
+                      "reusable": false,
+                      "validity": {
+                        "endTime": 1572355249017,
+                        "startTime": 1572355193128
+                      },
+                      "reconcilable": false
+                    },
+                    "configurator": {},
+                    "customerSelection": {},
+                    "cost": null,
+                    "tspId": null,
+                    "tspProduct": {
+                      "id": "testtaxi1-product1"
+                    }
+                  }
+                ]
               },
               "examples": {
                 "taxi": {
@@ -1565,7 +1740,67 @@
                     "token",
                     "tspProduct"
                   ],
-                  "additionalProperties": false
+                  "additionalProperties": false,
+                  "examples": [
+                    {
+                      "leg": {
+                        "from": {
+                          "name": "Siltasaarenkatu 1, Helsinki",
+                          "address": "streetName:Siltasaarenkatu|streetNumber:1|city:Helsinki|zipCode:00530|country:Suomi",
+                          "lat": 60.177252,
+                          "lon": 24.950388
+                        },
+                        "to": {
+                          "name": "Ida Aalbergin tie 3, Helsinki",
+                          "address": "streetName:Ida%20Aalbergin%20tie|streetNumber:1|city:Helsinki|zipCode:00400|country:Suomi",
+                          "lat": 60.231538,
+                          "lon": 24.892568
+                        },
+                        "startTime": 1572440451838,
+                        "endTime": 1572441571838,
+                        "mode": "TAXI",
+                        "departureDelay": 900000
+                      },
+                      "customer": {
+                        "email": "test@example.com",
+                        "phone": "+358400001010",
+                        "locale": "en",
+                        "clientId": "whim",
+                        "lastName": "Tester",
+                        "opaqueId": "cafecaca",
+                        "firstName": "Test"
+                      },
+                      "state": "RESERVED",
+                      "tspId": "deadbeefdeadbeefdeadcafebeef",
+                      "terms": {
+                        "reusable": false,
+                        "validity": {
+                          "endTime": 1572355249017,
+                          "startTime": 1572355193128
+                        },
+                        "reconcilable": false
+                      },
+                      "tspProduct": {
+                        "id": "testtaxi1-product1"
+                      },
+                      "meta": {
+                        "MODE_TAXI": {
+                          "driver": {},
+                          "taxiCenter": {
+                            "name": "Taksi Test1",
+                            "phone": "+358400001010"
+                          },
+                          "vehicleType": "any"
+                        }
+                      },
+                      "cost": {
+                        "amount": 22,
+                        "currency": "EUR"
+                      },
+                      "tspProductId": "testtaxi1-product1",
+                      "token": {}
+                    }
+                  ]
                 },
                 "examples": {
                   "Taxi": {
@@ -1782,7 +2017,10 @@
                     "id": {
                       "description": "Universally unique identifier, see https://en.wikipedia.org/wiki/Universally_unique_identifier",
                       "type": "string",
-                      "pattern": "^[A-Fa-f0-9]{8}(-[A-Fa-f0-9]{4}){3}-[A-Fa-f0-9]{12}$"
+                      "pattern": "^[A-Fa-f0-9]{8}(-[A-Fa-f0-9]{4}){3}-[A-Fa-f0-9]{12}$",
+                      "examples": [
+                        "4828507e-683f-41bf-9d87-689808fbf958"
+                      ]
                     },
                     "fares": {
                       "type": "array",
@@ -2258,7 +2496,173 @@
                         }
                       }
                     }
-                  }
+                  },
+                  "examples": [
+                    {
+                      "id": "12345678-ABCD-1234-ABCD-123456789ABC",
+                      "state": "EXPIRED",
+                      "leg": {
+                        "to": {
+                          "lat": 60.184333,
+                          "lon": 24.835972,
+                          "name": "Otaranta 6, Espoo",
+                          "address": "streetName:Otaranta|streetNumber:6|city:Espoo|zipCode:02150|country:Suomi"
+                        },
+                        "from": {
+                          "lat": 60.168442,
+                          "lon": 24.932205,
+                          "name": "Urho Kekkosen katu 1, Helsinki",
+                          "address": "streetName:Urho Kekkosen katu|streetNumber:1|city:Helsinki|zipCode:00100|country:Suomi"
+                        },
+                        "mode": "TAXI",
+                        "endTime": 1553092978009,
+                        "agencyId": "Valopilkku",
+                        "startTime": 1553092978009,
+                        "departureDelay": 123456
+                      },
+                      "token": {
+                        "type": "SECURITY_CODE",
+                        "value": "12345"
+                      },
+                      "terms": {
+                        "reusable": false,
+                        "validity": {
+                          "endTime": 1553092978009,
+                          "startTime": 1553092978009
+                        },
+                        "reconcilable": false
+                      },
+                      "meta": {
+                        "raw": {
+                          "data": {
+                            "lat": 60.168442,
+                            "lon": 24.932205,
+                            "vehicle_id": "123"
+                          },
+                          "order_id": 12345,
+                          "timestamp": "2019-03-20T10:10:12+00:00",
+                          "localized_description": "Tilaus on valmis."
+                        },
+                        "MODE_TAXI": {
+                          "vehicleId": "123",
+                          "taxiCenter": {
+                            "name": "Lähitaksi",
+                            "phone": "+3581007300"
+                          },
+                          "vehicleType": "any",
+                          "vehicleLocation": {
+                            "lat": 60.245254,
+                            "lon": 24.989604
+                          }
+                        },
+                        "timestamp": 1553092978009,
+                        "valopilkku": {
+                          "prepaid": true,
+                          "locations": [
+                            {
+                              "type": "pickup",
+                              "address": {
+                                "city": "Helsinki",
+                                "street_address": "Urho Kekkosen katu 1"
+                              },
+                              "contacts": [
+                                {
+                                  "name": "John Doe",
+                                  "passenger_count": 1,
+                                  "provider_order_id": "MaaS-12345"
+                                }
+                              ],
+                              "coordinate": {
+                                "lat": 60.168442,
+                                "lon": 24.932205
+                              },
+                              "passenger_count": 1
+                            },
+                            {
+                              "type": "destination",
+                              "address": {
+                                "city": "Espoo",
+                                "street_address": "Otaranta 6"
+                              },
+                              "drop_off": [
+                                "MaaS-12345"
+                              ],
+                              "coordinate": {
+                                "lat": 60.184333,
+                                "lon": 24.835972
+                              },
+                              "passenger_count": 1
+                            }
+                          ],
+                          "submitted": "2019-03-21T11:13:19.753Z"
+                        },
+                        "description": "Tilaus on valmis."
+                      },
+                      "created": "2019-03-20 10:10:12.123456",
+                      "modified": "2019-03-20 18:30:12.123456",
+                      "cost": {
+                        "amount": 0,
+                        "currency": "EUR"
+                      },
+                      "stateLog": [
+                        {
+                          "reason": {},
+                          "invalid": false,
+                          "newState": "PENDING",
+                          "oldState": "START",
+                          "timestamp": 1553092178009
+                        },
+                        {
+                          "reason": {},
+                          "invalid": false,
+                          "newState": "PAID",
+                          "oldState": "PENDING",
+                          "timestamp": 1553092278009
+                        },
+                        {
+                          "reason": {},
+                          "invalid": false,
+                          "newState": "RESERVED",
+                          "oldState": "PAID",
+                          "timestamp": 1553092378009
+                        },
+                        {
+                          "reason": {},
+                          "invalid": false,
+                          "newState": "CONFIRMED",
+                          "oldState": "RESERVED",
+                          "timestamp": 1553092478009
+                        },
+                        {
+                          "reason": {},
+                          "invalid": false,
+                          "newState": "ACTIVATED",
+                          "oldState": "CONFIRMED",
+                          "timestamp": 1553092578009
+                        },
+                        {
+                          "reason": {},
+                          "invalid": false,
+                          "newState": "EXPIRED",
+                          "oldState": "ACTIVATED",
+                          "timestamp": 1553092678009
+                        }
+                      ],
+                      "productId": "valopilkku-any",
+                      "fares": [
+                        {
+                          "type": "charge",
+                          "amount": 1000,
+                          "currency": "WMP",
+                          "productionAmount": 1234
+                        }
+                      ],
+                      "cancelling": false,
+                      "customer": {
+                        "identityId": "eu-west-1:4828507e-683f-41bf-9d87-689808fbf958"
+                      }
+                    }
+                  ]
                 },
                 "examples": {
                   "Taxi1": {
@@ -2279,7 +2683,7 @@
               "application/json": {
                 "schema": {
                   "$id": "http://maasglobal.com/core/error.json",
-                  "description": "An error that the service may send",
+                  "description": "MaaS event response error object. An error that the service may send.",
                   "type": "object",
                   "required": [
                     "message",

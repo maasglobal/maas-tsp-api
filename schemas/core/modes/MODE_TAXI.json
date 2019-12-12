@@ -9,6 +9,9 @@
       "minLength": 1,
       "maxLength": 256
     },
+    "noShowReportedByDriver": {
+      "type": "boolean"
+    },
     "vehicleLocation": { "$ref": "../../../schemas/core/components/units-geo.json#/definitions/location" },
     "vehicleType": {
       "type": "string",
