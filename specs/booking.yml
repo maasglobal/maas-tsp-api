@@ -495,6 +495,18 @@ paths:
           required: true
           schema:
             $ref: ../schemas/core/booking.json#/definitions/tspId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/tsp/booking-update/request.json
+            examples:
+              carSharingUnlock:
+                summary: Unlock a car
+                externalValue: ../examples/car/booking-update-request-unlock.json
+              carSharingLock:
+                summary: Lock a car
+                externalValue: ../examples/car/booking-update-request-unlock.json
       responses:
         '200':
           description: Updated, old booking returned
