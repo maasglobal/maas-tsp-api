@@ -233,6 +233,15 @@ tags:
 
       The same principle applies when TSP is communicating with WhimApp.
 
+      The error response body are defined as JSON in [JSON Schema](https://maasglobal.github.io/maas-schemas/html/core/error.html#code) and can contain additional fields, e.g.
+
+      ```json
+      {
+        code: "BOOKING_ALREADY_EXISTS",
+        message: "Active booking already exists for this user.",
+        bookingId: "deadbeefdeadbeefdeadcafe0000"
+      }
+      ```
     x-traitTag: true
   - name: Booking
     description: |
@@ -398,6 +407,34 @@ paths:
                 Taxi:
                   summary: Taxi
                   externalValue: ../examples/taxi/booking-create-response.json
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '409':
+          description: |
+            Another Booking exists for this User.
+
+            If TSP does not support more than one booking per user, it can indicate it by sending this response when 
+            WhimApp creates a new booking. Booking ID can be specified as an extra property in a response. See [Error Cases](#section/Error-Cases) for more information.
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
   /bookings/{tspId}:
     get:
       operationId: bookingGet
