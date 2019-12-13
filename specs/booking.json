@@ -2831,7 +2831,7 @@
                 },
                 "carSharingLock": {
                   "summary": "Lock a car",
-                  "externalValue": "../examples/car/booking-update-request-unlock.json"
+                  "externalValue": "../examples/car/booking-update-request-lock.json"
                 }
               }
             }
