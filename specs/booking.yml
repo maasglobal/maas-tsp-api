@@ -506,7 +506,7 @@ paths:
                 externalValue: ../examples/car/booking-update-request-unlock.json
               carSharingLock:
                 summary: Lock a car
-                externalValue: ../examples/car/booking-update-request-unlock.json
+                externalValue: ../examples/car/booking-update-request-lock.json
       responses:
         '200':
           description: Updated, old booking returned
