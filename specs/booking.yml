@@ -119,7 +119,8 @@ tags:
       | **ARRIVED** | Not applicable for all modes of transportation. For TAXI means driver have arrived to the pickup point. We are waiting for this state update from TSP. |
       | **ACTIVATED** | Booking has started. For TAXI means TAXI has picked up the passenger. We are waiting for this state update from some TSPs e.g. Taxi and will send this state update via [Update booking](#operation/bookingUpdate) call for car sharing and micromobility providers (to unlock car or a scooter and start a ride). |
       | **ON_HOLD** | Booking still active but have been paused, for example for Car Sharing - lock the car but not finish the ride. We will send this state update via [Update booking](#operation/bookingUpdate) call. | 
-      | **FINISHED** | Ride was completed. We are waiting for this state update from TSP. |
+      | **EXPIRED** | Ride was completed. We are waiting for this state update from TSP. |
+      | **FINISHED** | Payment receipt reconcillation completed, for example for extra charges during Taxi ride, see [Get final booking receipt](#operation/bookingGetReceipt) endpoint. |
       | **CANCELLED** | Cancelled by user. Booking can be subject to a fee or/and not be refundable as specified by TSP in booking cancellation rules. |
       | **REJECTED** | Rejected by TSP. We can update with this state on **PENDING**, **RESERVED**, **CONFIRMED**, **ACTIVATED** state and show User message about the reason for rejection, as received from TSP. |
 
