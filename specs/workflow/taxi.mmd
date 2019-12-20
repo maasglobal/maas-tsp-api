@@ -1,10 +1,11 @@
 %% MermaidJS workflow graph for Taxi TSP
+%% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
 graph LR
     Options[Booking options] -.->|Creating the booking| Reserved
-    Confirmed -.-> Cancelled["Cancelled ($$)"]
+    Confirmed -.->|Subject to a fee| Cancelled
     Reserved -.->|No driver| Rejected
     Reserved -->|Driver found| Confirmed
-    Reserved -.-> Cancelled2["Cancelled ($$)"]
+    Reserved -.->|Subject to a fee| Cancelled2["Cancelled"]
     Confirmed2[Confirmed] -->|Waiting for pickup| Arrived
     Arrived -->|Ride started| Activated
     Activated -->|Ride finished| Expired
