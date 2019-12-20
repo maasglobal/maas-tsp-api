@@ -123,6 +123,18 @@ tags:
       | **CANCELLED** | Cancelled by user. Booking can be subject to a fee or/and not be refundable as specified by TSP in booking cancellation rules. |
       | **REJECTED** | Rejected by TSP. We can update with this state on **PENDING**, **RESERVED**, **CONFIRMED**, **ACTIVATED** state and show User message about the reason for rejection, as received from TSP. |
 
+      ### Taxi state
+
+      Flow for taxi, both for on-call and prebooking PHV (private-ride vehicles) are shown below.
+
+      ![Taxi workflow](./specs/workflow/taxi.svg)
+
+      ### Bike state
+
+      State flow for bike, scooter and other micromobility are shown below.
+
+      ![Bike workflow](./specs/workflow/bike.svg)
+
       ### Structure
 
       See examples for a [Create booking](#operation/bookingCreate) or schema for [Booking create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) to understand all available data in a booking.
