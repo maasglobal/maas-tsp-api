@@ -125,7 +125,7 @@ tags:
 
       ### Taxi state
 
-      Flow for taxi, both for on-call and prebooking PHV (private-ride vehicles) are shown below.
+      Flow for taxi, both for on-call and prebooking PHV (private hire vehicles) are shown below.
 
       ![Taxi workflow](./specs/workflow/taxi.svg)
 
