@@ -1,0 +1,11 @@
+%% MermaidJS workflow graph for Bike or E-bike TSP
+%% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
+graph LR
+    Options[Booking options] -.->|Reserving a bike | Reserved
+    Reserved -.-> Cancelled
+    Reserved2[Reserved] -->|Unlocking| Activated
+    Activated -->|Ride finished| Expired
+    Activated -->|Lock and keep reserved| On_hold
+    Expired -->|Final price received| Finished
+    On_hold -->|Unlock| Activated
+    style Cancelled stroke-dasharray: 5, 5
