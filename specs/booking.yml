@@ -168,7 +168,7 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json) |
+      | [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json), SCOOTER - [response](examples/scooter/booking-options-response.json) |
 
       ## Creating a booking
 
@@ -191,7 +191,7 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Create Booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) |  TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json) |
+      | [Create Booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) |  TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json), SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json) |
 
       ## Paying a booking
 
@@ -213,7 +213,7 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) |  - |
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) |  SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json), CAR - [request lock](examples/car/booking-update-request-lock.json), [request unlock](examples/car/booking-update-request-unlock.json) |
 
       ## Cancelling a booking
 
@@ -236,8 +236,9 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | TAXI - [RESERVED](examples/taxi/booking-read-by-id-response.json), [ACTIVATED](examples/taxi/booking-read-by-id-response-activated.json) |
+      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | TAXI - [RESERVED](examples/taxi/booking-read-by-id-response.json), [ACTIVATED](examples/taxi/booking-read-by-id-response-activated.json), SCOOTER - [ACTIVATED](examples/scooter/booking-read-by-id-response-activated.json) |
       | [Update booking state](#operation/backendBookingReceive) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | - |
+      | [Get receipt](#operation/bookingGetReceipt) | - | SCOOTER - [response](examples/scooter/booking-receipt-response.json) | 
 
       ## Error Cases
 
@@ -356,9 +357,27 @@ paths:
               fromAddress=streetName:Siltasaarenkatu|streetNumber:1|city:Helsinki|zipCode:00530|country:Suomi&fromName=Siltasaarenkatu%201%20Helsinki& \
               mode=TAXI& \
               startTime=1572347575000& \
+              tspProductIds=testtaxi1-product1& \
               to=60.23044350000001,24.8990183& \
               toAddress=streetName:Ida%20Aalbergin%20tie|streetNumber:3|city:Helsinki|zipCode:00400|country:Suomi& \
               toName=Ida%20Aalbergin%20tie%203%20Helsinki' \
+                --header "x-api-key: pieY8Oezeicioyei5eisheeb7sheeLie"
+        - lang: Shell
+          label: Query for scooter
+          source: |
+            curl --location --request GET 'http://localhost:3000/bookings/options? \
+              customer[clientId]=whim&customer[locale]=en& \
+              customer[opaqueId]=deadbeef-deadbeef& \
+              customer[phone]=+358400001010& \
+              customer[firstName]=Tester& \
+              customer[lastName]=Test& \
+              endTime=1577969729830& \
+              from=60.1769789,24.9504135& \
+              fromRadius=400& \
+              mode=SCOOTER& \
+              tspProductIds=scooterinc1& \
+              startTime=1577966129830& \
+              to=60.1769789,24.9504135&' \
                 --header "x-api-key: pieY8Oezeicioyei5eisheeb7sheeLie"
       responses:
         '200':
@@ -373,6 +392,9 @@ paths:
                 Taxi:
                   summary: Taxi
                   externalValue: '../examples/taxi/booking-options-response.json'
+                Scooter:
+                  summary: Scooter
+                  externalValue: '../examples/scooter/booking-options-response.json'
   /bookings:
     post:
       operationId: bookingCreate
@@ -399,9 +421,12 @@ paths:
             schema:
               $ref: ../schemas/tsp/booking-create/request.json
             examples:
-              taxi:
+              Taxi:
                 summary: Taxi
                 externalValue: ../examples/taxi/booking-create-request.json
+              Scooter:
+                summary: Scooter
+                externalValue: ../examples/scooter/booking-create-request.json
         description: |
           Parameters of booking to be created, optionally referencing 
           offerId returned on the `/bookings/options` call.
@@ -419,6 +444,9 @@ paths:
                 Taxi:
                   summary: Taxi
                   externalValue: ../examples/taxi/booking-create-response.json
+                Scooter:
+                  summary: Scooter
+                  externalValue: ../examples/scooter/booking-create-response.json
         '400':
           description: Bad request
           content:
@@ -475,6 +503,9 @@ paths:
                 Taxi2:
                   summary: Taxi - ACTIVATED
                   externalValue: '../examples/taxi/booking-read-by-id-response-activated.json'
+                Scooter:
+                  summary: Scooter - ACTIVATED
+                  externalValue: '../examples/scooter/booking-read-by-id-response-activated.json'
         '400':
           description: Bad request (invalid query parameters)
           content:
@@ -518,7 +549,10 @@ paths:
                 externalValue: ../examples/car/booking-update-request-unlock.json
               carSharingLock:
                 summary: Lock a car
-                externalValue: ../examples/car/booking-update-request-unlock.json
+                externalValue: ../examples/car/booking-update-request-lock.json
+              scooterReturn:
+                summary: Return scooter
+                externalValue: ../examples/scooter/booking-update-expired-request.json
       responses:
         '200':
           description: Updated, old booking returned
@@ -612,11 +646,15 @@ paths:
             $ref: ../schemas/core/booking.json#/definitions/tspId
       responses:
         '200':
-          description: The bookings matching the query
+          description: The bookings matching the query with final receipt
           content:
             application/json:
               schema:
                 $ref: ../schemas/core/booking.json
+              examples:
+                Scooter:
+                  summary: Scooter
+                  externalValue: '../examples/scooter/booking-receipt-response.json'
         '400':
           description: Bad request (invalid query parameters)
           content:
