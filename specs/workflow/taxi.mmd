@@ -3,6 +3,7 @@
 graph LR
     Options[Booking options] -.->|Creating the booking| Reserved
     Confirmed -.->|Subject to a fee| Cancelled
+    Confirmed -.->|Driver rejected| Rejected
     Reserved -.->|No driver| Rejected
     Reserved -->|Driver found| Confirmed
     Reserved -.->|Subject to a fee| Cancelled2["Cancelled"]
