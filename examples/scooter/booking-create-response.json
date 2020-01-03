@@ -1,0 +1,21 @@
+{
+  "meta": {},
+  "state": "CONFIRMED",
+  "terms": {
+    "reusable": false,
+    "fareRates": [
+      {
+        "amount": 0.3,
+        "startAt": 0,
+        "currency": "EUR",
+        "timeInterval": 60
+      }
+    ],
+    "reconcilable": false
+  },
+  "token": {},
+  "tspId": "4414dac0-9b45-4aed-b38f-aa23abfa6604",
+  "tspProduct": {
+    "id": "scooterinc1"
+  }
+}
