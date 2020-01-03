@@ -168,7 +168,7 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json), SCOOTER - [response](examples/scooter/booking-options-response.json) |
+      | [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json), SCOOTER - [response](examples/scooter/booking-options-response.json), CAR SHARING - [response](examples/car/booking-options-response.json) |
 
       ## Creating a booking
 
@@ -191,7 +191,7 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Create Booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) |  TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json), SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json) |
+      | [Create Booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) |  TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json), SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json), CAR SHARING - [request](examples/car/booking-create-request.json), [response](examples/car/booking-create-response.json) |
 
       ## Paying a booking
 
@@ -213,7 +213,7 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) |  SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json), CAR - [request lock](examples/car/booking-update-request-lock.json), [request unlock](examples/car/booking-update-request-unlock.json) |
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) |  SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json), CAR SHARING, lock - [request](examples/car/booking-update-request-lock.json), [response](examples/car/booking-update-response-lock.json), CAR SHARING, unlock - [request](examples/car/booking-update-request-unlock.json) |
 
       ## Cancelling a booking
 
@@ -223,7 +223,7 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Cancel booking](#operation/bookingCancel) | [tsp/booking-cancel](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-cancel) |  - |
+      | [Cancel booking](#operation/bookingCancel) | [tsp/booking-cancel](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-cancel) | CAR SHARING - [response](examples/car/booking-cancel-response.json) |
 
       ## Tracking a booking
 
@@ -379,6 +379,23 @@ paths:
               startTime=1577966129830& \
               to=60.1769789,24.9504135&' \
                 --header "x-api-key: pieY8Oezeicioyei5eisheeb7sheeLie"
+        - lang: Shell
+          label: Query for car sharing
+          source: |
+            curl --location --request GET 'http://localhost:3000/bookings/options? \
+              customer[clientId]=whim&customer[locale]=en& \
+              customer[opaqueId]=deadbeef-deadbeef& \
+              customer[phone]=+358400001010& \
+              customer[firstName]=Tester& \
+              customer[lastName]=Test& \
+              endTime=1577969729830& \
+              from=60.1769789,24.9504135& \
+              fromRadius=20000& \
+              mode=CAR& \
+              tspProductIds=carsharingabc1& \
+              startTime=1577966129830& \
+              to=60.1769789,24.9504135&' \
+                --header "x-api-key: pieY8Oezeicioyei5eisheeb7sheeLie"
       responses:
         '200':
           x-summary: Array of options
@@ -395,6 +412,9 @@ paths:
                 Scooter:
                   summary: Scooter
                   externalValue: '../examples/scooter/booking-options-response.json'
+                CarSharing:
+                  summary: Car sharing
+                  externalValue: '../examples/car/booking-options-response.json'
   /bookings:
     post:
       operationId: bookingCreate
@@ -427,6 +447,9 @@ paths:
               Scooter:
                 summary: Scooter
                 externalValue: ../examples/scooter/booking-create-request.json
+              CarSharing:
+                summary: Car sharing
+                externalValue: ../examples/car/booking-create-request.json
         description: |
           Parameters of booking to be created, optionally referencing 
           offerId returned on the `/bookings/options` call.
@@ -447,6 +470,9 @@ paths:
                 Scooter:
                   summary: Scooter
                   externalValue: ../examples/scooter/booking-create-response.json
+                CarSharing:
+                  summary: Car sharing
+                  externalValue: ../examples/car/booking-create-response.json
         '400':
           description: Bad request
           content:
@@ -544,12 +570,12 @@ paths:
             schema:
               $ref: ../schemas/tsp/booking-update/request.json
             examples:
-              carSharingUnlock:
-                summary: Unlock a car
-                externalValue: ../examples/car/booking-update-request-unlock.json
               carSharingLock:
                 summary: Lock a car
                 externalValue: ../examples/car/booking-update-request-lock.json
+              carSharingUnlock:
+                summary: Unlock a car
+                externalValue: ../examples/car/booking-update-request-unlock.json
               scooterReturn:
                 summary: Return scooter
                 externalValue: ../examples/scooter/booking-update-expired-request.json
@@ -560,6 +586,10 @@ paths:
             application/json:
               schema:
                 $ref: ../schemas/core/booking.json
+              examples:
+                CarSharing:
+                  summary: Car sharing response lock
+                  externalValue: '../examples/car/booking-update-response-lock.json'
         '204':
           description: Updated, no content returned
         '400':
@@ -603,6 +633,10 @@ paths:
             application/json:
               schema:
                 $ref: ../schemas/core/booking.json
+              examples:
+                CarSharing:
+                  summary: Car sharing cancel
+                  externalValue: '../examples/car/booking-cancel-response.json'
         '204':
           description: Deleted, no content returned
         '400':
