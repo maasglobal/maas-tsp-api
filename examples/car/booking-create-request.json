@@ -1,0 +1,66 @@
+{
+  "leg": {
+    "to": {
+      "lat": 60.1693,
+      "lon": 24.9364,
+      "name": "EuroPark P-Simonkenttä",
+      "address": "streetName:Simonkatu|streetNumber:5|zipCode:00100|city:Helsinki"
+    },
+    "from": {
+      "lat": 60.1693,
+      "lon": 24.9364,
+      "name": "EuroPark P-Simonkenttä",
+      "address": "streetName:Simonkatu|streetNumber:5|zipCode:00100|city:Helsinki"
+    },
+    "mode": "SHARED_CAR",
+    "endTime": 1576607463612,
+    "agencyId": "CARSHARINGABC",
+    "startTime": 1576606863612
+  },
+  "customer": {
+    "email": "test@example.com",
+    "phone": "+358400001010",
+    "locale": "en",
+    "clientId": "whim",
+    "lastName": "Test",
+    "opaqueId": "167c19724b2bcf36e13f6a59790bfcd8d5e8735c6c43fa8f10b79b49876cacc4",
+    "firstName": "Tester"
+  },
+  "tspProduct": { "id": "carsharingabc1" },
+  "meta": {
+    "MODE_SHARED_CAR": {
+      "id": "123456",
+      "car": {
+        "fuel": "gasoline",
+        "doors": [5, 5],
+        "luggage": [4, 2],
+        "location": { "lat": 60.1693, "lon": 24.9364 },
+        "passengers": 5,
+        "transmission": "automatic",
+        "classification": "CWAR",
+        "registrationPlate": "ABC-123"
+      },
+      "name": "Toyota Corolla",
+      "image": "https://raw.githubusercontent.com/maasglobal/maas-tsp-api/master/examples/car/car.png",
+      "pickupInfo": "<p>Cars are parked in EuroPark\n",
+      "description": "Toyota Corolla Touring Sport 1,8 Hybrid Auto",
+      "startEndGeoRegionUrl": "https://raw.githubusercontent.com/maasglobal/maas-tsp-api/master/examples/car/rental-region.geojson.json"
+    }
+  },
+  "terms": {
+    "reusable": false,
+    "validity": { "endTime": 1608164463612, "startTime": 1576606863612 },
+    "fareRates": [
+      { "amount": 20, "currency": "EUR", "timeInterval": 7500 },
+      { "amount": 4, "currency": "EUR", "startAt": 7500, "timeInterval": 1800 },
+      { "amount": 70, "currency": "EUR", "timeInterval": 86400, "type": "maxRate" }
+    ],
+    "reconcilable": true
+  },
+  "configurator": {},
+  "customerSelection": {},
+  "product": { "name": "carsharingabc1_name", "description": "carsharingabc1_desc", "agencyId": "CARSHARINGABC" },
+  "cost": null,
+  "tspId": null,
+  "token": {}
+}

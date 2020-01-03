@@ -1,0 +1,35 @@
+{
+  "tspId": "64c09cf9-cd7d-422e-9d42-8ab897bab9d5",
+  "state": "RESERVED",
+  "meta": {
+    "MODE_SHARED_CAR": {
+      "id": "123456",
+      "name": "Toyota Corolla",
+      "description": "Toyota Corolla Touring Sport 1,8 Hybrid Auto",
+      "image": "https://raw.githubusercontent.com/maasglobal/maas-tsp-api/master/examples/car/car.png",
+      "car": {
+        "passengers": 5,
+        "doors": [5, 5],
+        "luggage": [4, 2],
+        "transmission": "automatic",
+        "fuel": "gasoline",
+        "classification": "CWAR",
+        "registrationPlate": "ABC-123",
+        "location": { "lat": 60.1693, "lon": 24.9364 }
+      }
+    }
+  },
+  "tspProduct": { "id": "carsharingabc1" },
+  "cost": { "amount": 20, "currency": "EUR" },
+  "terms": {
+    "reusable": false,
+    "validity": { "endTime": 1608164463612, "startTime": 1576606863612 },
+    "fareRates": [
+      { "amount": 20, "currency": "EUR", "timeInterval": 7500 },
+      { "amount": 4, "currency": "EUR", "startAt": 7500, "timeInterval": 1800 },
+      { "amount": 70, "currency": "EUR", "timeInterval": 86400, "type": "maxRate" }
+    ],
+    "reconcilable": true
+  },
+  "token": {}
+}
