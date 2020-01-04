@@ -1,0 +1,30 @@
+sequenceDiagram
+  %% MermaidJS sequences for docked bike interaction
+  %% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
+  %% For docking and undocking a bike you need to provide a PIN code 
+  participant User as 👤 User
+  participant App as 📱 App
+  participant TSP as 🚲 API
+  participant Dock as 🚪 Dock
+  participant Finance as 👩‍💼 Finance
+  Note over User,TSP: Dock based bike sharing
+  User->>App: Options
+  App->>TSP: Options
+  TSP->>User: Show docks, bikes and prices
+  TSP-->>User: Initial payment
+  User->>TSP: Create booking
+  User->>Dock: Undocking code
+  TSP->>App: Update state "ACTIVATED"
+  loop Check state
+    App->>TSP: Get booking
+  end
+  User->>App: Return bike
+  TSP->>User: Docking stations
+  App->>TSP: Update state "ON_HOLD"
+  User->>Dock: Docking code
+  TSP->>App: Update state "EXPIRED"
+  User->>App: (Off-session) payment
+  loop Monthly
+    Note over TSP,Finance: Payment according to invoice
+    TSP->>Finance: Invoice 
+  end
