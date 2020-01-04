@@ -1,0 +1,45 @@
+{
+  "leg": {
+    "to": { "lat": 60.1769789, "lon": 24.9504135 },
+    "from": { "lat": 24.9504135, "lon": 24.9504135 },
+    "mode": "SCOOTER",
+    "endTime": 1577951370632,
+    "agencyId": "scooterinc",
+    "startTime": 1577951310632
+  },
+  "customer": {
+    "email": "test@example.com",
+    "phone": "+358400001010",
+    "locale": "en",
+    "clientId": "whim",
+    "lastName": "Test",
+    "opaqueId": "167c19724b2bcf36e13f6a59790bfcd8d5e8735c6c43fa8f10b79b49876cacc4",
+    "firstName": "Tester",
+    "subscriberType": "non-subscriber",
+    "appInstanceId": "aeaea4ab-32ff-4934-ac7c-bc364b10d456",
+    "subscriptionAppInstanceId": "aeaea4ab-32ff-4934-ac7c-bc364b10d456",
+    "subscriptionLocale": "en"
+  },
+  "tspProduct": { "id": "scooterinc1" },
+  "meta": {
+    "MODE_SCOOTER": {
+      "scooter": {
+        "id": "bcb759fe-5851-4725-a5ee-a9e049933b48",
+        "code": 201011,
+        "battery": 95,
+        "location": { "lat": 60.179293, "lon": 24.950885 }
+      }
+    }
+  },
+  "terms": {
+    "reusable": false,
+    "fareRates": [{ "amount": 0.3, "startAt": 0, "currency": "EUR", "timeInterval": 60 }],
+    "reconcilable": false
+  },
+  "configurator": {},
+  "customerSelection": {},
+  "product": { "name": "SCOOTER1", "description": "SCOOTER1_DESC", "agencyId": "scooterinc" },
+  "cost": null,
+  "tspId": null,
+  "token": {}
+}

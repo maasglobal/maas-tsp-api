@@ -6,16 +6,17 @@
   "main": "src/index.js",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
+    "postinstall": "cp -f ./node_modules/mermaid/dist/mermaid.min.js ./node_modules/mermaid.cli/",
     "clean": "shx rm -Rf dist node_modules",
-    "build": "node utils/adopt-schemas.js",
-    "start": "node utils/adopt-schemas.js && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -e js,md,yml,yaml,json",
+    "build": "node utils/adopt-schemas.js && node utils/bundle-spec.js && node utils/compile-workflows.js",
+    "start": "npm run build && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -e js,md,yml,yaml,json",
     "prettify": "prettier --write --ignore-path .gitignore '**/*.{css,html,js,json,md,yaml,yml}'",
     "lint": "npm run lint-code && npm run lint-schemas && npm run lint-spec",
     "lint-code": "eslint .",
-    "lint-spec": "node utils/adopt-schemas.js && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint specs/booking.yml",
-    "lint-schemas": "node utils/adopt-schemas.js && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint schemas",
+    "lint-spec": "npm run build && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint specs/booking.yml",
+    "lint-schemas": "npm run build && cross-env NODE_OPTIONS=--max_old_space_size=4096 spectral lint schemas",
     "copy-resources": "shx cp -r assets dist/ && shx cp -r assets dist/ && shx cp docs/* dist && shx cp -r examples dist/ && shx cp -r schemas dist/ && shx cp -r specs dist/ && shx cp node_modules/redoc/bundles/redoc.standalone* dist/ && shx mkdir -p dist/swagger-ui && shx cp -r node_modules/swagger-ui-dist/* dist/swagger-ui/",
-    "dist": "node utils/adopt-schemas.js && shx mkdir -p dist/specs && node utils/bundle-spec.js && npm run copy-resources",
+    "dist": "npm run build && npm run copy-resources",
     "deploy": "gh-pages -d dist",
     "test": "(cd node_modules/maas-schemas && node build.js) && mocha"
   },
@@ -48,7 +49,9 @@
     "fp-ts": "^2.1.2",
     "io-ts": "^2.0.1",
     "io-ts-promise": "^2.0.1",
-    "maas-schemas-ts": "0.0.13"
+    "maas-schemas-ts": "0.0.13",
+    "mermaid": "^8.4.4",
+    "mermaid.cli": "^0.5.1"
   },
   "dependencies": {
     "maas-schemas": "^10.0.1"
