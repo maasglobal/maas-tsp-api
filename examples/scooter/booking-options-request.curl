@@ -1,0 +1,14 @@
+customer[clientId]:whim
+customer[locale]:en
+customer[firstName]:Tester
+customer[opaqueId]:54d299b8036d3fd9a1b3e1337f5f8af28dc67b4fc0489fb608481aaef3ffb2f5
+customer[lastName]:Test
+customer[phone]:+358400001010
+endTime:{{now3hr}}
+extraOptions:
+from:60.1769789,24.9504135
+mode:SCOOTER
+startTime:{{now}}
+to:60.1769789,24.9504135
+tspProductIds:scooterinc1
+fromRadius:400
