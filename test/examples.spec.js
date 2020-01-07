@@ -4,6 +4,7 @@ const BookingCreateRequest = require('maas-schemas-ts/lib/tsp/booking-create/req
 const BookingCreateResponse = require('maas-schemas-ts/lib/tsp/booking-create/response').Default;
 const BookingUpdateRequest = require('maas-schemas-ts/lib/tsp/booking-update/request').Default;
 const BookingUpdateResponse = require('maas-schemas-ts/lib/tsp/booking-update/response').Default;
+const BookingCancelResponse = require('maas-schemas-ts/lib/tsp/booking-cancel/response').Default;
 const BookingOptionsResponse = require('maas-schemas-ts/lib/tsp/booking-options-list/response').Default;
 const BookingReadByIdResponse = require('maas-schemas-ts/lib/tsp/booking-read-by-id/response').Default;
 const BookingReceiptResponse = require('maas-schemas-ts/lib/tsp/booking-receipt/response').Default;
@@ -74,6 +75,41 @@ describe('Check examples', () => {
       return typePromise.decode(
         BookingUpdateRequest,
         JSON.parse(fs.readFileSync('./examples/car/booking-update-request-lock.json'))
+      );
+    });
+
+    it('booking-update-response-lock.json', () => {
+      return typePromise.decode(
+        BookingUpdateResponse,
+        JSON.parse(fs.readFileSync('./examples/car/booking-update-response-lock.json'))
+      );
+    });
+
+    it('booking-create-request.json', () => {
+      return typePromise.decode(
+        BookingCreateRequest,
+        JSON.parse(fs.readFileSync('./examples/car/booking-create-request.json'))
+      );
+    });
+
+    it('booking-create-response.json', () => {
+      return typePromise.decode(
+        BookingCreateResponse,
+        JSON.parse(fs.readFileSync('./examples/car/booking-create-response.json'))
+      );
+    });
+
+    it('booking-cancel-response.json', () => {
+      return typePromise.decode(
+        BookingCancelResponse,
+        JSON.parse(fs.readFileSync('./examples/car/booking-cancel-response.json'))
+      );
+    });
+
+    it('booking-options-response.json', () => {
+      return typePromise.decode(
+        BookingOptionsResponse,
+        JSON.parse(fs.readFileSync('./examples/car/booking-options-response.json'))
       );
     });
   });
