@@ -1,0 +1,30 @@
+sequenceDiagram
+  %% MermaidJS sequences for taxi interaction
+  %% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
+  participant User as 👤 User
+  participant App as 📱 App
+  participant TSP as 🚕 API
+  participant Finance as 👩‍💼 Finance
+  Note over User,TSP: Taxi or Private Hire Vehicle (PHV)
+  User->>App: Options
+  App->>TSP: Cars, locations and estimate prices
+  TSP->>User: Show cars, bikes and prices
+  User-->>App: Initial payment
+  User->>TSP: Create booking
+  TSP->>User: Receive state "RESERVED"
+  Note over User,TSP: Looking for driver or waiting for prebooked time
+  TSP->>User: Receive state "CONFIRMED"
+  Note over User,TSP: Taxi found and driver confirmed
+  TSP->>User: Receive state "ARRIVED"
+  Note over User,TSP: Taxi waiting for pickup
+  TSP->>User: Receive state "ACTIVATED"
+  Note over User,TSP: Taxi driving to destination
+  TSP->>User: Receive state "EXPIRED"
+  Note over User,TSP: Ride finished
+  TSP->>App: Receive state "FINISHED"
+  Note over App,TSP: Final price
+  User-->>App: (Off-session) payment
+  loop Monthly
+    Note over TSP,Finance: Payment according to invoice
+    TSP->>Finance: Invoice 
+  end

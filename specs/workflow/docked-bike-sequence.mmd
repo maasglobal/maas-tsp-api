@@ -11,19 +11,19 @@ sequenceDiagram
   User->>App: Options
   App->>TSP: Options
   TSP->>User: Show docks, bikes and prices
-  TSP-->>User: Initial payment
+  User-->>App: Initial payment
   User->>TSP: Create booking
   User->>Dock: Undocking code
-  TSP->>App: Receive state "ACTIVATED"
-  loop Check state
-    App->>TSP: Get booking
-  end
+  TSP->>User: Receive state "ACTIVATED"
+  Note over User,TSP: Bike ride started
   User->>App: Return bike
   TSP->>User: Docking stations
   User->>TSP: Ask PIN code for docking station
   User->>Dock: Enter docking code on station
-  TSP->>App: Receive state "EXPIRED"
-  User->>App: (Off-session) payment
+  TSP->>User: Receive state "EXPIRED"
+  TSP->>App: Receive state "FINISHED"
+  Note over App,TSP: Final price
+  User-->>App: (Off-session) payment
   loop Monthly
     Note over TSP,Finance: Payment according to invoice
     TSP->>Finance: Invoice 
