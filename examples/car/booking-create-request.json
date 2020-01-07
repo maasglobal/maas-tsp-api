@@ -14,7 +14,7 @@
     },
     "mode": "SHARED_CAR",
     "endTime": 1576607463612,
-    "agencyId": "CARSHARINGABC",
+    "agencyId": "car-sharing-abc",
     "startTime": 1576606863612
   },
   "customer": {
@@ -59,7 +59,7 @@
   },
   "configurator": {},
   "customerSelection": {},
-  "product": { "name": "carsharingabc1_name", "description": "carsharingabc1_desc", "agencyId": "CARSHARINGABC" },
+  "product": { "name": "carsharingabc1_name", "description": "carsharingabc1_desc", "agencyId": "car-sharing-abc" },
   "cost": null,
   "tspId": null,
   "token": {}
