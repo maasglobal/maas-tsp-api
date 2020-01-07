@@ -4,7 +4,7 @@
     "from": { "lat": 24.9504135, "lon": 24.9504135 },
     "mode": "SCOOTER",
     "endTime": 1577951370632,
-    "agencyId": "scooterinc",
+    "agencyId": "scooter-inc",
     "startTime": 1577951310632
   },
   "customer": {
@@ -38,7 +38,7 @@
   },
   "configurator": {},
   "customerSelection": {},
-  "product": { "name": "SCOOTER1", "description": "SCOOTER1_DESC", "agencyId": "scooterinc" },
+  "product": { "name": "SCOOTER1", "description": "SCOOTER1_DESC", "agencyId": "scooter-inc" },
   "cost": null,
   "tspId": null,
   "token": {}
