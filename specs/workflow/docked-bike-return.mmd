@@ -7,8 +7,7 @@ sequenceDiagram
   participant Dock as 🚪 Dock
   Note over User,TSP: Returning a bike to dock
   User->>App: Return bike
-  TSP->>User: Docking stations?
-  User->>TSP: Update state "ON_HOLD" with a dock ID
-  TSP->>User: Return booking with dock PIN code
+  TSP->>User: Docking stations
+  User->>TSP: Ask PIN code for docking station
   User->>Dock: Enter docking code on station
   TSP->>App: Receive state "EXPIRED"
