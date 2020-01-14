@@ -1,0 +1,27 @@
+language: node_js
+node_js: "12"
+cache:
+  directories:
+    - ode_modules # Our node modules
+    - $HOME/.npm # Globally installed packages, e.g. NPM
+
+install:
+  - npm install
+
+stages:
+  - name: test
+    if: type = pull_request
+  - name: deploy
+    if: branch = master AND type != pull_request
+
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm run build
+        - npm run test
+        - npm run lint-code
+        - npm run lint-schemas
+    - stage: deploy
+      script:
+        - npm run dist
