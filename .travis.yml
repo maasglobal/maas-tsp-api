@@ -25,3 +25,6 @@ jobs:
     - stage: deploy
       script:
         - npm run dist
+        - echo Deploying github pages for ${TRAVIS_REPO_SLUG}
+        - git remote add origin-pages https://${GITHUB_API_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
+        - npx gh-pages -d dist -o origin-pages
