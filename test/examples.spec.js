@@ -8,6 +8,8 @@ const BookingCancelResponse = require('maas-schemas-ts/lib/tsp/booking-cancel/re
 const BookingOptionsResponse = require('maas-schemas-ts/lib/tsp/booking-options-list/response').Default;
 const BookingReadByIdResponse = require('maas-schemas-ts/lib/tsp/booking-read-by-id/response').Default;
 const BookingReceiptResponse = require('maas-schemas-ts/lib/tsp/booking-receipt/response').Default;
+const StationsListResponse = require('maas-schemas-ts/lib/tsp/stations-list/response').Default;
+const StationsRetrieveResponse = require('maas-schemas-ts/lib/tsp/stations-retrieve/response').Default;
 const typePromise = require('io-ts-promise');
 const assert = require('assert');
 
@@ -110,6 +112,22 @@ describe('Check examples', () => {
       return typePromise.decode(
         BookingOptionsResponse,
         JSON.parse(fs.readFileSync('./examples/car/booking-options-response.json'))
+      );
+    });
+  });
+
+  describe('bike', () => {
+    it('stations-list-response.json', () => {
+      return typePromise.decode(
+        StationsListResponse,
+        JSON.parse(fs.readFileSync('./examples/bike/stations-list-response.json'))
+      );
+    });
+
+    it('stations-retrieve-response.json', () => {
+      return typePromise.decode(
+        StationsRetrieveResponse,
+        JSON.parse(fs.readFileSync('./examples/bike/stations-retrieve-response.json'))
       );
     });
   });
