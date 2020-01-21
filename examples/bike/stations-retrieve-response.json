@@ -5,6 +5,11 @@
     "code": "1234",
     "location": "60.178205,24.951532",
     "agencyId": "bicycles-inc",
-    "services": ["BICYCLE"]
+    "services": ["BICYCLE"],
+    "slots": {
+      "total": 8,
+      "empty": 3,
+      "bikes": 5
+    }
   }
 }
