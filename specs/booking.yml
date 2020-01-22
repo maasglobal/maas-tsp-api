@@ -761,7 +761,7 @@ paths:
                 $ref: ../schemas/tsp/stations-list/response.json
               examples:
                 Bikes1:
-                  summary: Docker bike stations
+                  summary: Docked bike stations
                   externalValue: '../examples/bike/stations-list-response.json'
         '400':
           description: Bad request (invalid query parameters)
@@ -803,14 +803,14 @@ paths:
             $ref: ../schemas/core/components/common.json#/definitions/agencyId
       responses:
         '200':
-          description: Information about single station
+          description: Information about a single station
           content:
             application/json:
               schema:
                 $ref: ../schemas/tsp/stations-retrieve/response.json
               examples:
                 Bikes1:
-                  summary: Docker bike stations
+                  summary: Docked bike stations
                   externalValue: '../examples/bike/stations-retrieve-response.json'
         '400':
           description: Bad request (invalid query parameters)
