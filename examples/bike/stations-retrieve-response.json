@@ -1,0 +1,15 @@
+{
+  "station": {
+    "id": "2919219",
+    "name": "Hakaniemi",
+    "code": "1234",
+    "location": "60.178205,24.951532",
+    "agencyId": "bicycles-inc",
+    "services": ["BICYCLE"],
+    "slots": {
+      "total": 8,
+      "empty": 3,
+      "bikes": 5
+    }
+  }
+}

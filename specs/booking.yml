@@ -272,6 +272,11 @@ tags:
       TSP. For more information about booking, see [Booking explained](#section/Booking-explained)
     x-traitTag: false
     x-displayName: Booking API
+  - name: Stations
+    description: |
+      Stations available for public transport and micromobility docking.
+    x-traitTag: false
+    x-displayName: Stations API
   - name: WebHook
     description: |
       Publically available API which you can call to send booking state changes immediately when they happen, without the need to for us to poll our system by calling [Get booking](#operation/bookingGet) multiple times.
@@ -711,6 +716,110 @@ paths:
                 $ref: ../schemas/core/error.json
         '404':
           description: Receipt not ready
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+  /stations:
+    get:
+      operationId: stationsGet
+      summary: Get stations
+      description: Returns the list of stations
+      tags:
+        - Stations
+      parameters:
+        - name: location
+          description: Starting point
+          in: query
+          required: true
+          schema:
+            $ref: ../schemas/core/components/units-geo.json#/definitions/shortLocationString
+        - name: radius
+          description: Radius to look for stations in, if not specified return all stations.
+          in: query
+          required: false
+          schema:
+            $ref: ../schemas/core/components/units-geo.json#/definitions/distance
+        - name: type
+          description: Type of points to return
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The stations matching the query
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/tsp/stations-list/response.json
+              examples:
+                Bikes1:
+                  summary: Docked bike stations
+                  externalValue: '../examples/bike/stations-list-response.json'
+        '400':
+          description: Bad request (invalid query parameters)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '401':
+          description: Authorization error (invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+  /stations/{id}:
+    get:
+      operationId: stationGet
+      summary: Get station
+      description: Returns the information about the specific station
+      tags:
+        - Stations
+      parameters:
+        - name: id
+          description: ID of the station
+          in: path
+          required: true
+          schema:
+            $ref: ../schemas/core/components/station.json#/definitions/id
+        - name: agencyId
+          description: TSP provider id which this station belongs to
+          in: query
+          required: true
+          schema:
+            $ref: ../schemas/core/components/common.json#/definitions/agencyId
+      responses:
+        '200':
+          description: Information about a single station
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/tsp/stations-retrieve/response.json
+              examples:
+                Bikes1:
+                  summary: Docked bike stations
+                  externalValue: '../examples/bike/stations-retrieve-response.json'
+        '400':
+          description: Bad request (invalid query parameters)
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/core/error.json
+        '401':
+          description: Authorization error (invalid API key)
           content:
             application/json:
               schema:

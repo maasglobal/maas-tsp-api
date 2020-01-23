@@ -38,6 +38,12 @@
       "x-displayName": "Booking API"
     },
     {
+      "name": "Stations",
+      "description": "Stations available for public transport and micromobility docking.\n",
+      "x-traitTag": false,
+      "x-displayName": "Stations API"
+    },
+    {
       "name": "WebHook",
       "description": "Publically available API which you can call to send booking state changes immediately when they happen, without the need to for us to poll our system by calling [Get booking](#operation/bookingGet) multiple times.\n\nThese endpoints are treated as Webhooks, which TSP **may** call to make communication faster and booking process smoother.\n\n> ⚠️ The specific endpoint URL to be invoked are subject to agreement between TSP and MaaS Global.\n",
       "x-traitTag": false,
@@ -81,11 +87,7 @@
             "in": "query",
             "required": true,
             "schema": {
-              "description": "Geographic latitude-longitude number-pair as a string in WGS-84 system, see https://en.wikipedia.org/wiki/World_Geodetic_System",
-              "type": "string",
-              "pattern": "^[+-]?\\d{1,3}(\\.\\d+)?,[+-]?\\d{1,3}(\\.\\d+)?$",
-              "minLength": 1,
-              "maxLength": 64
+              "$ref": "#/paths/~1stations/get/parameters/0/schema"
             }
           },
           {
@@ -94,7 +96,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "$ref": "#/paths/~1bookings~1options/get/parameters/0/schema"
+              "$ref": "#/paths/~1stations/get/parameters/0/schema"
             }
           },
           {
@@ -416,19 +418,10 @@
                                         }
                                       },
                                       "openingHours": {
-                                        "description": "Opening hour of the station, object format is left for TSP to decide",
-                                        "type": "object"
+                                        "$ref": "#/paths/~1stations~1%7Bid%7D/get/responses/200/content/application~1json/schema/properties/station/properties/openingHours"
                                       },
                                       "zone": {
-                                        "description": "Geofencing zone defined by provider that the station is within",
-                                        "anyOf": [
-                                          {
-                                            "type": "number"
-                                          },
-                                          {
-                                            "type": "string"
-                                          }
-                                        ]
+                                        "$ref": "#/paths/~1stations~1%7Bid%7D/get/responses/200/content/application~1json/schema/properties/station/properties/zone"
                                       }
                                     }
                                   }
@@ -445,9 +438,7 @@
                                 "minimum": -9007199254740991
                               },
                               "agencyId": {
-                                "type": "string",
-                                "minLength": 2,
-                                "maxLength": 64
+                                "$ref": "#/paths/~1stations~1%7Bid%7D/get/parameters/1/schema"
                               }
                             },
                             "additionalProperties": false,
@@ -854,9 +845,7 @@
                                 "type": "string"
                               },
                               "stationId": {
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 64
+                                "$ref": "#/paths/~1stations~1%7Bid%7D/get/parameters/0/schema"
                               },
                               "alternativeCollections": {
                                 "type": "string"
@@ -1850,27 +1839,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$id": "http://maasglobal.com/core/error.json",
-                  "description": "MaaS event response error object. An error that the service may send.",
-                  "type": "object",
-                  "required": [
-                    "message",
-                    "code"
-                  ],
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "A human readable error message (preferrably in English)",
-                      "minLength": 1,
-                      "maxLength": 256
-                    },
-                    "code": {
-                      "type": "string",
-                      "description": "An internal error code, used for reference",
-                      "minLength": 1,
-                      "maxLength": 64
-                    }
-                  }
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -1880,7 +1849,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -1890,7 +1859,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -1900,7 +1869,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2061,7 +2030,7 @@
                           "minimum": 0
                         },
                         "agencyId": {
-                          "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/leg/properties/agencyId"
+                          "$ref": "#/paths/~1stations~1%7Bid%7D/get/parameters/1/schema"
                         },
                         "tspProductId": {
                           "type": "string",
@@ -2309,11 +2278,7 @@
                           "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/leg/properties/departureDelay"
                         },
                         "distance": {
-                          "description": "Distance in meters",
-                          "type": "number",
-                          "minimum": 0,
-                          "maximum": 40075000,
-                          "multipleOf": 1
+                          "$ref": "#/paths/~1stations/get/parameters/1/schema"
                         },
                         "route": {
                           "type": "string",
@@ -2331,7 +2296,7 @@
                           "maxLength": 255
                         },
                         "agencyId": {
-                          "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/leg/properties/agencyId"
+                          "$ref": "#/paths/~1stations~1%7Bid%7D/get/parameters/1/schema"
                         },
                         "legGeometry": {
                           "type": "object",
@@ -2780,7 +2745,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2790,7 +2755,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2800,7 +2765,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2904,7 +2869,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2914,7 +2879,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2924,7 +2889,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2974,7 +2939,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2984,7 +2949,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -2994,7 +2959,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -3004,7 +2969,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -3053,7 +3018,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -3063,7 +3028,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -3073,7 +3038,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -3083,7 +3048,369 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations": {
+      "get": {
+        "operationId": "stationsGet",
+        "summary": "Get stations",
+        "description": "Returns the list of stations",
+        "tags": [
+          "Stations"
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "description": "Starting point",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "description": "Geographic latitude-longitude number-pair as a string in WGS-84 system, see https://en.wikipedia.org/wiki/World_Geodetic_System",
+              "type": "string",
+              "pattern": "^[+-]?\\d{1,3}(\\.\\d+)?,[+-]?\\d{1,3}(\\.\\d+)?$",
+              "minLength": 1,
+              "maxLength": 64
+            }
+          },
+          {
+            "name": "radius",
+            "description": "Radius to look for stations in, if not specified return all stations.",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "Distance in meters",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 40075000,
+              "multipleOf": 1
+            }
+          },
+          {
+            "name": "type",
+            "description": "Type of points to return",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The stations matching the query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$id": "http://maasglobal.com/tsp/stations-list/response.json",
+                  "description": "MaaS stations query response schema",
+                  "type": "object",
+                  "properties": {
+                    "stations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "description": "Simplified station schema, coming as part of stations-list response",
+                        "properties": {
+                          "id": {
+                            "$ref": "#/paths/~1stations~1%7Bid%7D/get/parameters/0/schema"
+                          },
+                          "code": {
+                            "$ref": "#/paths/~1stations~1%7Bid%7D/get/responses/200/content/application~1json/schema/properties/station/properties/code"
+                          },
+                          "name": {
+                            "$ref": "#/paths/~1stations~1%7Bid%7D/get/responses/200/content/application~1json/schema/properties/station/properties/name"
+                          },
+                          "location": {
+                            "$ref": "#/paths/~1stations/get/parameters/0/schema"
+                          },
+                          "agencyId": {
+                            "$ref": "#/paths/~1stations~1%7Bid%7D/get/parameters/1/schema"
+                          },
+                          "services": {
+                            "$ref": "#/paths/~1stations~1%7Bid%7D/get/responses/200/content/application~1json/schema/properties/station/properties/services"
+                          },
+                          "address": {
+                            "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/customer/properties/address"
+                          },
+                          "city": {
+                            "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/customer/properties/city"
+                          },
+                          "country": {
+                            "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/customer/properties/country"
+                          },
+                          "zone": {
+                            "$ref": "#/paths/~1stations~1%7Bid%7D/get/responses/200/content/application~1json/schema/properties/station/properties/zone"
+                          },
+                          "platformCode": {
+                            "$ref": "#/paths/~1stations~1%7Bid%7D/get/responses/200/content/application~1json/schema/properties/station/properties/platformCode"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "location",
+                          "agencyId",
+                          "services"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "examples": {
+                  "Bikes1": {
+                    "summary": "Docked bike stations",
+                    "externalValue": "../examples/bike/stations-list-response.json"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid query parameters)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$id": "http://maasglobal.com/core/error.json",
+                  "description": "MaaS event response error object. An error that the service may send.",
+                  "type": "object",
+                  "required": [
+                    "message",
+                    "code"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "A human readable error message (preferrably in English)",
+                      "minLength": 1,
+                      "maxLength": 256
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "An internal error code, used for reference",
+                      "minLength": 1,
+                      "maxLength": 64
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error (invalid API key)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stations/{id}": {
+      "get": {
+        "operationId": "stationGet",
+        "summary": "Get station",
+        "description": "Returns the information about the specific station",
+        "tags": [
+          "Stations"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ID of the station",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64
+            }
+          },
+          {
+            "name": "agencyId",
+            "description": "TSP provider id which this station belongs to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 64
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about a single station",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$id": "http://maasglobal.com/tsp/stations-retrieve/response.json",
+                  "description": "MaaS stations query response schema",
+                  "type": "object",
+                  "properties": {
+                    "station": {
+                      "type": "object",
+                      "description": "Detailed station schema, coming as stations-retrieve response",
+                      "properties": {
+                        "id": {
+                          "$ref": "#/paths/~1stations~1%7Bid%7D/get/parameters/0/schema"
+                        },
+                        "code": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "location": {
+                          "$ref": "#/paths/~1stations/get/parameters/0/schema"
+                        },
+                        "agencyId": {
+                          "$ref": "#/paths/~1stations~1%7Bid%7D/get/parameters/1/schema"
+                        },
+                        "address": {
+                          "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/customer/properties/address"
+                        },
+                        "city": {
+                          "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/customer/properties/city"
+                        },
+                        "country": {
+                          "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/customer/properties/country"
+                        },
+                        "openingHours": {
+                          "description": "Opening hour of the station, object format is left for TSP to decide",
+                          "type": "object"
+                        },
+                        "facilities": {
+                          "description": "Station facilities, including services and features",
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "timetables": {
+                          "description": "Timetable for passing by / originating transports",
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "mode": {
+                                "$ref": "#/paths/~1bookings~1options/get/parameters/4/schema"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "longName": {
+                                "type": "string"
+                              },
+                              "schedule": {
+                                "$ref": "#/paths/~1bookings~1options/get/parameters/2/schema"
+                              },
+                              "realtime": {
+                                "$ref": "#/paths/~1bookings~1options/get/parameters/2/schema"
+                              },
+                              "isRealtime": {
+                                "type": "boolean",
+                                "description": "A flag indicating whether this transport mode is realtime or not"
+                              }
+                            }
+                          }
+                        },
+                        "zone": {
+                          "description": "Geofencing zone defined by provider that the station is within",
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "services": {
+                          "description": "What agency and mode of transport will occupy this station",
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/paths/~1bookings~1options/get/parameters/4/schema"
+                          }
+                        },
+                        "platformCode": {
+                          "description": "Platform number",
+                          "anyOf": [
+                            {
+                              "type": "number"
+                            },
+                            {
+                              "type": "string"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "location",
+                        "agencyId"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "examples": {
+                  "Bikes1": {
+                    "summary": "Docked bike stations",
+                    "externalValue": "../examples/bike/stations-retrieve-response.json"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid query parameters)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error (invalid API key)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -3185,7 +3512,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1bookings/post/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
                 }
               }
             }
