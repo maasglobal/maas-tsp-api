@@ -1,0 +1,54 @@
+{
+  "tspId": "64c09cf9-cd7d-422e-9d42-8ab897bab9d5",
+  "state": "ON_HOLD",
+  "meta": {
+    "MODE_BICYCLE": {
+      "pickupStation": {
+        "id": "2919219",
+        "name": "Hakaniemi",
+        "code": "1234",
+        "location": {
+          "lat": 60.178205,
+          "lon": 24.951532
+        },
+        "agencyId": "bicycles-inc",
+        "services": ["BICYCLE"],
+        "slots": {
+          "total": 8,
+          "empty": 2,
+          "bikes": 5
+        }
+      },
+      "returnStation": {
+        "id": "2919219",
+        "name": "Hakaniemi",
+        "code": "1234",
+        "location": {
+          "lat": 60.178205,
+          "lon": 24.951532
+        },
+        "agencyId": "bicycles-inc",
+        "services": ["BICYCLE"],
+        "slots": {
+          "total": 8,
+          "empty": 2,
+          "bikes": 5
+        }
+      }
+    }
+  },
+  "token": {
+    "data": {
+      "pickupDetails": {
+        "bayNumber": 3,
+        "pinCode": "2112991",
+        "expirationTime": 1576587222500
+      },
+      "returnDetails": {
+        "bayNumber": 5,
+        "pinCode": "0892111",
+        "expirationTime": 1576587322500
+      }
+    }
+  }
+}

@@ -117,6 +117,27 @@ describe('Check examples', () => {
   });
 
   describe('bike', () => {
+    it('booking-create-response.json', () => {
+      return typePromise.decode(
+        BookingCreateResponse,
+        JSON.parse(fs.readFileSync('./examples/bike/booking-create-response.json'))
+      );
+    });
+
+    it('booking-update-request-reserve-dock.json', () => {
+      return typePromise.decode(
+        BookingUpdateRequest,
+        JSON.parse(fs.readFileSync('./examples/bike/booking-update-request-reserve-dock.json'))
+      );
+    });
+
+    it('booking-update-response-reserve-dock.json', () => {
+      return typePromise.decode(
+        BookingUpdateResponse,
+        JSON.parse(fs.readFileSync('./examples/bike/booking-update-response-reserve-dock.json'))
+      );
+    });
+
     it('stations-list-response.json', () => {
       return typePromise.decode(
         StationsListResponse,
