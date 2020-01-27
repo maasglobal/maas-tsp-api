@@ -6,9 +6,9 @@ graph LR
     Reserved -.->|Subject to a fee| Cancelled
     Reserved -.->|Denied by TSP| Rejected
     Reserved2[Reserved] -->|Unlocking| Activated
-    Activated -->|Reserve a return dock| On_hold
-    On_hold -->|Cancel return| Activated
-    On_hold -->|New attempt to return| On_hold
+    Activated -->|WIP: Reserve a return dock| On_hold
+    On_hold -->|WIP: Cancel return| Activated
+    On_hold -->|WIP: New attempt to return| On_hold
     Activated -.->|Denied by TSP| Rejected2[Rejected]
     On_hold -.->|Denied by TSP| Rejected2[Rejected]
     On_hold -->|Ride finished| Expired
