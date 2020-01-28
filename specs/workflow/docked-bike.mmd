@@ -1,0 +1,18 @@
+graph LR
+    %% MermaidJS workflow graph for docker Bike or E-bike TSP
+    %% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
+    Options[Booking options] -.->|Reserving a bike | Reserved
+    Reserved -->|Unlocking| Activated2[Activated]
+    Reserved -.->|Subject to a fee| Cancelled
+    Reserved -.->|Denied by TSP| Rejected
+    Reserved2[Reserved] -->|Unlocking| Activated
+    Activated -->|WIP: Reserve a return dock| On_hold
+    On_hold -->|WIP: Cancel return| Activated
+    On_hold -->|WIP: New attempt to return| On_hold
+    Activated -.->|Denied by TSP| Rejected2[Rejected]
+    On_hold -.->|Denied by TSP| Rejected2[Rejected]
+    On_hold -->|Ride finished| Expired
+    Expired -->|Final price received| Finished
+    style Cancelled color:red,stroke-dasharray: 5, 5
+    style Rejected color:red,stroke-dasharray: 5, 5
+    style Rejected2 color:red,stroke-dasharray: 5, 5

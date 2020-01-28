@@ -1,0 +1,48 @@
+{
+  "tspId": "64c09cf9-cd7d-422e-9d42-8ab897bab9d5",
+  "state": "RESERVED",
+  "meta": {
+    "MODE_BICYCLE": {
+      "pickupStation": {
+        "id": "2919219",
+        "name": "Hakaniemi",
+        "code": "1234",
+        "location": {
+          "lat": 60.178205,
+          "lon": 24.951532
+        },
+        "agencyId": "bicycles-inc",
+        "services": ["BICYCLE"],
+        "slots": {
+          "total": 8,
+          "empty": 2,
+          "bikes": 5
+        }
+      }
+    }
+  }, 
+  "terms": {
+    "reusable": false,
+    "fareRates": [
+      {
+        "amount": 6,
+        "startAt": 0,
+        "currency": "GBP",
+        "timeInterval": 86400
+      }
+    ],
+    "reconcilable": false
+  },
+  "tspProduct": {
+    "id": "bicyclesinc1"
+  },
+  "token": {
+    "data": {
+      "pickupDetails": {
+        "bayNumber": 3,
+        "pinCode": "2112991",
+        "expirationTime": 1576587222500
+      }
+    }
+  }
+}
