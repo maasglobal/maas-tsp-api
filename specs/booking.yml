@@ -57,12 +57,19 @@ info:
       * [SwaggerUI](swagger-ui.html?urls.primaryName=maas-v1.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)
 
-    ### 1.1.0 Latest version
+    ### 1.1.0 Current version
+
+    From this version onwards, this documentation are living documentation for current and future versions. Any specific features not available in production are marked as **1.X.X-future** and WIP in diagrams.
 
       * [OpenAPI Specification](specs/booking.json)
       * [Documentation](?booking.json)
       * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)
+
+    ### 1.2.0 Future version
+
+      * Not yet available in production
+      * Marked by **v.1.2.0-future** in this documentation and WIP in diagrams.
 
     ## Getting started
 
@@ -107,7 +114,7 @@ tags:
 
       Free ride and docked bike sharing.
 
-      ![Taxi workflow](./specs/workflow/docked-bike-sequence.svg)
+      ![Docked bike workflow](./specs/workflow/docked-bike-sequence.svg)
 
       ## Booking explained
 
@@ -125,7 +132,7 @@ tags:
       | **CONFIRMED** | Booking confirmed, e.g. TAXI driver have accepted this order. We are waiting for this state update from TSP by periodically calling [Get booking](#operation/bookingGet) or waiting for webhook invocation via [Update booking state](#operation/backendBookingReceive) endpoint invocation. |
       | **ARRIVED** | Not applicable for all modes of transportation. For TAXI means driver have arrived to the pickup point. We are waiting for this state update from TSP. |
       | **ACTIVATED** | Booking has started. For TAXI means TAXI has picked up the passenger. We are waiting for this state update from some TSPs e.g. Taxi and will send this state update via [Update booking](#operation/bookingUpdate) call for car sharing and micromobility providers (to unlock car or a scooter and start a ride). |
-      | **ON_HOLD** | Booking still active but have been paused, for example for Car Sharing - lock the car but not finish the ride. We will send this state update via [Update booking](#operation/bookingUpdate) call. | 
+      | **ON_HOLD** | Booking still active but have been paused, for example for Car Sharing - lock the car but not finish the ride. We will send this state update via [Update booking](#operation/bookingUpdate) call. **v.1.2.0-future**: For docked bikes transition to this state reserves docking bay. | 
       | **EXPIRED** | Ride was completed. We are waiting for this state update from TSP. |
       | **FINISHED** | Payment receipt reconcillation completed, for example for extra charges during Taxi ride, see [Get final booking receipt](#operation/bookingGetReceipt) endpoint. |
       | **CANCELLED** | Cancelled by user. Booking can be subject to a fee or/and not be refundable as specified by TSP in booking cancellation rules. |
@@ -142,6 +149,14 @@ tags:
       State flow for bike, scooter and other micromobility are shown below.
 
       ![Bike workflow](./specs/workflow/bike.svg)
+
+      ### Docked bike state
+
+      Docked bike state, when you need to reserve a dock before you can return a bike.
+
+      Version: **v.1.2.0-future** Not yet released in production, see **WIP** (Work in progress) status which are not yet implemented.
+
+      ![Bike workflow](./specs/workflow/docked-bike.svg)
 
       ### Structure
 
@@ -177,6 +192,8 @@ tags:
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
       | [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json), SCOOTER - [response](examples/scooter/booking-options-response.json), CAR SHARING - [response](examples/car/booking-options-response.json) |
+      | [Available stations](#operation/stationsGet) | [tsp/stations-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/stations-list) | DOCKED BIKE - [response](examples/bike/stations-list-response.json) |
+      | [Retrieve station](#operation/stationGet) | [tsp/stations-retrieve](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/stations-retrieve) | DOCKED BIKE - [response](examples/bike/stations-retrieve-response.json) |
 
       ## Creating a booking
 
@@ -199,7 +216,10 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Create Booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) |  TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json), SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json), CAR SHARING - [request](examples/car/booking-create-request.json), [response](examples/car/booking-create-response.json) |
+      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json) |
+      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json) |
+      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | CAR SHARING - [request](examples/car/booking-create-request.json), [response](examples/car/booking-create-response.json) |
+      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | **v.1.2.0-future**: DOCKED BIKE -  [response](examples/bike/booking-create-response.json) |
 
       ## Paying a booking
 
@@ -219,9 +239,14 @@ tags:
 
       A booking may be updated by a User or WhimApp when any party receives new information that the Leg needs to be changed. For example, when the User wants to change a destination. Such change may be subject to a fee, which should be reflected in response to update or when new booking retrieved via [Get booking](#operation/bookingGet) endpoint.
 
+      Also we update the booking when state for the booking changes, for example to start a ride on a scooter or shared car.
+
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) |  SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json), CAR SHARING, lock - [request](examples/car/booking-update-request-lock.json), [response](examples/car/booking-update-response-lock.json), CAR SHARING, unlock - [request](examples/car/booking-update-request-unlock.json) |
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json) |
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | CAR SHARING, lock - [request](examples/car/booking-update-request-lock.json), [response](examples/car/booking-update-response-lock.json)|
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | CAR SHARING, unlock - [request](examples/car/booking-update-request-unlock.json) |
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | **v.1.2.0-future**: DOCKED BIKE, reserve dock - [request](examples/bike/booking-update-request-reserve-dock.json), [response](examples/bike/booking-update-response-reserve-dock.json) |
 
       ## Cancelling a booking
 
@@ -244,8 +269,9 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | TAXI - [RESERVED](examples/taxi/booking-read-by-id-response.json), [ACTIVATED](examples/taxi/booking-read-by-id-response-activated.json), SCOOTER - [ACTIVATED](examples/scooter/booking-read-by-id-response-activated.json) |
-      | [Update booking state](#operation/backendBookingReceive) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | - |
+      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | TAXI - [RESERVED](examples/taxi/booking-read-by-id-response.json), [ACTIVATED](examples/taxi/booking-read-by-id-response-activated.json) |
+      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | SCOOTER - [ACTIVATED](examples/scooter/booking-read-by-id-response-activated.json) |
+      | [Update booking state](#operation/backendBookingReceive) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | See [above](#section/Updating-a-booking) |
       | [Get receipt](#operation/bookingGetReceipt) | - | SCOOTER - [response](examples/scooter/booking-receipt-response.json) | 
 
       ## Error Cases

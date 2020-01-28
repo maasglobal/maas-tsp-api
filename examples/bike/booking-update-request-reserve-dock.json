@@ -1,0 +1,16 @@
+{
+  "tspId": "64c09cf9-cd7d-422e-9d42-8ab897bab9d5",
+  "state": "ON_HOLD",
+  "meta": {
+    "MODE_BICYCLE": {
+      "returnStation": {
+        "id": "2919219",
+        "name": "Hakaniemi",
+        "location": {
+          "lat": 60.178205,
+          "lon": 24.951532
+        }
+      }
+    }
+  }
+}
