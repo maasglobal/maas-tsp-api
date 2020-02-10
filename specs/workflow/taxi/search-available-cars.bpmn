@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0" camunda:diagramRelationId="7a1b2a15-f71b-45be-8558-04feec3ecfa8">
+  <bpmn:collaboration id="Collaboration_0s75qfl">
+    <bpmn:participant id="Participant_06fwn96" name="Search available cars" processRef="Process_1">
+      <bpmn:documentation>Relevant points:
+• ETA to the query location is good to return already here, if possible
+• Car type, make and model, color, taxi id number good to return, if available</bpmn:documentation>
+    </bpmn:participant>
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_0ksyemc">
+      <bpmn:lane id="Lane_1ustlvz" name="📱 Whim">
+        <bpmn:flowNodeRef>Task_0rmkvy5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0ijoncr</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1t06zio" name="👤 User">
+        <bpmn:flowNodeRef>EndEvent_0oc29eo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_06jsdp2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0d4rtbo</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1b2a8xf" name="🚕 TSP">
+        <bpmn:flowNodeRef>Task_0xy3s05</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:endEvent id="EndEvent_0oc29eo">
+      <bpmn:incoming>SequenceFlow_03cm7sv</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_0xy3s05" name="Respond with availability">
+      <bpmn:incoming>SequenceFlow_0htprwd</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0r931sc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_0rmkvy5" name="Query for availability by location and radius">
+      <bpmn:incoming>SequenceFlow_0a66fye</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0htprwd</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_0ijoncr" name="Receive availability of taxis, view on map">
+      <bpmn:incoming>SequenceFlow_0r931sc</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1fvfvqg</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1iw75n0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_06jsdp2" name="Open map to view taxis">
+      <bpmn:incoming>SequenceFlow_1iw75n0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0a66fye</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_0d4rtbo" name="View available taxis">
+      <bpmn:incoming>SequenceFlow_1fvfvqg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_03cm7sv</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_03cm7sv" sourceRef="Task_0d4rtbo" targetRef="EndEvent_0oc29eo" />
+    <bpmn:sequenceFlow id="SequenceFlow_1fvfvqg" sourceRef="Task_0ijoncr" targetRef="Task_0d4rtbo" />
+    <bpmn:sequenceFlow id="SequenceFlow_0r931sc" sourceRef="Task_0xy3s05" targetRef="Task_0ijoncr" />
+    <bpmn:sequenceFlow id="SequenceFlow_0htprwd" name="API /cars" sourceRef="Task_0rmkvy5" targetRef="Task_0xy3s05">
+      <bpmn:documentation>dasdasdas</bpmn:documentation>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0a66fye" sourceRef="Task_06jsdp2" targetRef="Task_0rmkvy5" />
+    <bpmn:sequenceFlow id="SequenceFlow_1iw75n0" sourceRef="StartEvent_1" targetRef="Task_06jsdp2" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0s75qfl">
+      <bpmndi:BPMNShape id="Participant_06fwn96_di" bpmnElement="Participant_06fwn96" isHorizontal="true">
+        <dc:Bounds x="195" y="80" width="959" height="550" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="252" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1t06zio_di" bpmnElement="Lane_1t06zio" isHorizontal="true">
+        <dc:Bounds x="225" y="80" width="929" height="160" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1b2a8xf_di" bpmnElement="Lane_1b2a8xf" isHorizontal="true">
+        <dc:Bounds x="225" y="440" width="929" height="190" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1iw75n0_di" bpmnElement="SequenceFlow_1iw75n0">
+        <di:waypoint x="288" y="160" />
+        <di:waypoint x="330" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_04otsms_di" bpmnElement="Task_06jsdp2">
+        <dc:Bounds x="330" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1ustlvz_di" bpmnElement="Lane_1ustlvz" isHorizontal="true">
+        <dc:Bounds x="225" y="240" width="929" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0a66fye_di" bpmnElement="SequenceFlow_0a66fye">
+        <di:waypoint x="430" y="160" />
+        <di:waypoint x="452" y="160" />
+        <di:waypoint x="452" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0htprwd_di" bpmnElement="SequenceFlow_0htprwd">
+        <di:waypoint x="452" y="380" />
+        <di:waypoint x="452" y="540" />
+        <di:waypoint x="502" y="540" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="458" y="457" width="45" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0r931sc_di" bpmnElement="SequenceFlow_0r931sc">
+        <di:waypoint x="602" y="540" />
+        <di:waypoint x="640" y="540" />
+        <di:waypoint x="640" y="340" />
+        <di:waypoint x="682" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fvfvqg_di" bpmnElement="SequenceFlow_1fvfvqg">
+        <di:waypoint x="732" y="300" />
+        <di:waypoint x="732" y="160" />
+        <di:waypoint x="812" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0oc29eo_di" bpmnElement="EndEvent_0oc29eo">
+        <dc:Bounds x="1004" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_03cm7sv_di" bpmnElement="SequenceFlow_03cm7sv">
+        <di:waypoint x="912" y="160" />
+        <di:waypoint x="1004" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_19xu0n1_di" bpmnElement="Task_0xy3s05">
+        <dc:Bounds x="502" y="500" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0gxo194_di" bpmnElement="Task_0rmkvy5">
+        <dc:Bounds x="402" y="300" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0b3zwbf_di" bpmnElement="Task_0ijoncr">
+        <dc:Bounds x="682" y="300" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_09qbcim_di" bpmnElement="Task_0d4rtbo">
+        <dc:Bounds x="812" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

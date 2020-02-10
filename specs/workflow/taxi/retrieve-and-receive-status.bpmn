@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0" camunda:diagramRelationId="a4545fed-01e2-4ff6-bf36-8309e87fb86d">
+  <bpmn:collaboration id="Collaboration_0j8ioqi">
+    <bpmn:participant id="Participant_1fkx0g2" name="Receive status changes" processRef="Process_1" />
+    <bpmn:participant id="Participant_05q1aut" name="Retrieive booking status" processRef="Process_03pxrw4" />
+    <bpmn:textAnnotation id="TextAnnotation_093o4hz">
+      <bpmn:text>Relevant points:
+• Both models should be preferably available: querying the status from Whim and getting status changes pushed from the TSP system
+• ⚠️ FINAL PRICE: crucial for Whim would be to receive the final price after the ride has ended. It can be pulled from Whim or pushed to Whim, more important is that it would be available.
+• Price change reason would also be good to receive, e.g. had to upgrade to a bigger car</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1ulp8a0" sourceRef="Participant_1fkx0g2" targetRef="TextAnnotation_093o4hz" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_0jdpdt0">
+      <bpmn:lane id="Lane_0upcdk5" name="👤 User">
+        <bpmn:flowNodeRef>Task_0av3o2x</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_0h27ccb</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0k11zcr" name="📱 Whim">
+        <bpmn:flowNodeRef>Task_1x6t5xl</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0ofkw1j" name="🚕 TSP">
+        <bpmn:flowNodeRef>Task_0knstai</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:userTask id="Task_0av3o2x" name="See changed status or booking">
+      <bpmn:incoming>SequenceFlow_0o514sb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_00ncegs</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_0h27ccb">
+      <bpmn:incoming>SequenceFlow_00ncegs</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_1x6t5xl" name="Receive changed status, send notification if needed">
+      <bpmn:incoming>SequenceFlow_0imd7gg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0o514sb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_0knstai" name="Send changed status">
+      <bpmn:incoming>SequenceFlow_0qu1y6q</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0imd7gg</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_0qu1y6q</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0qu1y6q" sourceRef="StartEvent_1" targetRef="Task_0knstai" />
+    <bpmn:sequenceFlow id="SequenceFlow_0imd7gg" name="Webhook&#10;API /status" sourceRef="Task_0knstai" targetRef="Task_1x6t5xl" />
+    <bpmn:sequenceFlow id="SequenceFlow_0o514sb" sourceRef="Task_1x6t5xl" targetRef="Task_0av3o2x" />
+    <bpmn:sequenceFlow id="SequenceFlow_00ncegs" sourceRef="Task_0av3o2x" targetRef="EndEvent_0h27ccb" />
+    <bpmn:textAnnotation id="TextAnnotation_092teo0">
+      <bpmn:text>Status changed by any reason; pushed to Whim via webhook</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0dvdoqz" sourceRef="Task_0knstai" targetRef="TextAnnotation_092teo0" />
+  </bpmn:process>
+  <bpmn:process id="Process_03pxrw4" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_0oygc55">
+      <bpmn:lane id="Lane_14f96jy" name="🚕 TSP">
+        <bpmn:flowNodeRef>Task_0w1zlx7</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_02iq30n" name="📱 Whim">
+        <bpmn:flowNodeRef>StartEvent_172m0hi</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1kmhpq4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1lylqx9</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_10pxnxg" name="👤 User">
+        <bpmn:flowNodeRef>UserTask_1e4dyod</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_10uuf5q</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_172m0hi">
+      <bpmn:outgoing>SequenceFlow_02dq90o</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Task_1kmhpq4" name="Retrieve booking">
+      <bpmn:incoming>SequenceFlow_02dq90o</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1w0nex7</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:task id="Task_0w1zlx7" name="Respond with booking information">
+      <bpmn:incoming>SequenceFlow_1w0nex7</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14mcghj</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:serviceTask id="Task_1lylqx9" name="Receive changed status, send notification if needed">
+      <bpmn:incoming>SequenceFlow_14mcghj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_15lx5mt</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="UserTask_1e4dyod" name="See changed status or booking">
+      <bpmn:incoming>SequenceFlow_15lx5mt</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1pawss2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_10uuf5q">
+      <bpmn:incoming>SequenceFlow_1pawss2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1pawss2" sourceRef="UserTask_1e4dyod" targetRef="EndEvent_10uuf5q" />
+    <bpmn:sequenceFlow id="SequenceFlow_15lx5mt" sourceRef="Task_1lylqx9" targetRef="UserTask_1e4dyod" />
+    <bpmn:sequenceFlow id="SequenceFlow_14mcghj" sourceRef="Task_0w1zlx7" targetRef="Task_1lylqx9" />
+    <bpmn:sequenceFlow id="SequenceFlow_1w0nex7" name="API /status" sourceRef="Task_1kmhpq4" targetRef="Task_0w1zlx7" />
+    <bpmn:sequenceFlow id="SequenceFlow_02dq90o" sourceRef="StartEvent_172m0hi" targetRef="Task_1kmhpq4" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0j8ioqi">
+      <bpmndi:BPMNShape id="Participant_1fkx0g2_di" bpmnElement="Participant_1fkx0g2" isHorizontal="true">
+        <dc:Bounds x="123" y="212" width="707" height="528" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="202" y="632" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0upcdk5_di" bpmnElement="Lane_0upcdk5" isHorizontal="true">
+        <dc:Bounds x="153" y="212" width="677" height="188" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0k11zcr_di" bpmnElement="Lane_0k11zcr" isHorizontal="true">
+        <dc:Bounds x="153" y="400" width="677" height="160" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0ofkw1j_di" bpmnElement="Lane_0ofkw1j" isHorizontal="true">
+        <dc:Bounds x="153" y="560" width="677" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_05q1aut_di" bpmnElement="Participant_05q1aut" isHorizontal="true">
+        <dc:Bounds x="860" y="212" width="730" height="528" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0qu1y6q_di" bpmnElement="SequenceFlow_0qu1y6q">
+        <di:waypoint x="238" y="650" />
+        <di:waypoint x="290" y="650" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0imd7gg_di" bpmnElement="SequenceFlow_0imd7gg">
+        <di:waypoint x="390" y="650" />
+        <di:waypoint x="420" y="650" />
+        <di:waypoint x="420" y="490" />
+        <di:waypoint x="450" y="490" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="433" y="576" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0o514sb_di" bpmnElement="SequenceFlow_0o514sb">
+        <di:waypoint x="550" y="490" />
+        <di:waypoint x="580" y="490" />
+        <di:waypoint x="580" y="340" />
+        <di:waypoint x="610" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_06xqdh2_di" bpmnElement="Task_0av3o2x">
+        <dc:Bounds x="610" y="300" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_16shqk5_di" bpmnElement="Task_1x6t5xl">
+        <dc:Bounds x="450" y="450" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_098u4md_di" bpmnElement="Task_0knstai">
+        <dc:Bounds x="290" y="610" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_092teo0_di" bpmnElement="TextAnnotation_092teo0">
+        <dc:Bounds x="460" y="670" width="310" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0dvdoqz_di" bpmnElement="Association_0dvdoqz">
+        <di:waypoint x="390" y="657" />
+        <di:waypoint x="478" y="670" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0h27ccb_di" bpmnElement="EndEvent_0h27ccb">
+        <dc:Bounds x="752" y="322" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_00ncegs_di" bpmnElement="SequenceFlow_00ncegs">
+        <di:waypoint x="710" y="340" />
+        <di:waypoint x="752" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Lane_10pxnxg_di" bpmnElement="Lane_10pxnxg" isHorizontal="true">
+        <dc:Bounds x="890" y="212" width="700" height="203" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_02iq30n_di" bpmnElement="Lane_02iq30n" isHorizontal="true">
+        <dc:Bounds x="890" y="415" width="700" height="175" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_14f96jy_di" bpmnElement="Lane_14f96jy" isHorizontal="true">
+        <dc:Bounds x="890" y="590" width="700" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_172m0hi_di" bpmnElement="StartEvent_172m0hi">
+        <dc:Bounds x="932" y="502" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_02dq90o_di" bpmnElement="SequenceFlow_02dq90o">
+        <di:waypoint x="968" y="520" />
+        <di:waypoint x="1020" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_08zxeqj_di" bpmnElement="Task_1kmhpq4">
+        <dc:Bounds x="1020" y="480" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0w1zlx7_di" bpmnElement="Task_0w1zlx7">
+        <dc:Bounds x="1110" y="630" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1w0nex7_di" bpmnElement="SequenceFlow_1w0nex7">
+        <di:waypoint x="1070" y="560" />
+        <di:waypoint x="1070" y="670" />
+        <di:waypoint x="1110" y="670" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1083" y="603" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_14mcghj_di" bpmnElement="SequenceFlow_14mcghj">
+        <di:waypoint x="1210" y="670" />
+        <di:waypoint x="1240" y="670" />
+        <di:waypoint x="1240" y="520" />
+        <di:waypoint x="1260" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0v4qiek_di" bpmnElement="Task_1lylqx9">
+        <dc:Bounds x="1260" y="480" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1e4dyod_di" bpmnElement="UserTask_1e4dyod">
+        <dc:Bounds x="1370" y="290" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_15lx5mt_di" bpmnElement="SequenceFlow_15lx5mt">
+        <di:waypoint x="1310" y="480" />
+        <di:waypoint x="1310" y="425" />
+        <di:waypoint x="1420" y="425" />
+        <di:waypoint x="1420" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_10uuf5q_di" bpmnElement="EndEvent_10uuf5q">
+        <dc:Bounds x="1522" y="312" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1pawss2_di" bpmnElement="SequenceFlow_1pawss2">
+        <di:waypoint x="1470" y="330" />
+        <di:waypoint x="1522" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_093o4hz_di" bpmnElement="TextAnnotation_093o4hz">
+        <dc:Bounds x="590" y="80" width="710" height="110" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1ulp8a0_di" bpmnElement="Association_1ulp8a0">
+        <di:waypoint x="830" y="219" />
+        <di:waypoint x="870" y="190" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
