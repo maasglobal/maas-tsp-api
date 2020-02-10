@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.6.0" camunda:diagramRelationId="7294d421-dde8-4916-9ebb-ff2e9d7473f1">
+  <bpmn:collaboration id="Collaboration_1ak1pvz">
+    <bpmn:participant id="Participant_163dq5t" name="Get price estimate or fixed price" processRef="Process_1" />
+    <bpmn:textAnnotation id="TextAnnotation_06wdden">
+      <bpmn:text>Relevant points:
+• Desired inputs: start time for pre-bookings, multipoint trips A-C-D-B, car type or passenger count, and also other options such as exclusive service, minivan, station wagon, driver language, pets allowed, disabled passenger</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0t9zl6a" sourceRef="Participant_163dq5t" targetRef="TextAnnotation_06wdden" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_089ntl4">
+      <bpmn:lane id="Lane_1bkimi4" name="🚕 TSP">
+        <bpmn:flowNodeRef>Task_162kt56</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0gbgiqe" name="📱 Whim">
+        <bpmn:flowNodeRef>Task_0p22r2o</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1poedk0</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1nl8y4w" name="👤 User">
+        <bpmn:flowNodeRef>Task_025zgcn</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1c0il93</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_0w25eof</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:task id="Task_025zgcn" name="Enter origin and destination of taxi trip, car type, etc">
+      <bpmn:incoming>SequenceFlow_1ts982m</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1onfdkr</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>SequenceFlow_1ts982m</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_1c0il93">
+      <bpmn:incoming>SequenceFlow_1vqxtg2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_0p22r2o" name="Receive offers">
+      <bpmn:incoming>SequenceFlow_0gsopel</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1q8us5r</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:task id="Task_0w25eof" name="See price estimate or fixed price">
+      <bpmn:incoming>SequenceFlow_1q8us5r</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1vqxtg2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:serviceTask id="Task_162kt56" name="Return offers with price estimate and/or fixed price">
+      <bpmn:incoming>SequenceFlow_14sqt98</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0gsopel</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_1poedk0" name="Query for price estimate or fixed price (if available)">
+      <bpmn:incoming>SequenceFlow_1onfdkr</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14sqt98</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1vqxtg2" sourceRef="Task_0w25eof" targetRef="EndEvent_1c0il93" />
+    <bpmn:sequenceFlow id="SequenceFlow_1q8us5r" sourceRef="Task_0p22r2o" targetRef="Task_0w25eof" />
+    <bpmn:sequenceFlow id="SequenceFlow_0gsopel" sourceRef="Task_162kt56" targetRef="Task_0p22r2o" />
+    <bpmn:sequenceFlow id="SequenceFlow_14sqt98" name="API /offers" sourceRef="Task_1poedk0" targetRef="Task_162kt56" />
+    <bpmn:sequenceFlow id="SequenceFlow_1onfdkr" sourceRef="Task_025zgcn" targetRef="Task_1poedk0" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ts982m" sourceRef="StartEvent_1" targetRef="Task_025zgcn" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1ak1pvz">
+      <bpmndi:BPMNShape id="Participant_163dq5t_di" bpmnElement="Participant_163dq5t" isHorizontal="true">
+        <dc:Bounds x="123" y="192" width="837" height="478" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="242" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1nl8y4w_di" bpmnElement="Lane_1nl8y4w" isHorizontal="true">
+        <dc:Bounds x="153" y="192" width="807" height="128" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_0gbgiqe_di" bpmnElement="Lane_0gbgiqe" isHorizontal="true">
+        <dc:Bounds x="153" y="320" width="807" height="170" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1bkimi4_di" bpmnElement="Lane_1bkimi4" isHorizontal="true">
+        <dc:Bounds x="153" y="490" width="807" height="180" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_025zgcn_di" bpmnElement="Task_025zgcn">
+        <dc:Bounds x="260" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1ts982m_di" bpmnElement="SequenceFlow_1ts982m">
+        <di:waypoint x="228" y="260" />
+        <di:waypoint x="260" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1onfdkr_di" bpmnElement="SequenceFlow_1onfdkr">
+        <di:waypoint x="310" y="300" />
+        <di:waypoint x="310" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1ytrxko_di" bpmnElement="Task_1poedk0">
+        <dc:Bounds x="260" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_14sqt98_di" bpmnElement="SequenceFlow_14sqt98">
+        <di:waypoint x="310" y="450" />
+        <di:waypoint x="310" y="580" />
+        <di:waypoint x="460" y="580" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="314" y="513" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_06vmf9g_di" bpmnElement="Task_162kt56">
+        <dc:Bounds x="460" y="540" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0gsopel_di" bpmnElement="SequenceFlow_0gsopel">
+        <di:waypoint x="560" y="580" />
+        <di:waypoint x="650" y="580" />
+        <di:waypoint x="650" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_024oo8w_di" bpmnElement="Task_0p22r2o">
+        <dc:Bounds x="600" y="370" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0w25eof_di" bpmnElement="Task_0w25eof">
+        <dc:Bounds x="710" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1q8us5r_di" bpmnElement="SequenceFlow_1q8us5r">
+        <di:waypoint x="650" y="370" />
+        <di:waypoint x="650" y="335" />
+        <di:waypoint x="760" y="335" />
+        <di:waypoint x="760" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1c0il93_di" bpmnElement="EndEvent_1c0il93">
+        <dc:Bounds x="882" y="242" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1vqxtg2_di" bpmnElement="SequenceFlow_1vqxtg2">
+        <di:waypoint x="810" y="260" />
+        <di:waypoint x="882" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_06wdden_di" bpmnElement="TextAnnotation_06wdden">
+        <dc:Bounds x="300" y="80" width="520" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0t9zl6a_di" bpmnElement="Association_0t9zl6a">
+        <di:waypoint x="556" y="192" />
+        <di:waypoint x="559" y="150" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

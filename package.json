@@ -9,7 +9,7 @@
     "postinstall": "cp -f ./node_modules/mermaid/dist/mermaid.min.js ./node_modules/mermaid.cli/",
     "clean": "shx rm -Rf dist node_modules",
     "build": "node utils/adopt-schemas.js && node utils/bundle-spec.js && node utils/compile-workflows.js",
-    "start": "npm run build && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -w specs/workflow -e js,md,mmd,yml,yaml,json",
+    "start": "npm run build && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -w specs/workflow -e js,md,mmd,yml,yaml,json,bpmn",
     "prettify": "prettier --write --ignore-path .gitignore '**/*.{css,html,js,json,md,yaml,yml}'",
     "lint": "npm run lint-code && npm run lint-schemas && npm run lint-spec",
     "lint-code": "eslint .",
@@ -51,7 +51,8 @@
     "io-ts-promise": "^2.0.1",
     "maas-schemas-ts": "0.0.13",
     "mermaid": "^8.4.4",
-    "mermaid.cli": "^0.5.1"
+    "mermaid.cli": "^0.5.1",
+    "@huksley/bpmn-to-image": "^0.5.1"
   },
   "dependencies": {
     "maas-schemas": "^10.0.1"
