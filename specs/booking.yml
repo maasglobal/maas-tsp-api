@@ -59,7 +59,7 @@ info:
 
     ### 1.1.0 Current version
 
-    From this version onwards, this documentation are living documentation for current and future versions. Any specific features not available in production are marked as **1.X.X-future** and WIP in diagrams.
+    From this version onwards, this documentation are living documentation for current and future versions. Any specific features not available in production are marked as **1.X.X-future**.
 
       * [OpenAPI Specification](specs/booking.json)
       * [Documentation](?booking.json)
@@ -69,7 +69,7 @@ info:
     ### 1.2.0 Future version
 
       * Not yet available in production
-      * Marked by **v.1.2.0-future** in this documentation and WIP in diagrams.
+      * Marked by **v.1.2.0-future** in this documentation
 
     ## Getting started
 
@@ -144,6 +144,18 @@ tags:
 
       ![Taxi workflow](./specs/workflow/taxi.svg)
 
+      ### Rental car state
+
+      Flow for rental car
+
+      ![Rental car workflow](./specs/workflow/car-rental.svg)
+
+      ### Shared car state
+
+      Flow for car-sharing
+
+      ![Shared car workflow](./specs/workflow/car-sharing.svg)
+
       ### Bike state
 
       State flow for bike, scooter and other micromobility are shown below.
@@ -154,9 +166,9 @@ tags:
 
       Docked bike state, when you need to reserve a dock before you can return a bike.
 
-      Version: **v.1.2.0-future** Not yet released in production, see **WIP** (Work in progress) status which are not yet implemented.
+      > ⚠️ ON_HOLD state for docked bikes only supported in version **v.1.2.0-future** which is not yet implemented.
 
-      ![Bike workflow](./specs/workflow/docked-bike.svg)
+      ![Docked bike workflow](./specs/workflow/docked-bike.svg)
 
       ### Structure
 
