@@ -117,6 +117,13 @@ describe('Check examples', () => {
   });
 
   describe('bike', () => {
+    it('booking-options-response.json', () => {
+      return typePromise.decode(
+        BookingOptionsResponse,
+        JSON.parse(fs.readFileSync('./examples/bike/booking-options-response.json'))
+      );
+    });
+
     it('booking-create-response.json', () => {
       return typePromise.decode(
         BookingCreateResponse,

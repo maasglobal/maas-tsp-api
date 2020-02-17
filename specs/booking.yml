@@ -191,7 +191,10 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json), SCOOTER - [response](examples/scooter/booking-options-response.json), CAR SHARING - [response](examples/car/booking-options-response.json) |
+      | [Available taxi types](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) | TAXI - [response](examples/taxi/booking-options-response.json) |
+      | [Available scooters](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) | SCOOTER - [response](examples/scooter/booking-options-response.json) |
+      | [Available cars](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) | CAR SHARING - [response](examples/car/booking-options-response.json) |
+      | [Available bikes](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) | DOCKED BIKE - [response](examples/bike/booking-options-response.json) |
       | [Available stations](#operation/stationsGet) | [tsp/stations-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/stations-list) | DOCKED BIKE - [response](examples/bike/stations-list-response.json) |
       | [Retrieve station](#operation/stationGet) | [tsp/stations-retrieve](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/stations-retrieve) | DOCKED BIKE - [response](examples/bike/stations-retrieve-response.json) |
 
@@ -859,7 +862,7 @@ paths:
   /backend/booking/{tspId}:
     patch:
       operationId: backendBookingReceive
-      summary: Update booking state
+      summary: Receive updated booking state
       description: |
         Updates booking information at the WhimApp backend. 
 

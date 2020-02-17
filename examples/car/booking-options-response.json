@@ -48,6 +48,55 @@
           { "amount": 70, "currency": "EUR", "timeInterval": 86400, "type": "maxRate" }
         ]
       }
+    },
+    {
+      "tspProduct": { "id": "carsharingabc1" },
+      "meta": {
+        "MODE_SHARED_CAR": {
+          "id": "123457",
+          "startEndGeoRegionUrl": "https://raw.githubusercontent.com/maasglobal/maas-tsp-api/master/examples/car/rental-region.geojson.json",
+          "pickupInfo": "<p>Cars are parked in EuroPark\n",
+          "name": "Toyota Aigo",
+          "description": "Toyota Aigo",
+          "image": "https://raw.githubusercontent.com/maasglobal/maas-tsp-api/master/examples/car/car.png",
+          "car": {
+            "passengers": 4,
+            "doors": [3, 3],
+            "luggage": [4, 2],
+            "transmission": "automatic",
+            "fuel": "gasoline",
+            "classification": "MBAR",
+            "registrationPlate": "ABC-124",
+            "location": { "lat": 60.1693, "lon": 24.9364 }
+          }
+        }
+      },
+      "leg": {
+        "mode": "SHARED_CAR",
+        "startTime": 1576587222500,
+        "endTime": 1576587822500,
+        "from": {
+          "name": "EuroPark P-Simonkenttä",
+          "address": "streetName:Simonkatu|streetNumber:5|zipCode:00100|city:Helsinki",
+          "lat": 60.1693,
+          "lon": 24.9364
+        },
+        "to": {
+          "name": "EuroPark P-Simonkenttä",
+          "address": "streetName:Simonkatu|streetNumber:5|zipCode:00100|city:Helsinki",
+          "lat": 60.1693,
+          "lon": 24.9364
+        }
+      },
+      "cost": { "amount": 20, "currency": "EUR" },
+      "terms": {
+        "validity": { "startTime": 1576587222500, "endTime": 1608144822500 },
+        "fareRates": [
+          { "amount": 20, "currency": "EUR", "timeInterval": 7500 },
+          { "amount": 4, "currency": "EUR", "startAt": 7500, "timeInterval": 1800 },
+          { "amount": 70, "currency": "EUR", "timeInterval": 86400, "type": "maxRate" }
+        ]
+      }
     }
   ]
 }
