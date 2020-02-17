@@ -1,4 +1,4 @@
-graph LR
+graph TD
   label1(Docked bike state flow)
   %% MermaidJS workflow graph for docker Bike or E-bike TSP
   %% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
@@ -6,7 +6,7 @@ graph LR
   Reserved -->|Unlocking| Activated2[Activated]
   Reserved -.->|Subject to a fee| Cancelled
   Reserved -.->|Denied by TSP| Rejected
-  Reserved2[Reserved] -->|Unlocking| Activated
+  Reserved -->|Reservation timed-out| Expired2[Expired]
   Activated -->|Reserve a return dock| On_hold
   On_hold[On hold] -->|Cancel return| Activated
   On_hold[On hold] -->|New attempt to return| On_hold[On hold]
@@ -16,4 +16,5 @@ graph LR
   style Cancelled color:red,stroke-dasharray: 5, 5
   style Rejected color:red,stroke-dasharray: 5, 5
   style Rejected2 color:red,stroke-dasharray: 5, 5
+  style Expired2 color:red,stroke-dasharray: 5, 5
   style label1 stroke-width:2px,color:black,stroke:black,fill:white
