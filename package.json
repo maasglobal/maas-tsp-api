@@ -44,6 +44,7 @@
     "maas-schemas-ts": "0.0.13",
     "mermaid": "^8.4.4",
     "mermaid.cli": "^0.5.1",
+    "mobx": "^5.15.4",
     "mocha": "^6.2.2",
     "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
@@ -54,8 +55,7 @@
     "swagger-ui-dist": "^3.24.2"
   },
   "dependencies": {
-    "maas-schemas": "^10.6.0",
-    "mobx": "^5.15.4"
+    "maas-schemas": "^10.6.0"
   },
   "husky": {
     "hooks": {
