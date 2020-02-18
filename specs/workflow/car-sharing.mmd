@@ -2,11 +2,11 @@ graph TD
   label1(Shared car state flow)
   %% MermaidJS workflow graph for Taxi TSP
   %% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
-  KYC[KYC] -.->|Check driver license| Confirmed
-  Options[Booking options] -.->|Create the booking| Confirmed
-  Confirmed -->|Unlock| Activated
-  Confirmed -.->|Subject to a fee| Cancelled
-  Confirmed -->|Timed-out| Expired2[Expired]
+  KYC[KYC] -.->|Check driver license| Reserved
+  Options[Booking options] -.->|Create the booking| Reserved
+  Reserved -->|Unlock| Activated
+  Reserved -.->|Subject to a fee| Cancelled
+  Reserved -->|Timed-out| Expired2[Expired]
   Activated2[Activated] -->|Ride finished| Expired
   Activated2[Activated] -->|Park| On_hold[On hold]
   Expired -->|Final price received| Finished
