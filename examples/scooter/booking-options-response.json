@@ -44,6 +44,51 @@
       "tspProduct": {
         "id": "scooterinc1"
       }
+    },
+    {
+      "cost": {
+        "currency": "EUR",
+        "amount": 1
+      },
+      "leg": {
+        "mode": "SCOOTER",
+        "startTime": 1581937820752,
+        "endTime": 1581937880752,
+        "from": {
+          "lat": 60.433793,
+          "lon": 22.222447
+        },
+        "to": {
+          "lat": 60.435388,
+          "lon": 22.226404
+        }
+      },
+      "meta": {
+        "MODE_SCOOTER": {
+          "scooter": {
+            "id": "f1da7e2a-956a-42e8-b659-9c2f32b01ce4",
+            "code": 201012,
+            "battery": 30,
+            "location": {
+              "lat": 60.433793,
+              "lon": 22.222447
+            }
+          }
+        }
+      },
+      "terms": {
+        "fareRates": [
+          {
+            "amount": 0.2,
+            "currency": "EUR",
+            "timeInterval": 60,
+            "startAt": 0
+          }
+        ]
+      },
+      "tspProduct": {
+        "id": "scooterinc1"
+      }
     }
   ]
 }

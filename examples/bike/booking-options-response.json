@@ -1,0 +1,102 @@
+{
+  "options": [
+    {
+      "cost": {
+        "currency": "EUR",
+        "amount": 0
+      },
+      "leg": {
+        "mode": "BICYCLE",
+        "startTime": 1577955471706,
+        "endTime": 1577955471706,
+        "from": {
+          "lat": 60.178205,
+          "lon": 24.951532,
+          "name": "Hakaniemi",
+          "stationId": "2919219"
+        },
+        "to": {
+          "lat": 60.178205,
+          "lon": 24.951532,
+          "name": "Hakaniemi",
+          "stationId": "2919219"
+        }
+      },
+      "meta": {
+        "MODE_BICYCLE": {
+          "bike": {
+            "id": "fe6fd61c-550a-4dd9-8e33-a4d5de4375cf",
+            "code": 1201,
+            "location": {
+              "lat": 60.178205,
+              "lon": 24.951532
+            }
+          },
+          "pickupStationId": "2919219"
+        }
+      },
+      "terms": {
+        "fareRates": [
+          {
+            "amount": 6,
+            "startAt": 0,
+            "currency": "GBP",
+            "timeInterval": 86400
+          }
+        ]
+      },
+      "tspProduct": {
+        "id": "bicyclesinc1"
+      }
+    },
+    {
+      "cost": {
+        "currency": "EUR",
+        "amount": 0
+      },
+      "leg": {
+        "mode": "BICYCLE",
+        "startTime": 1577955471706,
+        "endTime": 1577955471706,
+        "from": {
+          "lat": 60.178205,
+          "lon": 24.951532,
+          "name": "Hakaniemi",
+          "stationId": "2919219"
+        },
+        "to": {
+          "lat": 60.178205,
+          "lon": 24.951532,
+          "name": "Hakaniemi",
+          "stationId": "2919219"
+        }
+      },
+      "meta": {
+        "MODE_BICYCLE": {
+          "bike": {
+            "id": "888fc74e-c924-4ef1-a8e4-dc241c4e7722",
+            "code": 1202,
+            "location": {
+              "lat": 60.178205,
+              "lon": 24.951532
+            }
+          },
+          "pickupStationId": "2919219"
+        }
+      },
+      "terms": {
+        "fareRates": [
+          {
+            "amount": 6,
+            "startAt": 0,
+            "currency": "GBP",
+            "timeInterval": 86400
+          }
+        ]
+      },
+      "tspProduct": {
+        "id": "bicyclesinc1"
+      }
+    }
+  ]
+}
