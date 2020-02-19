@@ -1,0 +1,15 @@
+graph TD
+  label1(Rental car state flow)
+  %% MermaidJS workflow graph for Taxi TSP
+  %% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
+  KYC[KYC] -.->|Check driver license| Confirmed
+  Options[Booking options] -.->|Create the booking| Confirmed
+  Confirmed -.->|Subject to a fee| Cancelled
+  Confirmed -.->|No show| Expired2
+  Confirmed -->|Rental period start| Activated
+  Activated2[Activated] -->|Rental period ended| Expired
+  Expired -->|Final price received| Finished
+  style Cancelled color:red,stroke-dasharray: 5, 5
+  style label1 stroke-width:2px,color:black,stroke:black,fill:white
+  style KYC stroke-dasharray:5,5
+  style Expired2 color:red,stroke-dasharray: 5, 5
