@@ -560,7 +560,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/core/booking.json
+                $ref: ../schemas/tsp/booking-read-by-id/response.json
               examples:
                 Taxi1:
                   summary: Taxi - RESERVED
@@ -624,7 +624,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/core/booking.json
+                $ref: ../schemas/tsp/booking-update/response.json
               examples:
                 CarSharing:
                   summary: Car sharing response lock
@@ -671,7 +671,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/core/booking.json
+                $ref: ../schemas/tsp/booking-cancel/response.json
               examples:
                 CarSharing:
                   summary: Car sharing cancel
