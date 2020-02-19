@@ -87,6 +87,11 @@
     "subscriptionInstance": {
       "$ref": "#/definitions/subscriptionInstance"
     },
+    "balance": {
+      "type": "integer",
+      "minimum": 0,
+      "multipleOf": 1
+    },
     "balances": {
       "type": "array",
       "items": {
@@ -101,7 +106,15 @@
     }
   },
   "additionalProperties": false,
-  "required": ["identityId", "phone", "favoriteLocations", "paymentMethod", "subscriptionInstance", "balances"],
+  "required": [
+    "identityId",
+    "phone",
+    "favoriteLocations",
+    "balance",
+    "paymentMethod",
+    "subscriptionInstance",
+    "balances"
+  ],
   "definitions": {
     "subscriptionInstance": {
       "type": "object",

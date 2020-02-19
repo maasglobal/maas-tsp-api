@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Overview</title>
+  <link rel="stylesheet" type="text/css" href="github-markdown.css"/>
+  <style type="text/css">
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body class="markdown-body">
+  <h1 id="maas-resources">MaaS resources</h1>
+<p>Overview of resources available from MaaS Global, creators of <a href="https://whimapp.com">WhimApp</a>.</p>
+<h2 id="openapi-specification">OpenAPI specification</h2>
+<p>This is an API specification of REST endpoints that a Transport Service
+Provider (TSP) should implement to offer their services through the
+<a href="https://whimapp.com/">WhimApp</a>.</p>
+<ul>
+<li><a href="https://github.com/maasglobal/maas-tsp-api/tree/master/specs/booking.yml">OpenAPI Specification</a></li>
+<li><a href="redoc.html?booking.json">Documentation</a></li>
+<li><a href="swagger-ui.html?urls.primaryName=booking.yml">SwaggerUI</a></li>
+</ul>
+<h2 id="api-data-model-json-schema">API Data Model (JSON Schema)</h2>
+<p>Based on <a href="https://json-schema.org/">JSON Schema</a> standard, defines schema definitions for information exchanged between WhimApp and TSP.</p>
+<ul>
+<li><a href="https://github.com/maasglobal/maas-schemas/tree/develop/maas-schemas/schemas">Schemas</a></li>
+<li><a href="https://maasglobal.github.io/maas-schemas/">Documentation</a></li>
+</ul>
+<h2 id="booking-sequence-diagrams">Booking sequence diagrams</h2>
+<p>These diagrams show how User, WhimApp and TSP interact to perform booking with various modes of transportation (Taxi, Bike, etc)</p>
+<h3 id="taxi">Taxi</h3>
+<p><img src="specs/workflow/taxi-sequence.svg" alt="Taxi sequence diagram"></p>
+<h3 id="docked-bike">Docked bike</h3>
+<p><img src="specs/workflow/docked-bike-sequence.svg" alt="Docked bike sequence diagram"></p>
+<h2 id="booking-state-flow">Booking state flow</h2>
+<p>These diageams show the state transition for booking when journey is in progress.</p>
+<h3 id="taxi-1">Taxi</h3>
+<p><img src="specs/workflow/taxi.svg" alt="Taxi state flow"></p>
+<h3 id="bike">Bike</h3>
+<p><img src="specs/workflow/bike.svg" alt="Taxi state flow"></p>
+<h3 id="docked-bike-1">Docked bike</h3>
+<blockquote>
+<p>⚠️ ON_HOLD state for docked bikes only supported in version <strong>v.1.2.0-future</strong> which is not yet deployed to production.</p>
+</blockquote>
+<p><img src="specs/workflow/docked-bike.svg" alt="Taxi state flow"></p>
+<h2 id="examples">Examples</h2>
+<p>See the repository for JSON examples of data exchanged between WhimApp and TSP</p>
+<p><a href="https://github.com/maasglobal/maas-tsp-api/tree/master/examples">Examples repository</a></p>
+
+</body>
+</html>
