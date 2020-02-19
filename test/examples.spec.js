@@ -8,6 +8,7 @@ const BookingCancelResponse = require('maas-schemas-ts/lib/tsp/booking-cancel/re
 const BookingOptionsResponse = require('maas-schemas-ts/lib/tsp/booking-options-list/response').Default;
 const BookingReadByIdResponse = require('maas-schemas-ts/lib/tsp/booking-read-by-id/response').Default;
 const BookingReceiptResponse = require('maas-schemas-ts/lib/tsp/booking-receipt/response').Default;
+const WebhookBookingUpdate = require('maas-schemas-ts/lib/tsp/webhooks-bookings-update/remote-request').Default;
 const StationsListResponse = require('maas-schemas-ts/lib/tsp/stations-list/response').Default;
 const StationsRetrieveResponse = require('maas-schemas-ts/lib/tsp/stations-retrieve/response').Default;
 const typePromise = require('io-ts-promise');
@@ -61,6 +62,13 @@ describe('Check examples', () => {
       return typePromise.decode(
         BookingReadByIdResponse,
         JSON.parse(fs.readFileSync('./examples/taxi/booking-read-by-id-response-activated.json'))
+      );
+    });
+
+    it('webhook-booking-update-status.json', () => {
+      return typePromise.decode(
+        WebhookBookingUpdate,
+        JSON.parse(fs.readFileSync('./examples/taxi/webhook-booking-update-status.json'))
       );
     });
   });
@@ -117,6 +125,13 @@ describe('Check examples', () => {
   });
 
   describe('bike', () => {
+    it('booking-options-response.json', () => {
+      return typePromise.decode(
+        BookingOptionsResponse,
+        JSON.parse(fs.readFileSync('./examples/bike/booking-options-response.json'))
+      );
+    });
+
     it('booking-create-response.json', () => {
       return typePromise.decode(
         BookingCreateResponse,
