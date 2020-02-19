@@ -9,7 +9,7 @@
   "info": {
     "version": "1.1.0",
     "title": "WhimApp TSP API",
-    "description": "## Introduction\n\nThis is an API specification of REST endpoints that a Transport Service\nProvider (TSP) should implement to offer their services through the \n[Whim application](https://whimapp.com/).\n\nIt is written in machine-readable [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format, \nso that API endpoints, validators, and test clients can be generated from the\ndocumentation.\n\n### Download \n\n* OpenAPI Specification [JSON, single file document](./specs/booking.json)\n* OpenAPI Specification [YAML](./specs/booking.yml)\n\n## Terminology\n\n* **endpoint** Publically resolvable URL either managed by MaaS Global (Whim Backend API) or by TSP (Booking API).\n\n* **booking** Information about single leg during the customer trip, together with customer information and state.\n\n* **journey** Multi-leg trip which user plans via WhimApp.\n\n* **leg** Single trip which is performed by TSP. Booking created and contain the state of this trip.\n\n* **TSP** Transport service provider. MaaS Global partner which offers their services via WhimApp.\n\n* **route** One of the possible journey. To determine it, we call TSP booking options endpoint to get available offers.\n\n* **micromobility** Light vehicles such as electric scooters, shared bicycles and electric bicycles.\n\n* **WhimApp** Mobile application or similar, which is used by Whim User to perform journeys. Collectively we treat all communication from the point of WhimApp and user experience during the time the user interacts with the application.\n\n* **Whim backend** Caller of TSP API endpoints. WhimApp never calls TSP endpoints directly. All invocations are done from cloud-native infrastructure managed by MaaS Global.\n\n* **MaaS Global** MaaS Global is the world’s first true Mobility-as-a-Service (MaaS) operator with its award-winning Whim app, which provides users all city transport services in one app.\n\n## Versions\n\n### 1.0.0 Initial release (2018)\n\n**deprecated**\n  \n  * [OpenAPI Specification](specs/maas-v1.yml)\n  * [Documentation](?maas-v1.yml)\n  * [SwaggerUI](swagger-ui.html?urls.primaryName=maas-v1.yml)\n  * Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)\n\n### 1.1.0 Current version\n\nFrom this version onwards, this documentation are living documentation for current and future versions. Any specific features not available in production are marked as **1.X.X-future** and WIP in diagrams.\n\n  * [OpenAPI Specification](specs/booking.json)\n  * [Documentation](?booking.json)\n  * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)\n  * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)\n\n### 1.2.0 Future version\n\n  * Not yet available in production\n  * Marked by **v.1.2.0-future** in this documentation and WIP in diagrams.\n\n## Getting started\n\n### Running a local documentation server\n\nTo run local documentation server, follow the instructions in the [GitHub repo](https://github.com/maasglobal/maas-tsp-api/)\n\n    git clone https://github.com/maasglobal/maas-tsp-api/\n    cd maas-tsp-api\n    npm install\n    npm start\n\nOpen your browser and navigate to http://localhost:3000\n\n> ⚠️ You can change a port by specifying `PORT` env variable\n",
+    "description": "## Introduction\n\nThis is an API specification of REST endpoints that a Transport Service\nProvider (TSP) should implement to offer their services through the \n[Whim application](https://whimapp.com/).\n\nIt is written in machine-readable [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification) format, \nso that API endpoints, validators, and test clients can be generated from the\ndocumentation.\n\n### Download \n\n* OpenAPI Specification [JSON, single file document](./specs/booking.json)\n* OpenAPI Specification [YAML](./specs/booking.yml)\n\n## Terminology\n\n* **endpoint** Publically resolvable URL either managed by MaaS Global (Whim Backend API) or by TSP (Booking API).\n\n* **booking** Information about single leg during the customer trip, together with customer information and state.\n\n* **journey** Multi-leg trip which user plans via WhimApp.\n\n* **leg** Single trip which is performed by TSP. Booking created and contain the state of this trip.\n\n* **TSP** Transport service provider. MaaS Global partner which offers their services via WhimApp.\n\n* **route** One of the possible journey. To determine it, we call TSP booking options endpoint to get available offers.\n\n* **micromobility** Light vehicles such as electric scooters, shared bicycles and electric bicycles.\n\n* **WhimApp** Mobile application or similar, which is used by Whim User to perform journeys. Collectively we treat all communication from the point of WhimApp and user experience during the time the user interacts with the application.\n\n* **Whim backend** Caller of TSP API endpoints. WhimApp never calls TSP endpoints directly. All invocations are done from cloud-native infrastructure managed by MaaS Global.\n\n* **MaaS Global** MaaS Global is the world’s first true Mobility-as-a-Service (MaaS) operator with its award-winning Whim app, which provides users all city transport services in one app.\n\n## Versions\n\n### 1.0.0 Initial release (2018)\n\n**deprecated**\n  \n  * [OpenAPI Specification](specs/maas-v1.yml)\n  * [Documentation](?maas-v1.yml)\n  * [SwaggerUI](swagger-ui.html?urls.primaryName=maas-v1.yml)\n  * Source code [repository](https://github.com/maasglobal/maas-tsp-api/tree/v1.0)\n\n### 1.1.0 Current version\n\nFrom this version onwards, this documentation are living documentation for current and future versions. Any specific features not available in production are marked as **1.X.X-future** and WIP in diagrams.\n\n  * [OpenAPI Specification](specs/booking.json)\n  * [Documentation](?booking.json)\n  * [JSON Schema documentation](https://maasglobal.github.io/maas-schemas)\n  * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)\n  * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)\n\n### 1.2.0 Future version\n\n  * Not yet available in production\n  * Marked by **v.1.2.0-future** in this documentation and WIP in diagrams.\n\n## Getting started\n\n### Running a local documentation server\n\nTo run local documentation server, follow the instructions in the [GitHub repo](https://github.com/maasglobal/maas-tsp-api/)\n\n    git clone https://github.com/maasglobal/maas-tsp-api/\n    cd maas-tsp-api\n    npm install\n    npm start\n\nOpen your browser and navigate to http://localhost:3000\n\n> ⚠️ You can change a port by specifying `PORT` env variable\n",
     "contact": {
       "name": "Maas Global Team",
       "email": "tech@maas.global",
@@ -28,7 +28,7 @@
   "tags": [
     {
       "name": "Booking lifecycle",
-      "description": "The following scenario explains the life-cycle of an individual journey from a TSP viewpoint. Whenever a new concept (such as an actor or action is represented, it is imprinted in **bold**.\n\nThis scenario, with a few extra details, is shown in the sequence diagrams below. It should be noted from the picture that MaaS more often acts as a caller than a callee for Transport Service Provider. \n\n### TAXI \n\nTaxi or Private Hire Vehicle (PHV) booking sequence flow, both on-demand and prebooking.\n\n![Taxi workflow](./specs/workflow/taxi-sequence.svg)\n\n### Docked Bike \n\nFree ride and docked bike sharing.\n\n![Docked bike workflow](./specs/workflow/docked-bike-sequence.svg)\n\n## Booking explained\n\nBooking represents state about one leg of a journey, connected with TSP specific information and state.\n\nData model as specified by [JSON Schema](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/core/booking.json) allows representing information about any type of transport and state. To better understand how the booking works, let's take a look at the basic states and essential parts of the booking data.\n\n### State\n\nBooking goes through multiple states during the journey; here are the most important states. Please see [Tracking booking](#section/Tracking-booking) on information on how WhimApp and TSP exchange this information.\n\n| State | Description |\n|-----|------|\n| **RESERVED** | Booking created by calling [Create booking](#operation/bookingCreate) endpoint. |\n| **CONFIRMED** | Booking confirmed, e.g. TAXI driver have accepted this order. We are waiting for this state update from TSP by periodically calling [Get booking](#operation/bookingGet) or waiting for webhook invocation via [Update booking state](#operation/backendBookingReceive) endpoint invocation. |\n| **ARRIVED** | Not applicable for all modes of transportation. For TAXI means driver have arrived to the pickup point. We are waiting for this state update from TSP. |\n| **ACTIVATED** | Booking has started. For TAXI means TAXI has picked up the passenger. We are waiting for this state update from some TSPs e.g. Taxi and will send this state update via [Update booking](#operation/bookingUpdate) call for car sharing and micromobility providers (to unlock car or a scooter and start a ride). |\n| **ON_HOLD** | Booking still active but have been paused, for example for Car Sharing - lock the car but not finish the ride. We will send this state update via [Update booking](#operation/bookingUpdate) call. **v.1.2.0-future**: For docked bikes transition to this state reserves docking bay. | \n| **EXPIRED** | Ride was completed. We are waiting for this state update from TSP. |\n| **FINISHED** | Payment receipt reconcillation completed, for example for extra charges during Taxi ride, see [Get final booking receipt](#operation/bookingGetReceipt) endpoint. |\n| **CANCELLED** | Cancelled by user. Booking can be subject to a fee or/and not be refundable as specified by TSP in booking cancellation rules. |\n| **REJECTED** | Rejected by TSP. We can update with this state on **PENDING**, **RESERVED**, **CONFIRMED**, **ACTIVATED** state and show User message about the reason for rejection, as received from TSP. |\n\n### Taxi state\n\nFlow for taxi, both for on-call and prebooking PHV (private hire vehicles) are shown below.\n\n![Taxi workflow](./specs/workflow/taxi.svg)\n\n### Bike state\n\nState flow for bike, scooter and other micromobility are shown below.\n\n![Bike workflow](./specs/workflow/bike.svg)\n\n### Docked bike state\n\nDocked bike state, when you need to reserve a dock before you can return a bike.\n\nVersion: **v.1.2.0-future** Not yet released in production, see **WIP** (Work in progress) status which are not yet implemented.\n\n![Bike workflow](./specs/workflow/docked-bike.svg)\n\n### Structure\n\nSee examples for a [Create booking](#operation/bookingCreate) or schema for [Booking create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) to understand all available data in a booking.\n\nHere are the most essential parts of the booking data.\n\n| State | Required? | Description |\n|-----|------|------| \n| `leg.from` | Y | Pickup point with name, address and coordinates (lat, long) |\n| `leg.to` | N | Destination point with name, address and coordinates (lat, long) |\n| `leg.startTime` | N | Start time of a trip, may be in future. |\n| `leg.endTime` | N | End time of a trip, must be in future. |\n| `leg.mode` | Y | Requested mode of transportation, i.e. TAXI |\n| `customer` | Y | Customer information |\n| `state` | Y | State of the booking |\n| `meta` | Y | Information about TSP. Also contains driver for TAXI |\n| `tspId` | Y | TSP specifid ID for this booking |\n| `cost` | Y | Amount and currency this booking cost |\n\n## Planning a route\n\n**User** **queries** for a **Route** with an address or latitude-longitude pair from one place to another. WhimApp queries the route from a third party **Routing Engine** that contains the data for **TSP** routes. At this point, WhimApp makes no queries to the TSP - it expects the Routing Engine contains valid GTFS data for the TSP.\n\n> ⚠️ Routing and GTFS are used only if applicable for TSP provider. For example, for micromobility providers, we don't use GTFS and route planning.\n\n**WhimApp** shows several possible **Plans**, each containing a valid **Route** with several **Legs** with a part of a route using a specific TSP.\n\n## Booking options\n\nTo determine available mobility services, WhimApp calls [Available options](#operation/bookingOptionsGet) endpoint. Depending on the TSP mode of transportation, this endpoint returns available TAXIs or cars or bikes for the specified location. After User selection, one of the options is used to create a booking by calling [Create Booking](#operation/bookingCreate) endpoint.\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json), SCOOTER - [response](examples/scooter/booking-options-response.json), CAR SHARING - [response](examples/car/booking-options-response.json) |\n| [Available stations](#operation/stationsGet) | [tsp/stations-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/stations-list) | DOCKED BIKE - [response](examples/bike/stations-list-response.json) |\n| [Retrieve station](#operation/stationGet) | [tsp/stations-retrieve](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/stations-retrieve) | DOCKED BIKE - [response](examples/bike/stations-retrieve-response.json) |\n\n## Creating a booking\n\nThe User browses through the plans and chooses to book a journey. For each Leg in the Plan Route, WhimApp creates a new booking by invoking the corresponding endpoint in TSP.\n\nIt should be noted that the booking may be hours or days in advance - a bit like in booking a hotel. The booking contains the individual leg as the detailed travel plan for the TSP, as well as customer contact information.\n\n> ⚠️ Specific parts of customer information (E-mail, Phone, Last name, First name, etc.) which are sent to the TSP are subject to agreement between MaaS Global and TSP.\n\nTSP receives the booking and confirms the trip. TSP may modify the details\nof the booking, such as moving the **start location** to closest known\nstreet address or delaying the Leg **start time**, as long as the\n**end time** can be guaranteed. The booking is supplemented with\n**booked** state information and additional **terms** such as\nthe latest **cancellation rules**.\n\nWhimApp checks that the creation of booking succeeded and stores the booking for future reference.\n\n> ⚠️ User can also book a trip directly for the TAXI, car or micromobility transport (which will result in a journey with one leg)\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json) |\n| [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json) |\n| [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | CAR SHARING - [request](examples/car/booking-create-request.json), [response](examples/car/booking-create-response.json) |\n| [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | **v.1.2.0-future**: DOCKED BIKE -  [response](examples/bike/booking-create-response.json) |\n\n## Paying a booking\n\nWhen booking created, it is already paid according to the options received and selected by User. See [Booking options](#section/Booking+options) for more information.\n\nIf the booking can not be created, the paid amount will be refunded to the User.\n\n## Navigating a route\n\nThe User starts to navigate the Route. WhimApp tracks for the user location to know if there are any changes needed in the plan. WhimApp triggers the changes for bookings by monitoring the individual legs.\n\nWhimApp monitors the booking terms and Leg **start time**. When the actual Leg starts, WhimApp **starts** the Leg and notifies the TSP. User or TSP may request changes to the booking, e.g., in a case of a delay or cancellation.\n\nEach of these scenarios is described below.\n\n## Updating a booking\n\nA booking may be updated by a User or WhimApp when any party receives new information that the Leg needs to be changed. For example, when the User wants to change a destination. Such change may be subject to a fee, which should be reflected in response to update or when new booking retrieved via [Get booking](#operation/bookingGet) endpoint.\n\nAlso we update the booking when state for the booking changes, for example to start a ride on a scooter or shared car.\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json) |\n| [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | CAR SHARING, lock - [request](examples/car/booking-update-request-lock.json), [response](examples/car/booking-update-response-lock.json)|\n| [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | CAR SHARING, unlock - [request](examples/car/booking-update-request-unlock.json) |\n| [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | **v.1.2.0-future**: DOCKED BIKE, reserve dock - [request](examples/bike/booking-update-request-reserve-dock.json), [response](examples/bike/booking-update-response-reserve-dock.json) |\n\n## Cancelling a booking\n\nA booking may be canceled by User or WhimApp as specified by **cancellation rules** in **terms** of the booking. WhimApp invokes a [Cancel booking](#operation/bookingCancel) endpoint. TSP confirms and updates its own systems. If TSP can not cancel booking, it returns a 403 Forbidden error.\n\nIt should be noted that cancellation is an exceptional case and is likely happen only when the user chooses to cancel the whole route Plan.\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Cancel booking](#operation/bookingCancel) | [tsp/booking-cancel](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-cancel) | CAR SHARING - [response](examples/car/booking-cancel-response.json) |\n\n## Tracking a booking\n\nTo provide a smooth user experience, it is very important to keep the booking state updated on the WhimApp side. To do this, we can use two approaches:\n\n* We periodically check booking state, by calling [Get booking](#operation/bookingGet) endpoint\n* TSP sends us latest update, by calling Whim Backend endpoint [Update booking state](#operation/backendBookingReceive)\n\nWhile the latter is preferred way, MVP implementation can be created by only providing **required** [Get booking](#operation/bookingGet) endpoint.\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | TAXI - [RESERVED](examples/taxi/booking-read-by-id-response.json), [ACTIVATED](examples/taxi/booking-read-by-id-response-activated.json) |\n| [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | SCOOTER - [ACTIVATED](examples/scooter/booking-read-by-id-response-activated.json) |\n| [Update booking state](#operation/backendBookingReceive) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | See [above](#section/Updating-a-booking) |\n| [Get receipt](#operation/bookingGetReceipt) | - | SCOOTER - [response](examples/scooter/booking-receipt-response.json) | \n\n## Error Cases\n\nIt may be possible that WhimApp sends an invalid request, or the TSP cannot fulfill a request. In any such case, TSP may respond with an error. If TSP responds with an error, WhimApp assumes the state was not changed (e.g., a transaction was rolled back). WhimApp may repeat the request with the same or different data later on.\n\nThe same principle applies when TSP is communicating with WhimApp.\n\nThe error response body are defined as JSON in [JSON Schema](https://maasglobal.github.io/maas-schemas/html/core/error.html#code) and can contain additional fields, e.g.\n\n```json\n{\n  code: \"BOOKING_ALREADY_EXISTS\",\n  message: \"Active booking already exists for this user.\",\n  bookingId: \"deadbeefdeadbeefdeadcafe0000\"\n}\n```\n",
+      "description": "The following scenario explains the life-cycle of an individual journey from a TSP viewpoint. Whenever a new concept (such as an actor or action is represented, it is imprinted in **bold**.\n\nThis scenario, with a few extra details, is shown in the sequence diagrams below. It should be noted from the picture that MaaS more often acts as a caller than a callee for Transport Service Provider. \n\n### TAXI \n\nTaxi or Private Hire Vehicle (PHV) booking sequence flow, both on-demand and prebooking.\n\n![Taxi workflow](./specs/workflow/taxi-sequence.svg)\n\n### Docked Bike \n\nFree ride and docked bike sharing.\n\n![Docked bike workflow](./specs/workflow/docked-bike-sequence.svg)\n\n## Booking explained\n\nBooking represents state about one leg of a journey, connected with TSP specific information and state.\n\nData model as specified by [JSON Schema](https://maasglobal.github.io/maas-schemas/core/booking.html) allows representing information about any type of transport and state. To better understand how the booking works, let's take a look at the basic states and essential parts of the booking data.\n\n### State\n\nBooking goes through multiple states during the journey; here are the most important states. Please see [Tracking booking](#section/Tracking-booking) on information on how WhimApp and TSP exchange this information.\n\n| State | Description |\n|-----|------|\n| **RESERVED** | Booking created by calling [Create booking](#operation/bookingCreate) endpoint. |\n| **CONFIRMED** | Booking confirmed, e.g. TAXI driver have accepted this order. We are waiting for this state update from TSP by periodically calling [Get booking](#operation/bookingGet) or waiting for webhook invocation via [Update booking state](#operation/backendBookingReceive) endpoint invocation. |\n| **ARRIVED** | Not applicable for all modes of transportation. For TAXI means driver have arrived to the pickup point. We are waiting for this state update from TSP. |\n| **ACTIVATED** | Booking has started. For TAXI means TAXI has picked up the passenger. We are waiting for this state update from some TSPs e.g. Taxi and will send this state update via [Update booking](#operation/bookingUpdate) call for car sharing and micromobility providers (to unlock car or a scooter and start a ride). |\n| **ON_HOLD** | Booking still active but have been paused, for example for Car Sharing - lock the car but not finish the ride. We will send this state update via [Update booking](#operation/bookingUpdate) call. **v.1.2.0-future**: For docked bikes transition to this state reserves docking bay. | \n| **EXPIRED** | Ride was completed. We are waiting for this state update from TSP. |\n| **FINISHED** | Payment receipt reconcillation completed, for example for extra charges during Taxi ride, see [Get final booking receipt](#operation/bookingGetReceipt) endpoint. |\n| **CANCELLED** | Cancelled by user. Booking can be subject to a fee or/and not be refundable as specified by TSP in booking cancellation rules. |\n| **REJECTED** | Rejected by TSP. We can update with this state on **PENDING**, **RESERVED**, **CONFIRMED**, **ACTIVATED** state and show User message about the reason for rejection, as received from TSP. |\n\n### Taxi state\n\nFlow for taxi, both for on-call and prebooking PHV (private hire vehicles) are shown below.\n\n![Taxi workflow](./specs/workflow/taxi.svg)\n\n### Bike state\n\nState flow for bike, scooter and other micromobility are shown below.\n\n![Bike workflow](./specs/workflow/bike.svg)\n\n### Docked bike state\n\nDocked bike state, when you need to reserve a dock before you can return a bike.\n\nVersion: **v.1.2.0-future** Not yet released in production, see **WIP** (Work in progress) status which are not yet implemented.\n\n![Bike workflow](./specs/workflow/docked-bike.svg)\n\n### Structure\n\nSee examples for a [Create booking](#operation/bookingCreate) or schema for [Booking create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) to understand all available data in a booking.\n\nHere are the most essential parts of the booking data.\n\n| State | Required? | Description |\n|-----|------|------| \n| `leg.from` | Y | Pickup point with name, address and coordinates (lat, long) |\n| `leg.to` | N | Destination point with name, address and coordinates (lat, long) |\n| `leg.startTime` | N | Start time of a trip, may be in future. |\n| `leg.endTime` | N | End time of a trip, must be in future. |\n| `leg.mode` | Y | Requested mode of transportation, i.e. TAXI |\n| `customer` | Y | Customer information |\n| `state` | Y | State of the booking |\n| `meta` | Y | Information about TSP. Also contains driver for TAXI |\n| `tspId` | Y | TSP specifid ID for this booking |\n| `cost` | Y | Amount and currency this booking cost |\n\n## Planning a route\n\n**User** **queries** for a **Route** with an address or latitude-longitude pair from one place to another. WhimApp queries the route from a third party **Routing Engine** that contains the data for **TSP** routes. At this point, WhimApp makes no queries to the TSP - it expects the Routing Engine contains valid GTFS data for the TSP.\n\n> ⚠️ Routing and GTFS are used only if applicable for TSP provider. For example, for micromobility providers, we don't use GTFS and route planning.\n\n**WhimApp** shows several possible **Plans**, each containing a valid **Route** with several **Legs** with a part of a route using a specific TSP.\n\n## Booking options\n\nTo determine available mobility services, WhimApp calls [Available options](#operation/bookingOptionsGet) endpoint. Depending on the TSP mode of transportation, this endpoint returns available TAXIs or cars or bikes for the specified location. After User selection, one of the options is used to create a booking by calling [Create Booking](#operation/bookingCreate) endpoint.\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Available taxi types](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://maasglobal.github.io/maas-schemas/#tspbooking-options-list) | TAXI - [response](examples/taxi/booking-options-response.json) |\n| [Available scooters](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://maasglobal.github.io/maas-schemas/#tspbooking-options-list) | SCOOTER - [response](examples/scooter/booking-options-response.json) |\n| [Available cars](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://maasglobal.github.io/maas-schemas/#tspbooking-options-list) | CAR SHARING - [response](examples/car/booking-options-response.json) |\n| [Available bikes](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://maasglobal.github.io/maas-schemas/#tspbooking-options-list) | DOCKED BIKE - [response](examples/bike/booking-options-response.json) |\n| [Available stations](#operation/stationsGet) | [tsp/stations-list](https://maasglobal.github.io/maas-schemas/#tspstations-list) | DOCKED BIKE - [response](examples/bike/stations-list-response.json) |\n| [Retrieve station](#operation/stationGet) | [tsp/stations-retrieve](https://maasglobal.github.io/maas-schemas/#tspstations-retrieve) | DOCKED BIKE - [response](examples/bike/stations-retrieve-response.json) |\n\n## Creating a booking\n\nThe User browses through the plans and chooses to book a journey. For each Leg in the Plan Route, WhimApp creates a new booking by invoking the corresponding endpoint in TSP.\n\nIt should be noted that the booking may be hours or days in advance - a bit like in booking a hotel. The booking contains the individual leg as the detailed travel plan for the TSP, as well as customer contact information.\n\n> ⚠️ Specific parts of customer information (E-mail, Phone, Last name, First name, etc.) which are sent to the TSP are subject to agreement between MaaS Global and TSP.\n\nTSP receives the booking and confirms the trip. TSP may modify the details\nof the booking, such as moving the **start location** to closest known\nstreet address or delaying the Leg **start time**, as long as the\n**end time** can be guaranteed. The booking is supplemented with\n**booked** state information and additional **terms** such as\nthe latest **cancellation rules**.\n\nWhimApp checks that the creation of booking succeeded and stores the booking for future reference.\n\n> ⚠️ User can also book a trip directly for the TAXI, car or micromobility transport (which will result in a journey with one leg)\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) | TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json) |\n| [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) | SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json) |\n| [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) | CAR SHARING - [request](examples/car/booking-create-request.json), [response](examples/car/booking-create-response.json) |\n| [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) | **v.1.2.0-future**: DOCKED BIKE -  [response](examples/bike/booking-create-response.json) |\n\n## Paying a booking\n\nWhen booking created, it is already paid according to the options received and selected by User. See [Booking options](#section/Booking+options) for more information.\n\nIf the booking can not be created, the paid amount will be refunded to the User.\n\n## Navigating a route\n\nThe User starts to navigate the Route. WhimApp tracks for the user location to know if there are any changes needed in the plan. WhimApp triggers the changes for bookings by monitoring the individual legs.\n\nWhimApp monitors the booking terms and Leg **start time**. When the actual Leg starts, WhimApp **starts** the Leg and notifies the TSP. User or TSP may request changes to the booking, e.g., in a case of a delay or cancellation.\n\nEach of these scenarios is described below.\n\n## Updating a booking\n\nA booking may be updated by a User or WhimApp when any party receives new information that the Leg needs to be changed. For example, when the User wants to change a destination. Such change may be subject to a fee, which should be reflected in response to update or when new booking retrieved via [Get booking](#operation/bookingGet) endpoint.\n\nAlso we update the booking when state for the booking changes, for example to start a ride on a scooter or shared car.\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://maasglobal.github.io/maas-schemas/#tspbooking-update) | SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json) |\n| [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://maasglobal.github.io/maas-schemas/#tspbooking-update) | CAR SHARING, lock - [request](examples/car/booking-update-request-lock.json), [response](examples/car/booking-update-response-lock.json)|\n| [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://maasglobal.github.io/maas-schemas/#tspbooking-update) | CAR SHARING, unlock - [request](examples/car/booking-update-request-unlock.json) |\n| [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://maasglobal.github.io/maas-schemas/#tspbooking-update) | **v.1.2.0-future**: DOCKED BIKE, reserve dock - [request](examples/bike/booking-update-request-reserve-dock.json), [response](examples/bike/booking-update-response-reserve-dock.json) |\n\n## Cancelling a booking\n\nA booking may be canceled by User or WhimApp as specified by **cancellation rules** in **terms** of the booking. WhimApp invokes a [Cancel booking](#operation/bookingCancel) endpoint. TSP confirms and updates its own systems. If TSP can not cancel booking, it returns a 403 Forbidden error.\n\nIt should be noted that cancellation is an exceptional case and is likely happen only when the user chooses to cancel the whole route Plan.\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Cancel booking](#operation/bookingCancel) | [tsp/booking-cancel](https://maasglobal.github.io/maas-schemas/#tspbooking-cancel  ) | CAR SHARING - [response](examples/car/booking-cancel-response.json) |\n\n## Tracking a booking\n\nTo provide a smooth user experience, it is very important to keep the booking state updated on the WhimApp side. To do this, we can use two approaches:\n\n* We periodically check booking state, by calling [Get booking](#operation/bookingGet) endpoint\n* TSP sends us latest update, by calling Whim Backend endpoint [Update booking state](#operation/backendBookingReceive)\n\nWhile the latter is preferred way, MVP implementation can be created by only providing **required** [Get booking](#operation/bookingGet) endpoint.\n\n| Related API   | Related schemas | Examples | \n| --------- | --------- | ------ |\n| [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://maasglobal.github.io/maas-schemas/#tspbooking-read-by-id) | TAXI - [RESERVED](examples/taxi/booking-read-by-id-response.json), [ACTIVATED](examples/taxi/booking-read-by-id-response-activated.json) |\n| [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://maasglobal.github.io/maas-schemas/#tspbooking-read-by-id) | SCOOTER - [ACTIVATED](examples/scooter/booking-read-by-id-response-activated.json) |\n| [Update booking state](#operation/backendBookingReceive) | [tsp/booking-read-by-id](https://maasglobal.github.io/maas-schemas/#tspbooking-read-by-id) | See [above](#section/Updating-a-booking) |\n| [Get receipt](#operation/bookingGetReceipt) | [tsp/booking-receipt](https://maasglobal.github.io/maas-schemas/#tspbooking-receipt) | SCOOTER - [response](examples/scooter/booking-receipt-response.json) | \n\n## Error Cases\n\nIt may be possible that WhimApp sends an invalid request, or the TSP cannot fulfill a request. In any such case, TSP may respond with an error. If TSP responds with an error, WhimApp assumes the state was not changed (e.g., a transaction was rolled back). WhimApp may repeat the request with the same or different data later on.\n\nThe same principle applies when TSP is communicating with WhimApp.\n\nThe error response body are defined as JSON in [JSON Schema](https://maasglobal.github.io/maas-schemas/core/error.html#code) and can contain additional fields, e.g.\n\n```json\n{\n  code: \"BOOKING_ALREADY_EXISTS\",\n  message: \"Active booking already exists for this user.\",\n  bookingId: \"deadbeefdeadbeefdeadcafe0000\"\n}\n```\n",
       "x-traitTag": true
     },
     {
@@ -76,7 +76,7 @@
       "get": {
         "operationId": "bookingOptionsGet",
         "summary": "Available options",
-        "description": "Returns available options or offers.\n\nThe options are used to construct a booking to be created after the User selects it by calling [Create booking](#operation/bookingCreate).\n\nFull schema for parameters defined in [maas-schemas](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list/request.json) project\n",
+        "description": "Returns available options or offers.\n\nThe options are used to construct a booking to be created after the User selects it by calling [Create booking](#operation/bookingCreate).\n\nFull schema for parameters defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-options-list/request.html) project\n",
         "tags": [
           "Booking"
         ],
@@ -224,7 +224,7 @@
         "responses": {
           "200": {
             "x-summary": "Array of options",
-            "description": "Available transport options matching the given query parameters. If no transport options are available; an empty array is returned.\n",
+            "description": "Available transport options matching the given query parameters. If no transport options are available; an empty array is returned.\n\n### JSON Schema documentation\n\nFull schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-options-list/response.html) project\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -260,7 +260,7 @@
                                 "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/leg"
                               },
                               "terms": {
-                                "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms"
+                                "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
                               },
                               "meta": {
                                 "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
@@ -269,7 +269,7 @@
                                 "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/tspProduct"
                               },
                               "cost": {
-                                "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/cost"
+                                "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
                               },
                               "customer": {
                                 "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/customer"
@@ -290,7 +290,7 @@
                                 "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/leg"
                               },
                               "terms": {
-                                "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms"
+                                "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
                               },
                               "meta": {
                                 "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
@@ -594,7 +594,7 @@
       "post": {
         "operationId": "bookingCreate",
         "summary": "Create booking",
-        "description": "Creates a new booking for the TSP in **RESERVED** state. \n\nThe returned object will be a reference that is passed back & forth throughout the booking lifecycle.\n\nBooking request are based upon the response returned by calling [Available options](#operation/bookingOptionsGet) endpoint.\n\nThe booking may be modified in the response, e.g., the location can be adjusted for a more suitable pick-up location.\n\nIn addition, the service may contain a **meta** attribute for arbitrary TSP metadata that the TSP needs later, and **token** attribute depicting how long the current state is valid.\n\n### JSON Schema documentation\n\nFull schema for parameters defined in [maas-schemas](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create/request.json) project\n",
+        "description": "Creates a new booking for the TSP in **RESERVED** state. \n\nThe returned object will be a reference that is passed back & forth throughout the booking lifecycle.\n\nBooking request are based upon the response returned by calling [Available options](#operation/bookingOptionsGet) endpoint.\n\nThe booking may be modified in the response, e.g., the location can be adjusted for a more suitable pick-up location.\n\nIn addition, the service may contain a **meta** attribute for arbitrary TSP metadata that the TSP needs later, and **token** attribute depicting how long the current state is valid.\n\n### JSON Schema documentation\n\nFull schema for request defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-create/request.html) project\n",
         "tags": [
           "Booking"
         ],
@@ -1150,7 +1150,7 @@
                     }
                   },
                   "terms": {
-                    "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms"
+                    "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
                   },
                   "customer": {
                     "$id": "http://maasglobal.com/core/customer.json",
@@ -1167,7 +1167,7 @@
                             ]
                           },
                           {
-                            "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/id"
+                            "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/id"
                           }
                         ],
                         "examples": [
@@ -1298,7 +1298,7 @@
                                 "const": "TOKEN"
                               },
                               "tokenId": {
-                                "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/fares/items/definitions/tokenId"
+                                "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/fares/items/definitions/tokenId"
                               },
                               "amount": {
                                 "type": [
@@ -1514,16 +1514,16 @@
                             "type": "boolean"
                           },
                           "cost": {
-                            "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/cost"
+                            "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
                           },
                           "fares": {
                             "type": "array",
                             "items": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/fares/items"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/fares/items"
                             }
                           },
                           "terms": {
-                            "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms"
+                            "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
                           },
                           "meta": {
                             "type": "object"
@@ -1705,7 +1705,7 @@
         "responses": {
           "200": {
             "x-summary": "Booking",
-            "description": "Booking information. For more information about the booking, see [Booking explained](#section/Booking-explained).\n",
+            "description": "Booking information. For more information about the booking, see [Booking explained](#section/Booking-explained).\n\n### JSON Schema documentation\n\nFull schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-create/response.html) project\n",
             "content": {
               "application/json": {
                 "schema": {
@@ -1714,13 +1714,29 @@
                   "type": "object",
                   "properties": {
                     "tspId": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
                     },
                     "state": {
-                      "$ref": "#/paths/~1backend~1booking~1%7BtspId%7D/patch/requestBody/content/application~1json/schema/properties/state"
+                      "description": "The life-cycle state of a booking",
+                      "type": "string",
+                      "enum": [
+                        "START",
+                        "PENDING",
+                        "PAID",
+                        "RESERVED",
+                        "CONFIRMED",
+                        "ARRIVED",
+                        "ACTIVATED",
+                        "ON_HOLD",
+                        "CANCELLED",
+                        "EXPIRED",
+                        "REJECTED",
+                        "FINISHED",
+                        "UNKNOWN"
+                      ]
                     },
                     "cost": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/cost"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
                     },
                     "leg": {
                       "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/leg"
@@ -1729,10 +1745,10 @@
                       "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
                     },
                     "terms": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
                     },
                     "token": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/token"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/token"
                     },
                     "tspProduct": {
                       "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/tspProduct"
@@ -1881,7 +1897,7 @@
       "get": {
         "operationId": "bookingGet",
         "summary": "Get booking",
-        "description": "Returns the booking that has been created earlier.",
+        "description": "Returns the booking that has been created earlier.\n\n### JSON Schema documentation\n\nFull schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-read-by-id/response.html) project\n",
         "tags": [
           "Booking"
         ],
@@ -1892,7 +1908,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
+              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
             }
           }
         ],
@@ -1902,25 +1918,408 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "$id": "http://maasglobal.com/tsp/bookings-read-by-id/response.json",
+                  "description": "Response schema for getting a specific booking with a TSP ID from a TSP adapter",
+                  "properties": {
+                    "tspId": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
+                    },
+                    "cost": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
+                    },
+                    "state": {
+                      "$ref": "#/paths/~1bookings/post/responses/200/content/application~1json/schema/properties/state"
+                    },
+                    "leg": {
+                      "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/legDelta"
+                    },
+                    "meta": {
+                      "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
+                    },
+                    "terms": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
+                    },
+                    "token": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/token"
+                    },
+                    "tspProduct": {
+                      "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/tspProduct"
+                    }
+                  },
+                  "required": [
+                    "tspId",
+                    "state"
+                  ],
+                  "additionalProperties": false
+                },
+                "examples": {
+                  "Taxi1": {
+                    "summary": "Taxi - RESERVED",
+                    "externalValue": "../examples/taxi/booking-read-by-id-response.json"
+                  },
+                  "Taxi2": {
+                    "summary": "Taxi - ACTIVATED",
+                    "externalValue": "../examples/taxi/booking-read-by-id-response-activated.json"
+                  },
+                  "Scooter": {
+                    "summary": "Scooter - ACTIVATED",
+                    "externalValue": "../examples/scooter/booking-read-by-id-response-activated.json"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid query parameters)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error (invalid API key)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "bookingUpdate",
+        "summary": "Update booking",
+        "description": "Update booking, changing state, or changing booking details.\n\n### JSON Schema documentation\n\nFull schema for request defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-update/request.html) project\n",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "tspId",
+            "description": "ID of the booking created earlier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$id": "http://maasglobal.com/tsp/bookings-update/request.json",
+                "description": "Request schema for update a state of a specific booking with a TSP ID from a TSP adapter",
+                "type": "object",
+                "properties": {
+                  "tspId": {
+                    "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
+                  },
+                  "state": {
+                    "enum": [
+                      "RESERVED",
+                      "ACTIVATED",
+                      "ON_HOLD",
+                      "EXPIRED"
+                    ]
+                  },
+                  "configurator": {
+                    "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/configurator"
+                  },
+                  "meta": {
+                    "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
+                  },
+                  "terms": {
+                    "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
+                  },
+                  "customerSelection": {
+                    "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/customerSelection"
+                  }
+                },
+                "required": [
+                  "tspId"
+                ],
+                "additionalProperties": true
+              },
+              "examples": {
+                "carSharingLock": {
+                  "summary": "Lock a car",
+                  "externalValue": "../examples/car/booking-update-request-lock.json"
+                },
+                "carSharingUnlock": {
+                  "summary": "Unlock a car",
+                  "externalValue": "../examples/car/booking-update-request-unlock.json"
+                },
+                "scooterReturn": {
+                  "summary": "Return scooter",
+                  "externalValue": "../examples/scooter/booking-update-expired-request.json"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated, old booking returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$id": "http://maasglobal.com/tsp/bookings-update/response.json",
+                  "description": "Response schema for updating state of a specific booking with a TSP ID from a TSP adapter",
+                  "type": "object",
+                  "properties": {
+                    "tspId": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
+                    },
+                    "cost": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
+                    },
+                    "state": {
+                      "$ref": "#/paths/~1bookings/post/responses/200/content/application~1json/schema/properties/state"
+                    },
+                    "leg": {
+                      "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/legDelta"
+                    },
+                    "meta": {
+                      "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
+                    },
+                    "terms": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
+                    },
+                    "token": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/token"
+                    },
+                    "tspProduct": {
+                      "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/tspProduct"
+                    }
+                  },
+                  "required": [
+                    "tspId",
+                    "state"
+                  ],
+                  "additionalProperties": false
+                },
+                "examples": {
+                  "CarSharing": {
+                    "summary": "Car sharing response lock",
+                    "externalValue": "../examples/car/booking-update-response-lock.json"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Updated, no content returned"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error (invalid API key)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "bookingCancel",
+        "summary": "Cancel booking",
+        "description": "Cancel booking if it is possible.\n\nCancel can be subject to a fee, as returned by 200 OK response to this method.\n",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "tspId",
+            "description": "ID of the booking created earlier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted, old booking returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$id": "http://maasglobal.com/tsp/bookings-cancel/response.json",
+                  "description": "Response schema for canceling a booking through a TSP adapter",
+                  "type": "object",
+                  "properties": {
+                    "tspId": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
+                    },
+                    "state": {
+                      "description": "For normal full cancellation, end state would be CANCELLED. For booking that has multi tickets, if not all of them are cancelled, response state will be RESERVED",
+                      "enum": [
+                        "CANCELLED",
+                        "RESERVED"
+                      ]
+                    },
+                    "cost": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
+                    },
+                    "leg": {
+                      "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/leg"
+                    },
+                    "meta": {
+                      "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
+                    },
+                    "terms": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
+                    },
+                    "token": {
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/token"
+                    },
+                    "tspProduct": {
+                      "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/tspProduct"
+                    }
+                  },
+                  "required": [
+                    "tspId",
+                    "state"
+                  ],
+                  "additionalProperties": false
+                },
+                "examples": {
+                  "CarSharing": {
+                    "summary": "Car sharing cancel",
+                    "externalValue": "../examples/car/booking-cancel-response.json"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "Deleted, no content returned"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authorization error (invalid API key)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Cancellation forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bookings/{tspId}/receipt": {
+      "get": {
+        "operationId": "bookingGetReceipt",
+        "summary": "Get final booking receipt",
+        "description": "Get finalized pricing and receipt for the booking.\n\n### JSON Schema documentation\n\nFull schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-receipt/response.html) project\n",
+        "tags": [
+          "Booking"
+        ],
+        "parameters": [
+          {
+            "name": "tspId",
+            "description": "ID of the booking created earlier",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The bookings matching the query with final receipt",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$id": "http://maasglobal.com/core/booking.json",
                   "type": "object",
                   "description": "The base booking object with all fields, to be inherited",
                   "properties": {
                     "id": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/id"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/id"
                     },
                     "tspId": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
                     },
                     "state": {
-                      "$ref": "#/paths/~1backend~1booking~1%7BtspId%7D/patch/requestBody/content/application~1json/schema/properties/state"
+                      "$ref": "#/paths/~1bookings/post/responses/200/content/application~1json/schema/properties/state"
                     },
                     "stateLog": {
                       "$id": "http://maasglobal.com/core/components/state-log.json",
                       "description": "Set of booking state transitions",
                       "type": "array",
                       "items": {
-                        "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/properties/stateLog/definitions/bookingStateTransition"
+                        "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/properties/stateLog/definitions/bookingStateTransition"
                       },
                       "definitions": {
                         "obsoleteTime": {
@@ -1936,15 +2335,15 @@
                                   "$ref": "#/paths/~1bookings~1options/get/parameters/2/schema"
                                 },
                                 {
-                                  "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/properties/stateLog/definitions/obsoleteTime"
+                                  "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/properties/stateLog/definitions/obsoleteTime"
                                 }
                               ]
                             },
                             "oldState": {
-                              "$ref": "#/paths/~1backend~1booking~1%7BtspId%7D/patch/requestBody/content/application~1json/schema/properties/state"
+                              "$ref": "#/paths/~1bookings/post/responses/200/content/application~1json/schema/properties/state"
                             },
                             "newState": {
-                              "$ref": "#/paths/~1backend~1booking~1%7BtspId%7D/patch/requestBody/content/application~1json/schema/properties/state"
+                              "$ref": "#/paths/~1bookings/post/responses/200/content/application~1json/schema/properties/state"
                             },
                             "invalid": {
                               "type": "boolean"
@@ -1972,22 +2371,22 @@
                       }
                     },
                     "fares": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/fares"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/fares"
                     },
                     "cost": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/cost"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
                     },
                     "leg": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/leg"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/leg"
                     },
                     "token": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/token"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/token"
                     },
                     "meta": {
                       "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
                     },
                     "terms": {
-                      "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms"
+                      "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
                     },
                     "customer": {
                       "description": "MaaS booking customer",
@@ -2008,7 +2407,7 @@
                       "type": "object",
                       "properties": {
                         "id": {
-                          "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/properties/product/definitions/id"
+                          "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/properties/product/definitions/id"
                         },
                         "name": {
                           "type": "string",
@@ -2113,7 +2512,7 @@
                             ]
                           },
                           "tokenId": {
-                            "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/fares/items/definitions/tokenId"
+                            "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/fares/items/definitions/tokenId"
                           },
                           "originalAmount": {
                             "type": [
@@ -2213,7 +2612,7 @@
                       "description": "MaaS response may return any subset of legCore",
                       "properties": {
                         "signature": {
-                          "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/properties/signature"
+                          "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/properties/signature"
                         },
                         "state": {
                           "description": "The life-cycle state of a leg",
@@ -2336,7 +2735,7 @@
                           "description": "In 1 booking for a journey, it can be valid for many of the journey's leg. Each item of seating is a seat on 1 specific route",
                           "type": "array",
                           "items": {
-                            "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms/definitions/seat"
+                            "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/seat"
                           }
                         },
                         "validity": {
@@ -2399,10 +2798,10 @@
                               "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta/properties/MODE_TAXI/properties/driver/properties/image"
                             },
                             "outward": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms/definitions/cancellation"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/cancellation"
                             },
                             "return": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms/definitions/cancellation"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/cancellation"
                             }
                           }
                         },
@@ -2410,10 +2809,10 @@
                           "type": "object",
                           "properties": {
                             "outward": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms/definitions/amendment"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/amendment"
                             },
                             "return": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms/definitions/amendment"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/amendment"
                             }
                           }
                         },
@@ -2429,7 +2828,7 @@
                                 "multipleOf": 0.01
                               },
                               "currency": {
-                                "$ref": "#/paths/~1backend~1booking~1%7BtspId%7D/patch/requestBody/content/application~1json/schema/properties/cost/properties/currency/oneOf/0"
+                                "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost/properties/currency/oneOf/0"
                               },
                               "timeInterval": {
                                 "description": "Amount of seconds that fare rate is applied to",
@@ -2492,10 +2891,10 @@
                               "description": "A flag indicating whether this booking can be cancelled in 'RESERVED' state"
                             },
                             "cost": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/cost"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
                             },
                             "fare": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/fares/items"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/fares/items"
                             },
                             "refunded": {
                               "type": "boolean",
@@ -2515,10 +2914,10 @@
                               "description": "A flag indicating whether this booking can be amended"
                             },
                             "cost": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/cost"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
                             },
                             "fare": {
-                              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/fares/items"
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/fares/items"
                             }
                           },
                           "required": [
@@ -2724,287 +3123,6 @@
                   ]
                 },
                 "examples": {
-                  "Taxi1": {
-                    "summary": "Taxi - RESERVED",
-                    "externalValue": "../examples/taxi/booking-read-by-id-response.json"
-                  },
-                  "Taxi2": {
-                    "summary": "Taxi - ACTIVATED",
-                    "externalValue": "../examples/taxi/booking-read-by-id-response-activated.json"
-                  },
-                  "Scooter": {
-                    "summary": "Scooter - ACTIVATED",
-                    "externalValue": "../examples/scooter/booking-read-by-id-response-activated.json"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request (invalid query parameters)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Authorization error (invalid API key)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          }
-        }
-      },
-      "patch": {
-        "operationId": "bookingUpdate",
-        "summary": "Update booking",
-        "description": "Update booking, changing state, or changing booking details.\n",
-        "tags": [
-          "Booking"
-        ],
-        "parameters": [
-          {
-            "name": "tspId",
-            "description": "ID of the booking created earlier",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$id": "http://maasglobal.com/tsp/bookings-update/request.json",
-                "description": "Request schema for update a state of a specific booking with a TSP ID from a TSP adapter",
-                "type": "object",
-                "properties": {
-                  "tspId": {
-                    "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
-                  },
-                  "state": {
-                    "enum": [
-                      "RESERVED",
-                      "ACTIVATED",
-                      "ON_HOLD",
-                      "EXPIRED"
-                    ]
-                  },
-                  "configurator": {
-                    "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/configurator"
-                  },
-                  "meta": {
-                    "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
-                  },
-                  "terms": {
-                    "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms"
-                  },
-                  "customerSelection": {
-                    "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/customerSelection"
-                  }
-                },
-                "required": [
-                  "tspId"
-                ],
-                "additionalProperties": true
-              },
-              "examples": {
-                "carSharingLock": {
-                  "summary": "Lock a car",
-                  "externalValue": "../examples/car/booking-update-request-lock.json"
-                },
-                "carSharingUnlock": {
-                  "summary": "Unlock a car",
-                  "externalValue": "../examples/car/booking-update-request-unlock.json"
-                },
-                "scooterReturn": {
-                  "summary": "Return scooter",
-                  "externalValue": "../examples/scooter/booking-update-expired-request.json"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Updated, old booking returned",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema"
-                },
-                "examples": {
-                  "CarSharing": {
-                    "summary": "Car sharing response lock",
-                    "externalValue": "../examples/car/booking-update-response-lock.json"
-                  }
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "Updated, no content returned"
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Authorization error (invalid API key)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "bookingCancel",
-        "summary": "Cancel booking",
-        "description": "Cancel booking if it is possible.\n\nCancel can be subject to a fee, as returned by 200 OK response to this method.\n",
-        "tags": [
-          "Booking"
-        ],
-        "parameters": [
-          {
-            "name": "tspId",
-            "description": "ID of the booking created earlier",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Deleted, old booking returned",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema"
-                },
-                "examples": {
-                  "CarSharing": {
-                    "summary": "Car sharing cancel",
-                    "externalValue": "../examples/car/booking-cancel-response.json"
-                  }
-                }
-              }
-            }
-          },
-          "204": {
-            "description": "Deleted, no content returned"
-          },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Authorization error (invalid API key)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Cancellation forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1stations/get/responses/400/content/application~1json/schema"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/bookings/{tspId}/receipt": {
-      "get": {
-        "operationId": "bookingGetReceipt",
-        "summary": "Get final booking receipt",
-        "description": "Get finalized pricing and receipt for the booking.\n",
-        "tags": [
-          "Booking"
-        ],
-        "parameters": [
-          {
-            "name": "tspId",
-            "description": "ID of the booking created earlier",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The bookings matching the query with final receipt",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema"
-                },
-                "examples": {
                   "Scooter": {
                     "summary": "Scooter",
                     "externalValue": "../examples/scooter/booking-receipt-response.json"
@@ -3060,7 +3178,7 @@
       "get": {
         "operationId": "stationsGet",
         "summary": "Get stations",
-        "description": "Returns the list of stations",
+        "description": "Returns the list of stations\n\n### JSON Schema documentation\n\nFull schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/stations-list/response.html) project\n",
         "tags": [
           "Stations"
         ],
@@ -3229,7 +3347,7 @@
       "get": {
         "operationId": "stationGet",
         "summary": "Get station",
-        "description": "Returns the information about the specific station",
+        "description": "Returns the information about the specific station\n\n### JSON Schema documentation\n\nFull schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/stations-retrieve/response.html) project\n",
         "tags": [
           "Stations"
         ],
@@ -3421,8 +3539,8 @@
     "/backend/booking/{tspId}": {
       "patch": {
         "operationId": "backendBookingReceive",
-        "summary": "Update booking state",
-        "description": "Updates booking information at the WhimApp backend. \n\nIt is called by the TSP whenever the state of the booking are updated.\n",
+        "summary": "Receive updated booking state",
+        "description": "Updates booking information at the WhimApp backend. \n\nIt is called by the TSP whenever the state of the booking are updated.\n\n### JSON Schema documentation\n\nFull schema for payload defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/webhooks-bookings-update/remote-request.html) project\n",
         "parameters": [
           {
             "name": "tspId",
@@ -3430,7 +3548,7 @@
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
+              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
             }
           }
         ],
@@ -3441,32 +3559,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$id": "http://maasglobal.com/tsp/bookings-read-by-id/response.json",
-                "description": "Response schema for getting a specific booking with a TSP ID from a TSP adapter",
+                "$id": "http://maasglobal.com/tsp/webhooks-bookings-update/remote-request.json",
+                "description": "Remote request schema, e.g. how TSP should call MaaS-backend",
+                "type": "object",
                 "properties": {
                   "tspId": {
-                    "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/tspId"
+                    "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/tspId"
                   },
                   "cost": {
-                    "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/cost"
+                    "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost"
                   },
                   "state": {
-                    "description": "The life-cycle state of a booking",
-                    "type": "string",
                     "enum": [
-                      "START",
-                      "PENDING",
-                      "PAID",
                       "RESERVED",
                       "CONFIRMED",
-                      "ARRIVED",
                       "ACTIVATED",
-                      "ON_HOLD",
-                      "CANCELLED",
                       "EXPIRED",
-                      "REJECTED",
-                      "FINISHED",
-                      "UNKNOWN"
+                      "CANCELLED",
+                      "REJECTED"
                     ]
                   },
                   "leg": {
@@ -3476,13 +3586,10 @@
                     "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta"
                   },
                   "terms": {
-                    "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/terms"
+                    "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms"
                   },
                   "token": {
-                    "$ref": "#/paths/~1bookings~1%7BtspId%7D/get/responses/200/content/application~1json/schema/definitions/token"
-                  },
-                  "tspProduct": {
-                    "$ref": "#/paths/~1bookings~1options/get/responses/200/content/application~1json/schema/properties/options/items/definitions/tspProduct"
+                    "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/token"
                   }
                 },
                 "required": [
@@ -3494,7 +3601,7 @@
               "examples": {
                 "Taxi": {
                   "summary": "Taxi",
-                  "externalValue": "../examples/taxi/booking-read-by-id-response-activated.json"
+                  "externalValue": "../examples/taxi/webhook-booking-update-status.json"
                 }
               }
             }

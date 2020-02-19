@@ -1,0 +1,22 @@
+{
+  "tspId": "deadbeef-deadbeef-deadbeef-beefdead-121111-211211",
+  "meta": {
+    "MODE_TAXI": {
+      "driver": {
+        "phone": "+358400000001"
+      },
+      "taxiCenter": {
+        "name": "Taksi Test1",
+        "phone": "+35850000000"
+      },
+      "dispatchOrderId": "212111",
+      "vehicleId": "1",
+      "vehicleDescription": "Tesla Model S",
+      "vehicleLocation": {
+        "lat": 60.21751,
+        "lon": 24.93388
+      }
+    }
+  },
+  "state": "ACTIVATED"
+}
