@@ -1,0 +1,53 @@
+{
+  "$id": "http://maasglobal.com/core/partialFavoriteLocation.json",
+  "description": "Customer's favorite location",
+  "type": "object",
+  "definitions": {
+    "favoriteLocationTypes": {
+      "type": "string",
+      "enum": ["ADDRESS", "STOP"]
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "number"
+    },
+    "identityId": {
+      "$ref": "../../schemas/core/components/units.json#/definitions/identityId"
+    },
+    "type": {
+      "$ref": "#/definitions/favoriteLocationTypes"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location": {
+      "$ref": "../../schemas/core/components/units-geo.json#/definitions/location"
+    },
+    "streetName": {
+      "$ref": "../../schemas/core/components/address.json#/definitions/placeName"
+    },
+    "streetNumber": {
+      "type": "string"
+    },
+    "city": {
+      "$ref": "../../schemas/core/components/address.json#/definitions/city"
+    },
+    "country": {
+      "$ref": "../../schemas/core/components/address.json#/definitions/countryName"
+    },
+    "zipCode": {
+      "$ref": "../../schemas/core/components/address.json#/definitions/zipCode"
+    },
+    "agencyId": {
+      "$ref": "../../schemas/core/components/common.json#/definitions/agencyId"
+    },
+    "stopId": {
+      "$ref": "../../schemas/core/components/station.json#/definitions/id"
+    },
+    "lineId": {
+      "type": "string"
+    }
+  }
+}

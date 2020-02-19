@@ -39,10 +39,20 @@
         },
         "image": {
           "$ref": "../../../schemas/core/components/units.json#/definitions/url"
+        },
+        "rating": {
+          "type": "number"
         }
       }
     },
+    "pickupIdentificationCode": {
+      "description": "Any code that the user can show/tell to the driver to confirm legitimacy of the ride (name, letters, numbers - depends on the service provider)",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8
+    },
     "dispatchOrderId": {
+      "description": "An internal use only number identifying the dispatch id for inspection",
       "type": "string",
       "minLength": 1,
       "maxLength": 128
@@ -51,6 +61,9 @@
     "taxiCenter": {
       "type": "object",
       "properties": {
+        "image": {
+          "$ref": "../../../schemas/core/components/units.json#/definitions/url"
+        },
         "name": {
           "type": "string",
           "minLength": 1,
