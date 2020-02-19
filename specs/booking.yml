@@ -59,17 +59,18 @@ info:
 
     ### 1.1.0 Current version
 
-    From this version onwards, this documentation are living documentation for current and future versions. Any specific features not available in production are marked as **1.X.X-future** and WIP in diagrams.
+    From this version onwards, this documentation are living documentation for current and future versions. Any specific features not available in production are marked as **1.X.X-future**.
 
       * [OpenAPI Specification](specs/booking.json)
       * [Documentation](?booking.json)
+      * [JSON Schema documentation](https://maasglobal.github.io/maas-schemas)
       * [SwaggerUI](swagger-ui.html?urls.primaryName=booking.yml)
       * Source code [repository](https://github.com/maasglobal/maas-tsp-api/)
 
     ### 1.2.0 Future version
 
       * Not yet available in production
-      * Marked by **v.1.2.0-future** in this documentation and WIP in diagrams.
+      * Marked by **v.1.2.0-future** in this documentation
 
     ## Getting started
 
@@ -120,7 +121,7 @@ tags:
 
       Booking represents state about one leg of a journey, connected with TSP specific information and state.
 
-      Data model as specified by [JSON Schema](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/core/booking.json) allows representing information about any type of transport and state. To better understand how the booking works, let's take a look at the basic states and essential parts of the booking data.
+      Data model as specified by [JSON Schema](https://maasglobal.github.io/maas-schemas/core/booking.html) allows representing information about any type of transport and state. To better understand how the booking works, let's take a look at the basic states and essential parts of the booking data.
 
       ### State
 
@@ -144,6 +145,18 @@ tags:
 
       ![Taxi workflow](./specs/workflow/taxi.svg)
 
+      ### Rental car state
+
+      Flow for rental car
+
+      ![Rental car workflow](./specs/workflow/car-rental.svg)
+
+      ### Shared car state
+
+      Flow for car-sharing
+
+      ![Shared car workflow](./specs/workflow/car-sharing.svg)
+
       ### Bike state
 
       State flow for bike, scooter and other micromobility are shown below.
@@ -154,13 +167,13 @@ tags:
 
       Docked bike state, when you need to reserve a dock before you can return a bike.
 
-      Version: **v.1.2.0-future** Not yet released in production, see **WIP** (Work in progress) status which are not yet implemented.
+      > ⚠️ ON_HOLD state for docked bikes only supported in version **v.1.2.0-future** which is not yet implemented.
 
-      ![Bike workflow](./specs/workflow/docked-bike.svg)
+      ![Docked bike workflow](./specs/workflow/docked-bike.svg)
 
       ### Structure
 
-      See examples for a [Create booking](#operation/bookingCreate) or schema for [Booking create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) to understand all available data in a booking.
+      See examples for a [Create booking](#operation/bookingCreate) or schema for [Booking create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) to understand all available data in a booking.
 
       Here are the most essential parts of the booking data.
 
@@ -191,9 +204,12 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Available options](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list) |  TAXI - [response](examples/taxi/booking-options-response.json), SCOOTER - [response](examples/scooter/booking-options-response.json), CAR SHARING - [response](examples/car/booking-options-response.json) |
-      | [Available stations](#operation/stationsGet) | [tsp/stations-list](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/stations-list) | DOCKED BIKE - [response](examples/bike/stations-list-response.json) |
-      | [Retrieve station](#operation/stationGet) | [tsp/stations-retrieve](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/stations-retrieve) | DOCKED BIKE - [response](examples/bike/stations-retrieve-response.json) |
+      | [Available taxi types](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://maasglobal.github.io/maas-schemas/#tspbooking-options-list) | TAXI - [response](examples/taxi/booking-options-response.json) |
+      | [Available scooters](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://maasglobal.github.io/maas-schemas/#tspbooking-options-list) | SCOOTER - [response](examples/scooter/booking-options-response.json) |
+      | [Available cars](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://maasglobal.github.io/maas-schemas/#tspbooking-options-list) | CAR SHARING - [response](examples/car/booking-options-response.json) |
+      | [Available bikes](#operation/bookingOptionsGet) | [tsp/booking-options-list](https://maasglobal.github.io/maas-schemas/#tspbooking-options-list) | DOCKED BIKE - [response](examples/bike/booking-options-response.json) |
+      | [Available stations](#operation/stationsGet) | [tsp/stations-list](https://maasglobal.github.io/maas-schemas/#tspstations-list) | DOCKED BIKE - [response](examples/bike/stations-list-response.json) |
+      | [Retrieve station](#operation/stationGet) | [tsp/stations-retrieve](https://maasglobal.github.io/maas-schemas/#tspstations-retrieve) | DOCKED BIKE - [response](examples/bike/stations-retrieve-response.json) |
 
       ## Creating a booking
 
@@ -216,10 +232,10 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json) |
-      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json) |
-      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | CAR SHARING - [request](examples/car/booking-create-request.json), [response](examples/car/booking-create-response.json) |
-      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create) | **v.1.2.0-future**: DOCKED BIKE -  [response](examples/bike/booking-create-response.json) |
+      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) | TAXI - [request](examples/taxi/booking-create-request.json), [response](examples/taxi/booking-create-response.json) |
+      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) | SCOOTER - [request](examples/scooter/booking-create-request.json), [response](examples/scooter/booking-create-response.json) |
+      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) | CAR SHARING - [request](examples/car/booking-create-request.json), [response](examples/car/booking-create-response.json) |
+      | [Create booking](#operation/bookingCreate) | [tsp/booking-create](https://maasglobal.github.io/maas-schemas/#tspbooking-create) | **v.1.2.0-future**: DOCKED BIKE -  [response](examples/bike/booking-create-response.json) |
 
       ## Paying a booking
 
@@ -243,10 +259,10 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json) |
-      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | CAR SHARING, lock - [request](examples/car/booking-update-request-lock.json), [response](examples/car/booking-update-response-lock.json)|
-      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | CAR SHARING, unlock - [request](examples/car/booking-update-request-unlock.json) |
-      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-update) | **v.1.2.0-future**: DOCKED BIKE, reserve dock - [request](examples/bike/booking-update-request-reserve-dock.json), [response](examples/bike/booking-update-response-reserve-dock.json) |
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://maasglobal.github.io/maas-schemas/#tspbooking-update) | SCOOTER, finish a ride - [request](examples/scooter/booking-update-expired-request.json), [response](examples/scooter/booking-update-expired-response.json) |
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://maasglobal.github.io/maas-schemas/#tspbooking-update) | CAR SHARING, lock - [request](examples/car/booking-update-request-lock.json), [response](examples/car/booking-update-response-lock.json)|
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://maasglobal.github.io/maas-schemas/#tspbooking-update) | CAR SHARING, unlock - [request](examples/car/booking-update-request-unlock.json) |
+      | [Update booking](#operation/bookingUpdate) | [tsp/booking-update](https://maasglobal.github.io/maas-schemas/#tspbooking-update) | **v.1.2.0-future**: DOCKED BIKE, reserve dock - [request](examples/bike/booking-update-request-reserve-dock.json), [response](examples/bike/booking-update-response-reserve-dock.json) |
 
       ## Cancelling a booking
 
@@ -256,7 +272,7 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Cancel booking](#operation/bookingCancel) | [tsp/booking-cancel](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-cancel) | CAR SHARING - [response](examples/car/booking-cancel-response.json) |
+      | [Cancel booking](#operation/bookingCancel) | [tsp/booking-cancel](https://maasglobal.github.io/maas-schemas/#tspbooking-cancel  ) | CAR SHARING - [response](examples/car/booking-cancel-response.json) |
 
       ## Tracking a booking
 
@@ -269,10 +285,10 @@ tags:
 
       | Related API   | Related schemas | Examples | 
       | --------- | --------- | ------ |
-      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | TAXI - [RESERVED](examples/taxi/booking-read-by-id-response.json), [ACTIVATED](examples/taxi/booking-read-by-id-response-activated.json) |
-      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | SCOOTER - [ACTIVATED](examples/scooter/booking-read-by-id-response-activated.json) |
-      | [Update booking state](#operation/backendBookingReceive) | [tsp/booking-read-by-id](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-read-by-id) | See [above](#section/Updating-a-booking) |
-      | [Get receipt](#operation/bookingGetReceipt) | - | SCOOTER - [response](examples/scooter/booking-receipt-response.json) | 
+      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://maasglobal.github.io/maas-schemas/#tspbooking-read-by-id) | TAXI - [RESERVED](examples/taxi/booking-read-by-id-response.json), [ACTIVATED](examples/taxi/booking-read-by-id-response-activated.json) |
+      | [Get booking](#operation/bookingGet) | [tsp/booking-read-by-id](https://maasglobal.github.io/maas-schemas/#tspbooking-read-by-id) | SCOOTER - [ACTIVATED](examples/scooter/booking-read-by-id-response-activated.json) |
+      | [Update booking state](#operation/backendBookingReceive) | [tsp/booking-read-by-id](https://maasglobal.github.io/maas-schemas/#tspbooking-read-by-id) | See [above](#section/Updating-a-booking) |
+      | [Get receipt](#operation/bookingGetReceipt) | [tsp/booking-receipt](https://maasglobal.github.io/maas-schemas/#tspbooking-receipt) | SCOOTER - [response](examples/scooter/booking-receipt-response.json) | 
 
       ## Error Cases
 
@@ -280,7 +296,7 @@ tags:
 
       The same principle applies when TSP is communicating with WhimApp.
 
-      The error response body are defined as JSON in [JSON Schema](https://maasglobal.github.io/maas-schemas/html/core/error.html#code) and can contain additional fields, e.g.
+      The error response body are defined as JSON in [JSON Schema](https://maasglobal.github.io/maas-schemas/core/error.html#code) and can contain additional fields, e.g.
 
       ```json
       {
@@ -349,7 +365,7 @@ paths:
 
         The options are used to construct a booking to be created after the User selects it by calling [Create booking](#operation/bookingCreate).
 
-        Full schema for parameters defined in [maas-schemas](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-options-list/request.json) project
+        Full schema for parameters defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-options-list/request.html) project
       tags:
         - Booking
       parameters:
@@ -440,6 +456,10 @@ paths:
           x-summary: Array of options
           description: |
             Available transport options matching the given query parameters. If no transport options are available; an empty array is returned.
+
+            ### JSON Schema documentation
+
+            Full schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-options-list/response.html) project
           content:
             application/json:
               schema:
@@ -471,7 +491,7 @@ paths:
 
         ### JSON Schema documentation
 
-        Full schema for parameters defined in [maas-schemas](https://github.com/maasglobal/maas-schemas/blob/develop/maas-schemas/schemas/tsp/booking-create/request.json) project
+        Full schema for request defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-create/request.html) project
       tags:
         - Booking
       requestBody:
@@ -498,6 +518,10 @@ paths:
           x-summary: Booking
           description: |
             Booking information. For more information about the booking, see [Booking explained](#section/Booking-explained).
+            
+            ### JSON Schema documentation
+
+            Full schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-create/response.html) project
           content:
             application/json:
               schema:
@@ -544,7 +568,12 @@ paths:
     get:
       operationId: bookingGet
       summary: Get booking
-      description: Returns the booking that has been created earlier.
+      description: |
+        Returns the booking that has been created earlier.
+
+        ### JSON Schema documentation
+
+        Full schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-read-by-id/response.html) project
       tags:
         - Booking
       parameters:
@@ -560,7 +589,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/core/booking.json
+                $ref: ../schemas/tsp/booking-read-by-id/response.json
               examples:
                 Taxi1:
                   summary: Taxi - RESERVED
@@ -594,6 +623,10 @@ paths:
       summary: Update booking
       description: |
         Update booking, changing state, or changing booking details.
+
+        ### JSON Schema documentation
+
+        Full schema for request defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-update/request.html) project
       tags:
         - Booking
       parameters:
@@ -624,7 +657,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/core/booking.json
+                $ref: ../schemas/tsp/booking-update/response.json
               examples:
                 CarSharing:
                   summary: Car sharing response lock
@@ -671,7 +704,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/core/booking.json
+                $ref: ../schemas/tsp/booking-cancel/response.json
               examples:
                 CarSharing:
                   summary: Car sharing cancel
@@ -708,6 +741,10 @@ paths:
       summary: Get final booking receipt
       description: |
         Get finalized pricing and receipt for the booking.
+
+        ### JSON Schema documentation
+
+        Full schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/booking-receipt/response.html) project
       tags:
         - Booking
       parameters:
@@ -756,7 +793,12 @@ paths:
     get:
       operationId: stationsGet
       summary: Get stations
-      description: Returns the list of stations
+      description: |
+        Returns the list of stations
+
+        ### JSON Schema documentation
+
+        Full schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/stations-list/response.html) project
       tags:
         - Stations
       parameters:
@@ -811,7 +853,12 @@ paths:
     get:
       operationId: stationGet
       summary: Get station
-      description: Returns the information about the specific station
+      description: |
+        Returns the information about the specific station
+
+        ### JSON Schema documentation
+
+        Full schema for response defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/stations-retrieve/response.html) project
       tags:
         - Stations
       parameters:
@@ -859,11 +906,15 @@ paths:
   /backend/booking/{tspId}:
     patch:
       operationId: backendBookingReceive
-      summary: Update booking state
+      summary: Receive updated booking state
       description: |
         Updates booking information at the WhimApp backend. 
 
         It is called by the TSP whenever the state of the booking are updated.
+
+        ### JSON Schema documentation
+
+        Full schema for payload defined in [maas-schemas](https://maasglobal.github.io/maas-schemas/tsp/webhooks-bookings-update/remote-request.html) project
       parameters:
         - name: tspId
           description: ID of the booking created earlier
@@ -877,11 +928,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../schemas/tsp/booking-read-by-id/response.json
+              $ref: ../schemas/tsp/webhooks-bookings-update/remote-request.json
             examples:
               Taxi:
                 summary: Taxi
-                externalValue: '../examples/taxi/booking-read-by-id-response-activated.json'
+                externalValue: '../examples/taxi/webhook-booking-update-status.json'
         description: |
           Booking information with updated state.
         required: true
