@@ -5,7 +5,7 @@ graph TD
   KYC[KYC] -.->|Check driver license| Confirmed
   Options[Booking options] -.->|Create the booking| Confirmed
   Confirmed -.->|Subject to a fee| Cancelled
-  Confirmed -.->|No show| Expired2
+  Confirmed -.->|No show| Expired2["Expired"]
   Confirmed -->|Rental period start| Activated
   Activated2[Activated] -->|Rental period ended| Expired
   Expired -->|Final price received| Finished
