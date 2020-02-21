@@ -674,6 +674,13 @@
                           "image": {
                             "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta/properties/MODE_TAXI/properties/driver/properties/image"
                           },
+                          "vendor": {
+                            "type": "object",
+                            "description": "Some fields have a vendor specific format, but appear in all, or most TSPs",
+                            "properties": {
+                              "voucher": {}
+                            }
+                          },
                           "terms": {},
                           "car": {
                             "type": "object",
@@ -922,6 +929,13 @@
                           "image": {
                             "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta/properties/MODE_TAXI/properties/driver/properties/image"
                           },
+                          "vendor": {
+                            "type": "object",
+                            "description": "Some fields have a vendor specific format, but appear in all, or most TSPs",
+                            "properties": {
+                              "voucher": {}
+                            }
+                          },
                           "terms": {},
                           "car": {
                             "type": "object",
@@ -1098,10 +1112,20 @@
                                 "description": "Uniform resource locator, see https://en.wikipedia.org/wiki/Uniform_Resource_Locator and https://mathiasbynens.be/demo/url-regex",
                                 "type": "string",
                                 "pattern": "^(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*$"
+                              },
+                              "rating": {
+                                "type": "number"
                               }
                             }
                           },
+                          "pickupIdentificationCode": {
+                            "description": "Any code that the user can show/tell to the driver to confirm legitimacy of the ride (name, letters, numbers - depends on the service provider)",
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 8
+                          },
                           "dispatchOrderId": {
+                            "description": "An internal use only number identifying the dispatch id for inspection",
                             "type": "string",
                             "minLength": 1,
                             "maxLength": 128
@@ -1112,6 +1136,9 @@
                           "taxiCenter": {
                             "type": "object",
                             "properties": {
+                              "image": {
+                                "$ref": "#/paths/~1bookings/post/requestBody/content/application~1json/schema/properties/meta/properties/MODE_TAXI/properties/driver/properties/image"
+                              },
                               "name": {
                                 "type": "string",
                                 "minLength": 1,
@@ -1410,8 +1437,7 @@
                           "created": 1553687004207,
                           "modified": 0,
                           "currency": "EUR"
-                        },
-                        "balance": 1234
+                        }
                       }
                     ]
                   },
@@ -2438,6 +2464,9 @@
                         },
                         "allowFinishTrip": {
                           "type": "boolean"
+                        },
+                        "preAuthBuffer": {
+                          "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/properties/product/definitions/preAuthBuffer"
                         }
                       },
                       "definitions": {
@@ -2445,6 +2474,22 @@
                           "type": "string",
                           "minLength": 1,
                           "maxLength": 255
+                        },
+                        "preAuthBuffer": {
+                          "type": "object",
+                          "properties": {
+                            "percentageExtra": {
+                              "description": "Percentage of the fare which is added as a safety margin when pre-authorizing; e.g. if 20% is added as a safety margin, this value would be 0.2",
+                              "type": "number",
+                              "minimum": 0,
+                              "multipleOf": 0.01
+                            },
+                            "minimumExtra": {
+                              "description": "Minimum amount, expressed as a fare, that will be added as a safety margin to the estimated fare",
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/fares/items"
+                            }
+                          },
+                          "additionalProperties": false
                         }
                       },
                       "required": [
@@ -2577,15 +2622,7 @@
                         "currency": {
                           "oneOf": [
                             {
-                              "description": "Accepted monetary unit in ISO 4127 format, see https://en.wikipedia.org/wiki/ISO_4217#cite_note-1",
-                              "type": "string",
-                              "enum": [
-                                "EUR",
-                                "GBP",
-                                "SGD",
-                                "USD",
-                                "JPY"
-                              ]
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/surcharge/properties/currency"
                             },
                             {
                               "type": "null"
@@ -2790,6 +2827,20 @@
                             }
                           }
                         },
+                        "surcharges": {
+                          "type": "object",
+                          "description": "Surcharges that have been added to the cost/fare of the booking under certain conditions",
+                          "properties": {
+                            "midnight": {
+                              "description": "Fee for booking during night time",
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/surcharge"
+                            },
+                            "pickup": {
+                              "description": "Fee for pickup, usually for TAXI bookings",
+                              "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/surcharge"
+                            }
+                          }
+                        },
                         "cancellation": {
                           "type": "object",
                           "properties": {
@@ -2828,7 +2879,7 @@
                                 "multipleOf": 0.01
                               },
                               "currency": {
-                                "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/cost/properties/currency/oneOf/0"
+                                "$ref": "#/paths/~1bookings~1%7BtspId%7D~1receipt/get/responses/200/content/application~1json/schema/definitions/terms/definitions/surcharge/properties/currency"
                               },
                               "timeInterval": {
                                 "description": "Amount of seconds that fare rate is applied to",
@@ -2923,6 +2974,50 @@
                           "required": [
                             "amendable"
                           ]
+                        },
+                        "surcharge": {
+                          "type": "object",
+                          "description": "The additional fee that will be added if booking is in night time",
+                          "properties": {
+                            "isChargedUpfront": {
+                              "description": "Whether this is charged upfront or during reconciliation phase",
+                              "type": "boolean"
+                            },
+                            "amount": {
+                              "description": "The amount in currency",
+                              "type": "number",
+                              "minimum": 0,
+                              "multipleOf": 0.01
+                            },
+                            "currency": {
+                              "description": "Accepted monetary unit in ISO 4127 format, see https://en.wikipedia.org/wiki/ISO_4217#cite_note-1",
+                              "type": "string",
+                              "enum": [
+                                "EUR",
+                                "GBP",
+                                "SGD",
+                                "USD",
+                                "JPY"
+                              ]
+                            },
+                            "percentage": {
+                              "description": "Surcharge percentage over the original fee",
+                              "type": "number"
+                            },
+                            "minAmount": {
+                              "description": "The minimum amount in currency",
+                              "type": "number",
+                              "minimum": 0,
+                              "multipleOf": 0.01
+                            },
+                            "maxAmount": {
+                              "description": "The maximum amount in currency",
+                              "type": "number",
+                              "minimum": 0,
+                              "multipleOf": 0.01
+                            }
+                          },
+                          "additionalProperties": false
                         }
                       }
                     },

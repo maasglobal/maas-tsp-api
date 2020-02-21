@@ -23,31 +23,41 @@ Based on [JSON Schema](https://json-schema.org/) standard, defines schema defini
 
 These diagrams show how User, WhimApp and TSP interact to perform booking with various modes of transportation (Taxi, Bike, etc)
 
-### Taxi
+### Taxi sequence
 
-![Taxi sequence diagram](https://maasglobal.github.io/maas-tsp-api/specs/workflow/taxi-sequence.svg)
+![Taxi sequence diagram](https://maasglobal.github.io/maas-tsp-api/specs/workflow/taxi-sequence.png)
 
-### Docked bike
+### Docked bike sequence
 
-![Docked bike sequence diagram](https://maasglobal.github.io/maas-tsp-api/specs/workflow/docked-bike-sequence.svg)
+![Docked bike sequence diagram](https://maasglobal.github.io/maas-tsp-api/specs/workflow/docked-bike-sequence.png)
 
 ## Booking state flow
 
 These diageams show the state transition for booking when journey is in progress.
 
-### Taxi
+### Taxi states
 
-![Taxi state flow](https://maasglobal.github.io/maas-tsp-api/specs/workflow/taxi.svg)
+![Taxi states](https://maasglobal.github.io/maas-tsp-api/specs/workflow/taxi.png)
 
 ### Bike
 
-![Taxi state flow](https://maasglobal.github.io/maas-tsp-api/specs/workflow/bike.svg)
+Also compatible with scooter and other micromobility providers.
+
+![Bike states](https://maasglobal.github.io/maas-tsp-api/specs/workflow/bike.png)
+
+### Rental car
+
+![Rental car states](https://maasglobal.github.io/maas-tsp-api/specs/workflow/car-rental.png)
+
+### Car sharing
+
+![Car sharing states](https://maasglobal.github.io/maas-tsp-api/specs/workflow/car-sharing.png)
 
 ### Docked bike
 
-> ⚠️ ON_HOLD state for docked bikes only supported in version **v.1.2.0-future** which is not yet deployed to production.
+> ⚠️ `On hold` state for docked bikes only supported in version **v.1.2.0-future** which is not yet deployed to production.
 
-![Taxi state flow](https://maasglobal.github.io/maas-tsp-api/specs/workflow/docked-bike.svg)
+![Docked states](https://maasglobal.github.io/maas-tsp-api/specs/workflow/docked-bike.png)
 
 ## Examples
 
