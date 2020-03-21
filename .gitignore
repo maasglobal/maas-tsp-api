@@ -99,3 +99,5 @@ schemas
 # Generated folder for static hosting
 dist
 
+# IDE settings
+.vscode
