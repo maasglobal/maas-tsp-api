@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "postinstall": "cp -f ./node_modules/mermaid/dist/mermaid.min.js ./node_modules/@huksley/mermaid.cli/",
+    "postinstall": "cp -f ./node_modules/mermaid/dist/mermaid.min.js ./node_modules/@mermaid-js/mermaid-cli/",
     "clean": "shx rm -Rf dist node_modules",
     "build": "node utils/adopt-schemas.js && node utils/bundle-spec.js && node utils/compile-workflows.js",
     "start": "npm run build && nodemon src/index.js -w specs -w docs -w assets -w schemas -w src -w specs/workflow -w utils -e js,md,mmd,yml,yaml,json",
@@ -30,7 +30,8 @@
   "author": "Lauri Svan <lauri.svan@sc5.io> (https://github.com/laurisvan), Ruslan Gainutdinov (https://github.com/huksley), tech@maas.global",
   "license": "MIT",
   "devDependencies": {
-    "@stoplight/spectral": "^5.0.0",
+    "@mermaid-js/mermaid-cli": "^8.4.8",
+    "@stoplight/spectral": "^5.2.0",
     "cross-env": "^6.0.3",
     "eslint": "^5.16.0",
     "eslint-config-maasglobal": "^3.0.1",
@@ -43,9 +44,8 @@
     "io-ts-promise": "^2.0.1",
     "maas-schemas-ts": "0.0.13",
     "mermaid": "^8.4.7",
-    "@huksley/mermaid.cli": "^0.5.5",
     "mobx": "^5.15.4",
-    "mocha": "^6.2.2",
+    "mocha": "^7.1.1",
     "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
     "pretty-quick": "^2.0.1",
@@ -56,6 +56,12 @@
   },
   "dependencies": {
     "maas-schemas": "^10.6.0"
+  },
+  "mocha": {
+    "exit": true,
+    "extension": "js",
+    "watch-extensions": "js",
+    "recursive": true
   },
   "husky": {
     "hooks": {
