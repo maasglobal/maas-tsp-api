@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="swagger-ui/swagger-ui.css" />
     <link rel="icon" type="image/png" href="swagger-ui/favicon-32x32.png" sizes="32x32" />
     <link rel="icon" type="image/png" href="swagger-ui/favicon-16x16.png" sizes="16x16" />
-    <style>
+    <style type="text/css">
       html {
         box-sizing: border-box;
         overflow: -moz-scrollbars-vertical;
@@ -23,6 +23,37 @@
       body {
         margin: 0;
         background: #fafafa;
+      }
+
+      .swagger-ui h4>a  {
+        align-self: flex-start;
+        padding-top: 8px;
+        width: 180px;
+      }
+
+      .swagger-ui .renderedMarkdown table,
+      .swagger-ui .renderedMarkdown th,
+      .swagger-ui .renderedMarkdown td {
+        border: 1px solid #909090;
+      }
+
+      .swagger-ui .renderedMarkdown p,
+      .swagger-ui li {
+        line-height: 1.3em;
+      }
+
+      .swagger-ui .renderedMarkdown th {
+        font-size: 1.2em;
+      }
+
+      .swagger-ui .renderedMarkdown th,
+      .swagger-ui .renderedMarkdown td {
+        padding: 4px !important;
+      }
+
+      .swagger-ui .renderedMarkdown blockquote p {
+        border: 1px solid #d0d0d0;
+        padding: 16px;
       }
     </style>
   </head>

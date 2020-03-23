@@ -1,0 +1,5 @@
+{
+  "fontFamily": "\"Open Sans\", \"Trebuchet ms\", Verdana, Arial",
+  "themeCSS": "span.edgeLabel { display: inline-block; font-size: 11px; color: #303030; padding: 3px; border-radius: 4px; }",
+  "flowchart": { "curve": "basis", "useMaxWidth": true, "htmlLabels": true }
+}
