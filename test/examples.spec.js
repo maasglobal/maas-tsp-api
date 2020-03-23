@@ -1,16 +1,16 @@
 'use strict';
 
-const BookingCreateRequest = require('maas-schemas-ts/lib/tsp/booking-create/request').Default;
-const BookingCreateResponse = require('maas-schemas-ts/lib/tsp/booking-create/response').Default;
-const BookingUpdateRequest = require('maas-schemas-ts/lib/tsp/booking-update/request').Default;
-const BookingUpdateResponse = require('maas-schemas-ts/lib/tsp/booking-update/response').Default;
-const BookingCancelResponse = require('maas-schemas-ts/lib/tsp/booking-cancel/response').Default;
-const BookingOptionsResponse = require('maas-schemas-ts/lib/tsp/booking-options-list/response').Default;
-const BookingReadByIdResponse = require('maas-schemas-ts/lib/tsp/booking-read-by-id/response').Default;
-const BookingReceiptResponse = require('maas-schemas-ts/lib/tsp/booking-receipt/response').Default;
-const WebhookBookingUpdate = require('maas-schemas-ts/lib/tsp/webhooks-bookings-update/remote-request').Default;
-const StationsListResponse = require('maas-schemas-ts/lib/tsp/stations-list/response').Default;
-const StationsRetrieveResponse = require('maas-schemas-ts/lib/tsp/stations-retrieve/response').Default;
+const BookingCreateRequest = require('maas-schemas-ts/lib/tsp/booking-create/request').Request;
+const BookingCreateResponse = require('maas-schemas-ts/lib/tsp/booking-create/response').Response;
+const BookingUpdateRequest = require('maas-schemas-ts/lib/tsp/booking-update/request').Request;
+const BookingUpdateResponse = require('maas-schemas-ts/lib/tsp/booking-update/response').Response;
+const BookingCancelResponse = require('maas-schemas-ts/lib/tsp/booking-cancel/response').Response;
+const BookingOptionsResponse = require('maas-schemas-ts/lib/tsp/booking-options-list/response').Response;
+const BookingReadByIdResponse = require('maas-schemas-ts/lib/tsp/booking-read-by-id/response').Response;
+const BookingReceiptResponse = require('maas-schemas-ts/lib/tsp/booking-receipt/response').Response;
+const WebhookBookingUpdate = require('maas-schemas-ts/lib/tsp/webhooks-bookings-update/remote-request').RemoteRequest;
+const StationsListResponse = require('maas-schemas-ts/lib/tsp/stations-list/response').Response;
+const StationsRetrieveResponse = require('maas-schemas-ts/lib/tsp/stations-retrieve/response').Response;
 const typePromise = require('io-ts-promise');
 const assert = require('assert');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const Error = require('maas-schemas-ts/lib/core/error').Default;
+const Error = require('maas-schemas-ts/lib/core/error').Error;
 const typePromise = require('io-ts-promise');
 
 describe('Check examples', () => {
