@@ -2,7 +2,7 @@
   "_args": [
     [
       "swagger-ui-dist@3.24.2",
-      "/Users/ruslan/src/maas-tsp-api"
+      "/home/travis/build/maasglobal/maas-tsp-api"
     ]
   ],
   "_development": true,
@@ -27,7 +27,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/swagger-ui-dist/-/swagger-ui-dist-3.24.2.tgz",
   "_spec": "3.24.2",
-  "_where": "/Users/ruslan/src/maas-tsp-api",
+  "_where": "/home/travis/build/maasglobal/maas-tsp-api",
   "bugs": {
     "url": "https://github.com/swagger-api/swagger-ui/issues"
   },
