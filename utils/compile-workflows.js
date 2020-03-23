@@ -16,9 +16,13 @@ async function compileDiagram(file, format) {
     const result = file.replace('.mmd', '.' + format);
     // eslint-disable-next-line no-console
     console.warn(`Compiling ${file} into ${result}`);
-    const child = spawn('mmdc', ['-i', workflows + '/' + file, '-o', out + '/' + result, '--scale', '4'], {
-      timeout: 5000,
-    });
+    const child = spawn(
+      'mmdc',
+      ['-i', workflows + '/' + file, '-o', out + '/' + result, '-c', workflows + '/config.json', '--scale', '4'],
+      {
+        timeout: 5000,
+      }
+    );
 
     child.stderr.on('data', data => {
       // eslint-disable-next-line no-console
