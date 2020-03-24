@@ -2,18 +2,21 @@ graph TD
   label1(Bike/scooter state flow)
   %% MermaidJS workflow graph for Bike or E-bike TSP
   %% Use https://mermaid-js.github.io/mermaid-live-editor/ to edit
-  Options[Booking options] -.->|Reserving a bike | Reserved
+  Options -->|Starting the ride| Activated2[Activated]
+  Options[Booking options] -->|Reserving a bike | Reserved
   Reserved -->|Unlocking| Activated2[Activated]
   Reserved -.->|Subject to a fee| Cancelled
   Reserved -.->|Denied by TSP| Rejected
   Reserved -->|Reservation timed-out| Expired2[Expired]
   Activated -->|Ride finished| Expired
+  Activated -.->|Subject to a fee| Cancelled2[Cancelled]
   Activated -->|Lock and keep reserved| On_hold[On hold]
   Expired -->|Final price received| Finished
   On_hold[On hold] -->|Unlock| Activated
   Activated -.->|Denied by TSP| Rejected2[Rejected]
   On_hold[On hold] -.->|Denied by TSP| Rejected2[Rejected]
   style Cancelled color:red,stroke-dasharray: 5, 5
+  style Cancelled2 color:red,stroke-dasharray: 5, 5
   style Rejected color:red,stroke-dasharray: 5, 5
   style Rejected2 color:red,stroke-dasharray: 5, 5
   style Expired2 color:red,stroke-dasharray: 5, 5
